@@ -14,7 +14,9 @@ namespace Goats
 
         float CalculateKgOfGrass(int dayX, int goatY, int kgZ, int dayW, int goatQ)
         {
-            return (((dayW * kgZ) / dayX) * goatQ) / goatY;
+            int firstOperation = dayW * kgZ * goatQ;
+            int secondOpetation = dayX * goatY;
+            return firstOperation / secondOpetation;
         }
 
     }
