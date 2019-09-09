@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.572
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankRate", "BankRate\BankRate.csproj", "{44A732F4-2FFF-4E1B-AF5E-CC3B1BB082FB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Goats", "Goats\Goats.csproj", "{72D6874E-BDF7-451A-982E-802E5466EB9C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{44A732F4-2FFF-4E1B-AF5E-CC3B1BB082FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{44A732F4-2FFF-4E1B-AF5E-CC3B1BB082FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{44A732F4-2FFF-4E1B-AF5E-CC3B1BB082FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72D6874E-BDF7-451A-982E-802E5466EB9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72D6874E-BDF7-451A-982E-802E5466EB9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72D6874E-BDF7-451A-982E-802E5466EB9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72D6874E-BDF7-451A-982E-802E5466EB9C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
