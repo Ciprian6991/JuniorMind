@@ -14,7 +14,11 @@ namespace Parquet
 
         double NumberOfParquetBoards(double N, double M, double A, double B)
         {
-            return Math.Ceiling((N * M + (0.15 * N * M)) / (A * B));
+            double roomDimension = N * M;
+            const double losses = 0.15;
+            double boardDimension = A * B;
+
+            return Math.Ceiling((roomDimension + (losses * roomDimension)) / boardDimension);
         }
     }
 }
