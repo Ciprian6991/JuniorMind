@@ -12,6 +12,24 @@ namespace JSON1
                     && HasCorrectUnicodeWithoutExceptions(ExtractStringFromQuatationMarks(text));
         }
 
+        public static bool IsValidJsonNumber(string numberString)
+            {
+            if (numberString == null)
+            {
+                return false;
+            }
+
+            for (int i = 0; i < numberString.Length; i++)
+            {
+                if (numberString[i] < '0' && numberString[i] > '9')
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
         private static string ExtractStringFromQuatationMarks(string text)
         {
             const int subtractedLength = 2;
