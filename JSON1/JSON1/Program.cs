@@ -8,12 +8,25 @@ namespace JSON1
         {
             return text != null
                     && IsBetweenApostrophe(text)
-                    && HasCorrectSpecialCharactersInsideApostrophe(text);
+                    && HasCorrectBackslashSpecialCharacters(text.Substring(1, text.Length - 1 - 1))
+                    && HasCorrectUnicodeWithoutExceptions(text.Substring(1, text.Length - 1 - 1));
         }
 
-        private static bool HasCorrectSpecialCharactersInsideApostrophe(string text)
+        private static bool HasCorrectUnicodeWithoutExceptions(string text)
         {
-            return HasCorrectBackslashSpecialCharacters(text.Substring(1, text.Length - 1 - 1));
+            const string specialCharacters = "\"\\/bfnrtu";
+            const string exceptions = "\\\"";
+            for (int i = 1; i < text.Length - 1; i++)
+            {
+                if (exceptions.Contains(text[i])
+                    && !(specialCharacters.Contains(text[i - 1])
+                        || specialCharacters.Contains(text[i + 1])))
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         private static bool HasCorrectBackslashSpecialCharacters(string text)
@@ -23,7 +36,7 @@ namespace JSON1
             {
                 if (text[i] == '\\' && i < text.Length - 1
                     && !specialCharactersExceptHexa.Contains(text[i + 1])
-                    && !HasCorrectUnicodeFromGivenPosition(text, i + 1))
+                    && !HasCorrectFourUnicodeFromGivenPosition(text, i + 1))
                 {
                     return false;
                 }
@@ -32,7 +45,7 @@ namespace JSON1
             return true;
         }
 
-        private static bool HasCorrectUnicodeFromGivenPosition(string text, int pos)
+        private static bool HasCorrectFourUnicodeFromGivenPosition(string text, int pos)
         {
             const int SearchIntervalLength = 4;
             if (text.Length - pos < SearchIntervalLength)
@@ -78,6 +91,8 @@ namespace JSON1
         static void Main()
         {
             Console.WriteLine("Hello World!");
+            Console.WriteLine(IsAValidJsonString("\"Test\\u0097\nAnother line\""));
+            Console.Read();
         }
     }
 }
