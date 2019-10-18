@@ -13,9 +13,15 @@ namespace JSON1.Tests
         }
         
         [Fact]
-        public void ComplexStringInsideQuatationMarksIsValid()
+        public void UnicodeStringInsideQuatationMarksIsValid()
         {
             Assert.True(Program.IsAValidJsonString("\"Test\\u0097\nAnother line\""));
+        }
+
+        [Fact]
+        public void UnicodeStringInsideQuatationMarksIsNotValid()
+        {
+            Assert.False(Program.IsAValidJsonString("\"Test\\u0097\nAnother line\\u12\""));
         }
     }
 }
