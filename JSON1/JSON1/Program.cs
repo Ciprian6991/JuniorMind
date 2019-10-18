@@ -14,18 +14,19 @@ namespace JSON1
 
         private static string ExtractStringFromQuatationMarks(string text)
         {
-            return text.Substring(1, text.Length - 1 - 1);
+            const int subtractedLength = 2;
+            return text.Substring(1, text.Length - subtractedLength);
         }
 
         private static bool HasCorrectUnicodeWithoutExceptions(string text)
         {
-            const string specialCharacters = "\"\\/bfnrtu";
-            const string exceptions = "\\\"";
-            for (int i = 1; i < text.Length - 1; i++)
+            const string specialCharacters = "\"\b\f\n\r\t";
+            const int unicodeUpperLimit = 32;
+            for (int i = 0; i < text.Length; i++)
             {
-                if (exceptions.Contains(text[i])
-                    && !(specialCharacters.Contains(text[i - 1])
-                        || specialCharacters.Contains(text[i + 1])))
+                if (text[i] == '\"'
+                    || !specialCharacters.Contains(text[i])
+                    && (text[i] < unicodeUpperLimit))
                 {
                     return false;
                 }
@@ -96,8 +97,6 @@ namespace JSON1
         static void Main()
         {
             Console.WriteLine("Hello World!");
-            Console.WriteLine(IsAValidJsonString("\"Test\\u0097\nAnother line\""));
-            Console.Read();
         }
     }
 }
