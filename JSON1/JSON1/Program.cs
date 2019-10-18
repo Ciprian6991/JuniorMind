@@ -8,8 +8,13 @@ namespace JSON1
         {
             return text != null
                     && IsBetweenApostrophe(text)
-                    && HasCorrectBackslashSpecialCharacters(text.Substring(1, text.Length - 1 - 1))
-                    && HasCorrectUnicodeWithoutExceptions(text.Substring(1, text.Length - 1 - 1));
+                    && HasCorrectBackslashSpecialCharacters(ExtractStringFromQuatationMarks(text))
+                    && HasCorrectUnicodeWithoutExceptions(ExtractStringFromQuatationMarks(text));
+        }
+
+        private static string ExtractStringFromQuatationMarks(string text)
+        {
+            return text.Substring(1, text.Length - 1 - 1);
         }
 
         private static bool HasCorrectUnicodeWithoutExceptions(string text)
