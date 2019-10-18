@@ -4,7 +4,12 @@ namespace JSON1
 {
     public class Program
     {
-        static void Main(string[] args)
+        public static bool IsAValidJsonString(string text)
+        {
+            return true;
+        }
+
+        static void Main()
         {
             Console.WriteLine("Hello World!");
         }
