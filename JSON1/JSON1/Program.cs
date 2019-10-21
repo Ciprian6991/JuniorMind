@@ -13,12 +13,13 @@ namespace JSON1
         }
 
         public static bool IsValidJsonNumber(string numberString)
-            {
-            if (numberString == null)
-            {
-                return false;
-            }
+        {
+            return numberString != null
+                && IsNegativeOrPositiveNumber(numberString);
+        }
 
+        private static bool IsNegativeOrPositiveNumber(string numberString)
+        {
             int startIndex = 0;
             if (numberString[0] == '-')
             {
