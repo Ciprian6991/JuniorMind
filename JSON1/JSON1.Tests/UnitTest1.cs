@@ -54,5 +54,11 @@ namespace JSON1.Tests
         {
             Assert.True(Program.IsValidJsonNumber("123"));
         }
+
+        [Fact]
+        public void NegativeNaturalNumberIsValid()
+        {
+            Assert.True(Program.IsValidJsonNumber("-123"));
+        }
     }
 }

@@ -19,9 +19,15 @@ namespace JSON1
                 return false;
             }
 
-            for (int i = 0; i < numberString.Length; i++)
+            int startIndex = 0;
+            if (numberString[0] == '-')
             {
-                if (numberString[i] < '0' && numberString[i] > '9')
+                startIndex = 1;
+            }
+
+            for (int i = startIndex; i < numberString.Length; i++)
+            {
+                if (numberString[i] < '0' || numberString[i] > '9')
                 {
                     return false;
                 }
