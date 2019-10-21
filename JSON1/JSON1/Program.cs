@@ -15,7 +15,13 @@ namespace JSON1
         public static bool IsValidJsonNumber(string numberString)
         {
             return numberString != null
+                && IsValidIfHasOnlyOneDigit(numberString)
                 && IsNegativeOrPositiveNumber(numberString);
+        }
+
+        private static bool IsValidIfHasOnlyOneDigit(string numberString)
+        {
+            return numberString.Length != 1 || char.IsDigit(numberString[0]);
         }
 
         private static bool IsNegativeOrPositiveNumber(string numberString)
