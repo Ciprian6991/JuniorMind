@@ -16,7 +16,70 @@ namespace JSON1
         {
             return numberString != null
                 && IsValidIfHasOnlyOneDigit(numberString)
-                && IsNegativeOrPositiveNumber(numberString);
+                && IsValidNegativePositiveOrSubunitarNumber(numberString)
+                && HasCorrectDotExponentAndDigits(numberString.Substring(1, numberString.Length - 1));
+        }
+
+        private static bool HasCorrectDotExponentAndDigits(string text)
+        {
+            const string specialCharacters = "eE.+-";
+            bool flagDotOrE = false;
+            for (int i = 0; i < text.Length; i++)
+            {
+                if (!char.IsDigit(text[i]) && !specialCharacters.Contains(text[i]))
+                {
+                    return false;
+                }
+
+                if (text[i] == '.' && !HasCorrectDotAsNumberAtGivenPosition(text, i, ref flagDotOrE))
+                {
+                    return false;
+                }
+
+                if (text[i] == 'e' && !HasCorrectExponentAtGivenPosition(text, i, ref flagDotOrE))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        private static bool HasCorrectExponentAtGivenPosition(string text, int i, ref bool flagDotOrE)
+        {
+            flagDotOrE = true;
+
+            if (!char.IsDigit(text[i - 1]) || i + 1 >= text.Length)
+            {
+                return false;
+            }
+
+            if (!char.IsDigit(text[i + 1]) && text[i + 1] != '+' && text[i + 1] != '-')
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        private static bool HasCorrectDotAsNumberAtGivenPosition(string text, int i, ref bool flagDotOrE)
+        {
+            if (flagDotOrE)
+            {
+                return false;
+            }
+
+            if (i + 1 >= text.Length)
+            {
+                return false;
+            }
+
+            if (!char.IsDigit(text[i + 1]))
+            {
+                return false;
+            }
+
+            return true;
         }
 
         private static bool IsValidIfHasOnlyOneDigit(string numberString)
@@ -24,23 +87,10 @@ namespace JSON1
             return numberString.Length != 1 || char.IsDigit(numberString[0]);
         }
 
-        private static bool IsNegativeOrPositiveNumber(string numberString)
+        private static bool IsValidNegativePositiveOrSubunitarNumber(string numberString)
         {
-            int startIndex = 0;
-            if (numberString[0] == '-')
-            {
-                startIndex = 1;
-            }
-
-            for (int i = startIndex; i < numberString.Length; i++)
-            {
-                if (numberString[i] < '0' || numberString[i] > '9')
-                {
-                    return false;
-                }
-            }
-
-            return true;
+            return numberString[0] == '+' || numberString[0] == '-'
+                || char.IsDigit(numberString[0]) || numberString[0] == '.';
         }
 
         private static string ExtractStringFromQuatationMarks(string text)

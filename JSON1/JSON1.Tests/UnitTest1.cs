@@ -11,7 +11,7 @@ namespace JSON1.Tests
         {
             Assert.True(Program.IsAValidJsonString("\"valid\""));
         }
-        
+
         [Fact]
         public void UnicodeStringInsideQuatationMarksIsValid()
         {
@@ -65,6 +65,12 @@ namespace JSON1.Tests
         public void OneNegativeSignIsInvalid()
         {
             Assert.False(Program.IsValidJsonNumber("-"));
+        }
+
+        [Fact]
+        public void OneNegativeSubunitarNumberWithInvalidCharsIsNotValid()
+        {
+            Assert.False(Program.IsValidJsonNumber("-0.123ab"));
         }
     }
 }
