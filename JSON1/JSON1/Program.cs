@@ -34,6 +34,7 @@ namespace JSON1
         {
             const string specialCharacters = "eE.+-";
             bool flagDot = false;
+            bool flagExponent = false;
             if (StartsWithValidZero(text))
             {
                 return false;
@@ -50,6 +51,33 @@ namespace JSON1
                 {
                     return false;
                 }
+
+                if ((text[i] == 'e' || text[i] == 'E') && !HasCorrectExponentAtGivenPosition(text, i, ref flagExponent))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        private static bool HasCorrectExponentAtGivenPosition(string text, int i, ref bool flagExponent)
+        {
+            if (flagExponent)
+            {
+                return false;
+            }
+
+            flagExponent = true;
+
+            if (!char.IsDigit(text[i - 1]) || i + 1 >= text.Length)
+            {
+                return false;
+            }
+
+            if (!char.IsDigit(text[i + 1]) && text[i + 1] != '+' && text[i + 1] != '-')
+            {
+                return false;
             }
 
             return true;
@@ -167,7 +195,7 @@ namespace JSON1
         static void Main()
         {
             Console.WriteLine("Hello World!");
-            Console.WriteLine(IsValidJsonNumber("012"));
+            Console.WriteLine(IsValidJsonNumber("12.123E"));
             Console.ReadLine();
         }
     }
