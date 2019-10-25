@@ -31,17 +31,23 @@ namespace JSON1
                     return false;
                 }
 
-                if (text[i] == '.')
+                if (text[i] == '.' && !HasCorrectDotAsNumberAtGivenPosition(text, i, ref flagDot))
                 {
-                    if (flagDot || i + 1 >= text.Length && char.IsDigit(text[i + 1]))
-                    {
-                        return false;
-                    }
-
-                    flagDot = true;
+                    return false;
                 }
             }
 
+            return true;
+        }
+
+        private static bool HasCorrectDotAsNumberAtGivenPosition(string text, int i, ref bool flagDot)
+        {
+            if (flagDot || i + 1 >= text.Length && char.IsDigit(text[i + 1]))
+            {
+                return false;
+            }
+
+            flagDot = true;
             return true;
         }
 
