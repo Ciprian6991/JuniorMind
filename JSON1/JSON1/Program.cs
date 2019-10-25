@@ -16,7 +16,22 @@ namespace JSON1
         {
             return numberString != null
                 && IsValidIfHasOnlyOneDigit(numberString)
-                && IsValidNegativePositiveOrSubunitarNumber(numberString);
+                && IsValidNegativePositiveOrSubunitarNumber(numberString)
+                && HasCorrectDotExponentAndDigits(numberString.Substring(1, numberString.Length - 1));
+        }
+
+        private static bool HasCorrectDotExponentAndDigits(string text)
+        {
+            const string specialCharacters = "eE.+-";
+            for (int i = 0; i < text.Length; i++)
+            {
+                if (!char.IsDigit(text[i]) && !specialCharacters.Contains(text[i]))
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         private static bool IsValidIfHasOnlyOneDigit(string numberString)

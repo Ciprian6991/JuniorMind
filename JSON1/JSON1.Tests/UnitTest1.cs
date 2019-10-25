@@ -66,5 +66,11 @@ namespace JSON1.Tests
         {
             Assert.False(Program.IsValidJsonNumber("-"));
         }
+
+        [Fact]
+        public void OneNumberWithoutADigitAndSpecialCharactersIsFalse()
+        {
+            Assert.False(Program.IsValidJsonNumber("123.E123A"));
+        }
     }
 }
