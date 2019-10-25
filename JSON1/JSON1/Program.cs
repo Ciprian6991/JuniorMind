@@ -90,7 +90,7 @@ namespace JSON1
 
         private static bool HasCorrectDotAsNumberAtGivenPosition(string text, int i, ref bool flagDot)
         {
-            if (flagDot || i + 1 >= text.Length && char.IsDigit(text[i + 1]))
+            if (flagDot || (i + 1 >= text.Length || !char.IsDigit(text[i + 1])))
             {
                 return false;
             }
@@ -195,7 +195,7 @@ namespace JSON1
         static void Main()
         {
             Console.WriteLine("Hello World!");
-            Console.WriteLine(IsValidJsonNumber("12.123E"));
+            Console.WriteLine(IsValidJsonNumber("12."));
             Console.ReadLine();
         }
     }

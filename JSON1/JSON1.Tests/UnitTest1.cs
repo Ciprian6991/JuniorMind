@@ -108,5 +108,11 @@ namespace JSON1.Tests
         {
             Assert.False(Program.IsValidJsonNumber("12.123E"));
         }
+
+        [Fact]
+        public void NumberWithDotAtEndIsInvalid()
+        {
+            Assert.False(Program.IsValidJsonNumber("12."));
+        }
     }
 }
