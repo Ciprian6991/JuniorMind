@@ -34,6 +34,11 @@ namespace JSON1
         {
             const string specialCharacters = "eE.+-";
             bool flagDot = false;
+            if (StartsWithValidZero(text))
+            {
+                return false;
+            }
+
             for (int i = 0; i < text.Length; i++)
             {
                 if (!char.IsDigit(text[i]) && !specialCharacters.Contains(text[i]))
@@ -48,6 +53,11 @@ namespace JSON1
             }
 
             return true;
+        }
+
+        private static bool StartsWithValidZero(string text)
+        {
+            return (text.Length <= 1 || text[0] != '-' || text[1] != '0') && text[0] == '0';
         }
 
         private static bool HasCorrectDotAsNumberAtGivenPosition(string text, int i, ref bool flagDot)
@@ -157,7 +167,7 @@ namespace JSON1
         static void Main()
         {
             Console.WriteLine("Hello World!");
-            Console.WriteLine(IsValidJsonNumber(""));
+            Console.WriteLine(IsValidJsonNumber("012"));
             Console.ReadLine();
         }
     }

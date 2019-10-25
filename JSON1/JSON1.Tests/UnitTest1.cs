@@ -96,5 +96,11 @@ namespace JSON1.Tests
         {
             Assert.False(Program.IsAValidJsonString(""));
         }
+
+        [Fact]
+        public void NumberStartingWithZeroIsInvalid()
+        {
+            Assert.False(Program.IsValidJsonNumber("0123"));
+        }
     }
 }
