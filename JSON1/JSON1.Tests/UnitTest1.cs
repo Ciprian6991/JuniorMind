@@ -72,5 +72,17 @@ namespace JSON1.Tests
         {
             Assert.False(Program.IsValidJsonNumber("123.E123A"));
         }
+
+        [Fact]
+        public void OneNumberWithTwoDotsIsFalse()
+        {
+            Assert.False(Program.IsValidJsonNumber("123123.1.1"));
+        }
+
+        [Fact]
+        public void OneNumberWithOneDotIsTrue()
+        {
+            Assert.True(Program.IsValidJsonNumber("123.1"));
+        }
     }
 }

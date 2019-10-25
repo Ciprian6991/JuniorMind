@@ -17,17 +17,28 @@ namespace JSON1
             return numberString != null
                 && IsValidIfHasOnlyOneDigit(numberString)
                 && IsValidNegativePositiveOrSubunitarNumber(numberString)
-                && HasCorrectDotExponentAndDigits(numberString.Substring(1, numberString.Length - 1));
+                && HasCorrectDotExponentAndDigits(numberString);
         }
 
         private static bool HasCorrectDotExponentAndDigits(string text)
         {
             const string specialCharacters = "eE.+-";
+            bool flagDot = false;
             for (int i = 0; i < text.Length; i++)
             {
                 if (!char.IsDigit(text[i]) && !specialCharacters.Contains(text[i]))
                 {
                     return false;
+                }
+
+                if (text[i] == '.')
+                {
+                    if (flagDot || i + 1 >= text.Length && char.IsDigit(text[i + 1]))
+                    {
+                        return false;
+                    }
+
+                    flagDot = true;
                 }
             }
 
@@ -130,6 +141,8 @@ namespace JSON1
         static void Main()
         {
             Console.WriteLine("Hello World!");
+            Console.WriteLine(IsValidJsonNumber("123.1.1"));
+            Console.ReadLine();
         }
     }
 }
