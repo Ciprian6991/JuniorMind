@@ -6,6 +6,11 @@ namespace JSON1
     {
         public static bool IsAValidJsonString(string text)
         {
+            if (text == "")
+            {
+                return false;
+            }
+
             return text != null
                     && IsBetweenApostrophe(text)
                     && HasCorrectBackslashSpecialCharacters(ExtractStringFromQuatationMarks(text))

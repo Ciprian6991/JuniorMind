@@ -90,5 +90,11 @@ namespace JSON1.Tests
         {
             Assert.False(Program.IsValidJsonNumber(""));
         }
+        
+        [Fact]
+        public void NullStringIsFalse()
+        {
+            Assert.False(Program.IsAValidJsonString(""));
+        }
     }
 }
