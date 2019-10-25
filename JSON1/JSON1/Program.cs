@@ -14,6 +14,11 @@ namespace JSON1
 
         public static bool IsValidJsonNumber(string numberString)
         {
+            if (numberString == "")
+            {
+                return false;
+            }
+
             return numberString != null
                 && IsValidIfHasOnlyOneDigit(numberString)
                 && IsValidNegativePositiveOrSubunitarNumber(numberString)
@@ -147,7 +152,7 @@ namespace JSON1
         static void Main()
         {
             Console.WriteLine("Hello World!");
-            Console.WriteLine(IsValidJsonNumber("123.1.1"));
+            Console.WriteLine(IsValidJsonNumber(""));
             Console.ReadLine();
         }
     }
