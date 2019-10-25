@@ -66,11 +66,5 @@ namespace JSON1.Tests
         {
             Assert.False(Program.IsValidJsonNumber("-"));
         }
-
-        [Fact]
-        public void OneNegativeSubunitarNumberWithInvalidCharsIsNotValid()
-        {
-            Assert.False(Program.IsValidJsonNumber("-0.123ab"));
-        }
     }
 }
