@@ -6,14 +6,15 @@ namespace OopStudentPosition.Facts
     public class StudentFacts
     {
         [Fact]
-        public void Test1()
+        public void TestToVerifyIfTwoIdenticalStudentsReturnsTrue()
         {
-            var st = new Student(9.88, "Adrian");
-            Assert.True(st.HasMatchedGrade(9.88));
+            var st1 = new Student(9.88, "Adrian");
+            var st2 = new Student(9.88, "Adrian");
+            Assert.True(st1.HasEqualValues(st2));
         }
 
         [Fact]
-        public void Test2()
+        public void TestToVerifyIfStudentReturnsCorrectName()
         {
             var st = new Student(9.88, "Maria");
             Assert.True(st.HasMatchedName("Maria"));
