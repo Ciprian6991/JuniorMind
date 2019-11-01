@@ -6,8 +6,12 @@ namespace OopStudentPosition
     {
         public static void Main()
         {
-            StudentsClass students = new StudentsClass(ReadStudent(Console.ReadLine()));
-            Console.ReadLine();
+            string studentsNumbers = Console.ReadLine();
+            StudentsClass students = new StudentsClass(ReadStudents(studentsNumbers));
+            string nameOfSoughtStudent = Console.ReadLine();
+            int positionOfSoughtStudent = students.SearchPositionOfStudentByName(nameOfSoughtStudent);
+            Console.WriteLine(positionOfSoughtStudent);
+            Console.Read();
         }
 
         public static Student ReadStudent(string studentString)
@@ -19,6 +23,25 @@ namespace OopStudentPosition
             }
 
             return new Student(-1, "-1");
+        }
+
+        public static Student[] ReadStudents(string studentNumbers)
+        {
+            if (!string.IsNullOrEmpty(studentNumbers))
+            {
+                int studentsNumber = Convert.ToInt32(studentNumbers);
+                Student[] result = new Student[studentsNumber];
+
+                for (int i = 0; i < studentsNumber; i++)
+                {
+                    string studentString = Console.ReadLine();
+                    result[i] = ReadStudent(studentString);
+                }
+
+                return result;
+            }
+
+            return Array.Empty<Student>();
         }
     }
 }
