@@ -13,11 +13,6 @@ namespace OopStudentPosition
             this.students = students;
         }
 
-        public StudentsClass(Student student)
-        {
-            this.students[students.Length + 1] = student;
-        }
-
         public int SearchPositionOfStudentByName(string studentName)
         {
             for (int i = 0; i < students.Length; i++)
