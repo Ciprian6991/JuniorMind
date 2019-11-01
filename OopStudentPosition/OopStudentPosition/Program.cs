@@ -27,7 +27,7 @@ namespace OopStudentPosition
 
         public static Student[] ReadStudents(string studentNumbers)
         {
-            if (!string.IsNullOrEmpty(studentNumbers))
+            if (!string.IsNullOrEmpty(studentNumbers) && IsIntNumber(studentNumbers))
             {
                 int studentsNumber = Convert.ToInt32(studentNumbers);
                 Student[] result = new Student[studentsNumber];
@@ -42,6 +42,24 @@ namespace OopStudentPosition
             }
 
             return Array.Empty<Student>();
+        }
+
+        private static bool IsIntNumber(string v)
+        {
+            if (string.IsNullOrEmpty(v))
+            {
+                return false;
+            }
+
+            for (int i = 0; i < v.Length; i++)
+            {
+                if (v[i] < '0' || v[i] > '9')
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }

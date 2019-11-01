@@ -24,5 +24,12 @@ namespace OopStudentPosition.Facts
             Student st2 = Program.ReadStudent(studentData);
             Assert.True(st.HasEqualValues(st2));
         }
+
+        [Fact]
+        public void TestForReadingNonDigitNumberOfStudents()
+        {
+            string studentsNumbers = "notDigit";
+            Assert.Equal(Array.Empty<Student>(), Program.ReadStudents(studentsNumbers));
+        }
     }
 }
