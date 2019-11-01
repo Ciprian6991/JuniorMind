@@ -2,12 +2,23 @@
 
 namespace OopStudentPosition
 {
-    class Program
+    public class Program
     {
-        static void Main()
+        public static void Main()
         {
-            Console.WriteLine("Hello World!");
+            StudentsClass students = new StudentsClass(ReadStudent(Console.ReadLine()));
             Console.ReadLine();
+        }
+
+        public static Student ReadStudent(string studentString)
+        {
+            if (!string.IsNullOrEmpty(studentString))
+            {
+                string[] studentData = studentString.Split(":");
+                return new Student(Convert.ToDouble(studentData[1]), studentData[0]);
+            }
+
+            return new Student(-1, "-1");
         }
     }
 }

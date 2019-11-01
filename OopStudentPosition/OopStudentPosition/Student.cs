@@ -24,5 +24,10 @@ namespace OopStudentPosition
             {
                 return this.grade.Equals(grade);
             }
+
+            public bool HasEqualValues(Student student2)
+            {
+                return student2 != null && this.grade.Equals(student2.grade) && name == student2.name;
+            }
     }
 }
