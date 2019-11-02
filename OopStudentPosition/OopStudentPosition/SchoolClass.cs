@@ -18,17 +18,17 @@ namespace OopStudentPosition
         public double GetAverageGrade()
         {
             double average = 0;
-            for (int i = 0; i < GetGradesLength(); i++)
+            for (int i = 0; i < grades.Length; i++)
             {
                 average += grades[i];
             }
 
-            if (GetGradesLength() == 0)
+            if (grades.Length == 0)
             {
                 return 0;
             }
 
-            return average / GetGradesLength();
+            return average / grades.Length;
         }
 
         public bool HasSameName(SchoolClass cls)
@@ -39,11 +39,6 @@ namespace OopStudentPosition
         private string GetName()
         {
             return className;
-        }
-
-        private int GetGradesLength()
-        {
-            return grades.Length;
         }
     }
 }
