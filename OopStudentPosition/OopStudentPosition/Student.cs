@@ -6,23 +6,49 @@ namespace OopStudentPosition
 {
     public class Student
     {
-            readonly double grade;
-            readonly string name;
+        readonly string name;
+        readonly SchoolClass[] classes;
 
-            public Student(double grade, string name)
+        public Student(string name, SchoolClass[] classes)
+        {
+            this.name = name;
+            this.classes = classes;
+        }
+
+        public bool HasMatchedName(string name)
+        {
+            return this.name == name;
+        }
+
+        public bool HasEqualValues(Student student2)
+        {
+            return student2 != null && name == student2.name;
+        }
+
+        public double GetFinalGrade()
+        {
+            if (classes.Length == 0)
             {
-                this.grade = grade;
-                this.name = name;
+                return 0;
             }
 
-            public bool HasMatchedName(string name)
+            double grade = 0;
+            foreach (SchoolClass var in classes)
             {
-                return this.name == name;
+                grade += var.GetAverageGrade();
             }
 
-            public bool HasEqualValues(Student student2)
+            if (classes.Length == 0)
             {
-                return student2 != null && this.grade.Equals(student2.grade) && name == student2.name;
+                return 0;
             }
+
+            return grade / classes.Length;
+        }
+
+        public string GetStudentName()
+        {
+            return name;
+        }
     }
 }

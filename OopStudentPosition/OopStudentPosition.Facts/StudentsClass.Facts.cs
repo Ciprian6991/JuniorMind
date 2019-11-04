@@ -5,60 +5,76 @@ using Xunit;
 
 namespace OopStudentPosition.Facts
 {
-        public class StudentsClassFacts
+    public class StudentsClassFacts
+    {
+        [Fact]
+        public void TestToVerifyIfWeHaveCorrectTopPositionFromAThreeStudentsClass()
         {
-            [Fact]
-            public void NullStudentNumbersValueIsInvalid()
-            {
-                Student[] sts = Array.Empty<Student>();
-                StudentsClass students = new StudentsClass(sts);
-                Assert.Equal(-1, students.SearchPositionOfStudentByName(""));
-            }
+            double[] grades1 = { 9, 9, 9, 9 };
+            const string className1 = "Math";
+            double[] grades2 = { 9, 9, 9, 9 };
+            const string className2 = "English";
+            SchoolClass class1 = new SchoolClass(className1, grades1);
+            SchoolClass class2 = new SchoolClass(className2, grades2);
+            SchoolClass[] finalClasses1 = { class1, class2 };
 
-            [Fact]
-            public void ShowsThePositionsForASingleStudentWithValidParameters()
-            {
-                Student st1 = new Student(9.81, "Sabin");
-                Student[] sts = new Student[1];
-                sts[0] = st1;
-                StudentsClass students = new StudentsClass(sts);
-                Assert.Equal(0, students.SearchPositionOfStudentByName("Sabin"));
-            }
+            double[] grades3 = { 10, 10, 10, 10 };
+            const string className3 = "Sport";
+            double[] grades4 = { 10, 10, 10, 10 };
+            const string className4 = "Biology";
+            SchoolClass class3 = new SchoolClass(className3, grades3);
+            SchoolClass class4 = new SchoolClass(className4, grades4);
+            SchoolClass[] finalClasses2 = { class3, class4 };
 
-            [Fact]
-            public void ShowsThePositionsForASingleStudentWithInvalidParameters()
-            {
-                Student st1 = new Student(9.81, "Sabin");
-                Student[] sts = new Student[1];
-                sts[0] = st1;
-                StudentsClass students = new StudentsClass(sts);
-                Assert.Equal(-1, students.SearchPositionOfStudentByName("Zabin"));
-            }
+            double[] grades5 = { 6, 6, 6, 6 };
+            const string className5 = "Logic";
+            double[] grades6 = { 6, 6, 6, 6 };
+            const string className6 = "Electro";
+            SchoolClass class5 = new SchoolClass(className5, grades5);
+            SchoolClass class6 = new SchoolClass(className6, grades6);
+            SchoolClass[] finalClasses3 = { class5, class6 };
 
-            [Fact]
-            public void ShowsThePositionsForFiveStudentsWithValidParameters()
-            {
-                Student st1 = new Student(9.81, "Sabin");
-                Student st2 = new Student(5.31, "Adrian");
-                Student st3 = new Student(9.01, "Elena");
-                Student st4 = new Student(8.43, "Costas");
-                Student st5 = new Student(7.13, "Andreea");
-                Student[] sts = { st1, st2, st3, st4, st5 };
-                StudentsClass students = new StudentsClass(sts);
-                Assert.Equal(4, students.SearchPositionOfStudentByName("Andreea"));
-            }
-
-            [Fact]
-            public void ShowsThePositionsForFiveStudentsWithInvalidParameters()
-            {
-                Student st1 = new Student(9.81, "Sabin");
-                Student st2 = new Student(5.31, "Adrian");
-                Student st3 = new Student(9.01, "Elena");
-                Student st4 = new Student(8.43, "Costas");
-                Student st5 = new Student(7.13, "Andreea");
-                Student[] sts = { st1, st2, st3, st4, st5 };
-                StudentsClass students = new StudentsClass(sts);
-                Assert.Equal(-1, students.SearchPositionOfStudentByName("Daniela"));
-            }
+            var st1 = new Student("Adrian", finalClasses1);
+            var st2 = new Student("Sabin", finalClasses2);
+            var st3 = new Student("Larisa", finalClasses3);
+            Student[] sts = { st1, st2, st3 };
+            StudentsClass clasaDinScoala = new StudentsClass(sts);
+            Assert.Equal(1, clasaDinScoala.GetTopPositionByName("Sabin"));
         }
+
+        [Fact]
+        public void TestToVerifyIfWeHaveCorrectNamebyGivenTopPosition()
+        {
+            double[] grades1 = { 9, 9, 9, 9 };
+            const string className1 = "Math";
+            double[] grades2 = { 9, 9, 9, 9 };
+            const string className2 = "English";
+            SchoolClass class1 = new SchoolClass(className1, grades1);
+            SchoolClass class2 = new SchoolClass(className2, grades2);
+            SchoolClass[] finalClasses1 = { class1, class2 };
+
+            double[] grades3 = { 10, 10, 10, 10 };
+            const string className3 = "Sport";
+            double[] grades4 = { 10, 10, 10, 10 };
+            const string className4 = "Biology";
+            SchoolClass class3 = new SchoolClass(className3, grades3);
+            SchoolClass class4 = new SchoolClass(className4, grades4);
+            SchoolClass[] finalClasses2 = { class3, class4 };
+
+            double[] grades5 = { 6, 6, 6, 6 };
+            const string className5 = "Logic";
+            double[] grades6 = { 6, 6, 6, 6 };
+            const string className6 = "Electro";
+            SchoolClass class5 = new SchoolClass(className5, grades5);
+            SchoolClass class6 = new SchoolClass(className6, grades6);
+            SchoolClass[] finalClasses3 = { class5, class6 };
+
+            var st1 = new Student("Adrian", finalClasses1);
+            var st2 = new Student("Sabin", finalClasses2);
+            var st3 = new Student("Larisa", finalClasses3);
+            Student[] sts = { st1, st2, st3 };
+            StudentsClass clasaDinScoala = new StudentsClass(sts);
+            Assert.Equal("Sabin", clasaDinScoala.GetNameByTopPosition(1));
+        }
+    }
 }
