@@ -33,7 +33,7 @@ namespace OopStudentPosition
 
         public string GetNameByTopPosition(int position)
         {
-            int searchedPosition = 0;
+            int searchedPosition = -1;
             for (int i = 0; i < topPositions.Length; i++)
             {
                 if (topPositions[i].Equals(position))
