@@ -12,32 +12,20 @@ namespace OopStudentPosition
         public StudentsClass(Student[] students)
         {
             this.students = students;
-            topPositions = GetTopPositons();
-        }
-
-        public double SearchPositionOfStudentByName(string studentName)
-        {
-            for (int i = 0; i < students.Length; i++)
-            {
-                if (students[i].HasMatchedName(studentName))
-                {
-                    return i;
-                }
-            }
-
-            return -1;
+            topPositions = GetTopPositions();
         }
 
         public double GetTopPositionByName(string studentName)
         {
-            int position = -1;
+            int position = 0;
             foreach (Student student in students)
             {
-                position++;
                 if (student.HasMatchedName(studentName))
                 {
                     return topPositions[position];
                 }
+
+                position++;
             }
 
             return -1;
@@ -68,12 +56,7 @@ namespace OopStudentPosition
             return "doesn't exist";
         }
 
-        public double[] WriteGrades()
-        {
-            return topPositions;
-        }
-
-        private double[] GetTopPositons()
+        private double[] GetTopPositions()
         {
             double[] finalGradesTop = new double[students.Length];
             double[] grades = new double[students.Length];
@@ -111,14 +94,19 @@ namespace OopStudentPosition
                 {
                     if (gradesSorted[i] < gradesSorted[j])
                     {
-                        double aux = gradesSorted[i];
-                        gradesSorted[i] = gradesSorted[j];
-                        gradesSorted[j] = aux;
+                        SwapGrades(gradesSorted, i, j);
                     }
                 }
             }
 
             return gradesSorted;
+        }
+
+        private void SwapGrades(double[] gradesSorted, int i, int j)
+        {
+            double aux = gradesSorted[i];
+            gradesSorted[i] = gradesSorted[j];
+            gradesSorted[j] = aux;
         }
     }
 }
