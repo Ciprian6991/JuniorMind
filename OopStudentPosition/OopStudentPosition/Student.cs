@@ -46,6 +46,17 @@ namespace OopStudentPosition
             return grade / classes.Length;
         }
 
+        public void AddGradeByClassName(string className, double grade)
+        {
+            foreach (SchoolClass var in classes)
+            {
+                if (var.HasSameName(className))
+                {
+                    var.AddGrade(grade);
+                }
+            }
+        }
+
         public string GetStudentName()
         {
             return name;

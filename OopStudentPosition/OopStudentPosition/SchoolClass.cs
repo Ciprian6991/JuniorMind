@@ -36,6 +36,11 @@ namespace OopStudentPosition
             return cls != null && className == cls.GetName();
         }
 
+        public bool HasSameName(string cls)
+        {
+            return cls != null && className == cls;
+        }
+
         public void AddGrade(double grade)
         {
             grades = AddGradeToGrades(grade);

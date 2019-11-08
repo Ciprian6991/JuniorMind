@@ -62,5 +62,20 @@ namespace OopStudentPosition.Facts
             var st1 = new Student("Sabin", finalClasses1);
             Assert.Equal(9, st1.GetFinalGrade());
         }
+
+        [Fact]
+        public void TestToVerifyAddGradeByClassNameFunction()
+        {
+            double[] grades1 = { 10 };
+            string className1 = "Math";
+            double[] grades2 = { 10 };
+            string className2 = "English";
+            SchoolClass class1 = new SchoolClass(className1, grades1);
+            SchoolClass class2 = new SchoolClass(className2, grades2);
+            SchoolClass[] finalClasses1 = { class1, class2 };
+            var st1 = new Student("Sabin", finalClasses1);
+            st1.AddGradeByClassName("English", 2);
+            Assert.Equal(8, st1.GetFinalGrade());
+        }
     }
 }
