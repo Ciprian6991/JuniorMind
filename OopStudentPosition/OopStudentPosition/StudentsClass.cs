@@ -40,6 +40,19 @@ namespace OopStudentPosition
             }
         }
 
+        public int GetStudentTopPositionByName(string studentName)
+        {
+            for (int i = 0; i < students.Length; i++)
+            {
+                if (students[i].HasMatchedName(studentName))
+                {
+                    return i + 1;
+                }
+            }
+
+            return -1;
+        }
+
         public Student GetStudentByTopPosition(int position)
         {
             return GetStudentFromPosition(position - 1);
