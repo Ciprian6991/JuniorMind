@@ -7,12 +7,10 @@ namespace OopStudentPosition
     public class StudentsClass
     {
         readonly Student[] students;
-        private double[] topPositions;
 
         public StudentsClass(Student[] students)
         {
             this.students = students;
-            topPositions = GetTopPositions();
         }
 
         public void AddGradeToStudent(string studentName, string className, double grade)
@@ -24,107 +22,34 @@ namespace OopStudentPosition
                     st.AddGradeByClassName(className, grade);
                 }
             }
-
-            RefreshTopPositions();
         }
 
-        public double GetTopPositionByName(string studentName)
+        public void SortStudentsByGradesDescending()
         {
-            int position = 0;
-            foreach (Student student in students)
+            for (int i = 0; i < students.Length - 1; i++)
             {
-                if (student.HasMatchedName(studentName))
+                Student student1 = students[i];
+                for (int i1 = i + 1; i1 < students.Length; i1++)
                 {
-                    return topPositions[position];
-                }
-
-                position++;
-            }
-
-            return -1;
-        }
-
-        public string GetNameByTopPosition(int position)
-        {
-            int searchedPosition = -1;
-            for (int i = 0; i < topPositions.Length; i++)
-            {
-                if (topPositions[i].Equals(position))
-                {
-                    searchedPosition = i;
-                }
-            }
-
-            int studentPosition = 0;
-            foreach (Student student in students)
-            {
-                if (studentPosition == searchedPosition)
-                {
-                    return student.GetStudentName();
-                }
-
-                studentPosition++;
-            }
-
-            return "doesn't exist";
-        }
-
-        private void RefreshTopPositions()
-        {
-            topPositions = GetTopPositions();
-        }
-
-        private double[] GetTopPositions()
-        {
-            double[] finalGradesTop = new double[students.Length];
-            double[] grades = new double[students.Length];
-            for (int i = 0; i < students.Length; i++)
-            {
-                grades[i] = students[i].GetFinalGrade();
-            }
-
-            double[] gradesTop = GetDownSortedGrades(grades);
-            for (int i = 0; i < gradesTop.Length; i++)
-            {
-                for (int j = 0; j < grades.Length; j++)
-                {
-                    if (gradesTop[i].Equals(grades[j]))
+                    Student student2 = students[i1];
+                    if (student2.GetFinalGrade() > student1.GetFinalGrade())
                     {
-                        finalGradesTop[j] = i + 1;
+                        Swap(i, i1);
                     }
                 }
             }
-
-            return finalGradesTop;
         }
 
-        private double[] GetDownSortedGrades(double[] grades)
+        public Student GetStudentFromPosition(int i)
         {
-            double[] gradesSorted = new double[grades.Length];
-            for (int i = 0; i < gradesSorted.Length; i++)
-            {
-                gradesSorted[i] = grades[i];
-            }
-
-            for (int i = 0; i < gradesSorted.Length - 1; i++)
-            {
-                for (int j = i + 1; j < gradesSorted.Length; j++)
-                {
-                    if (gradesSorted[i] < gradesSorted[j])
-                    {
-                        SwapGrades(gradesSorted, i, j);
-                    }
-                }
-            }
-
-            return gradesSorted;
+            return students[i];
         }
 
-        private void SwapGrades(double[] gradesSorted, int i, int j)
+        private void Swap(int i, int i1)
         {
-            double aux = gradesSorted[i];
-            gradesSorted[i] = gradesSorted[j];
-            gradesSorted[j] = aux;
+            Student aux = students[i];
+            students[i] = students[i1];
+            students[i1] = aux;
         }
     }
 }
