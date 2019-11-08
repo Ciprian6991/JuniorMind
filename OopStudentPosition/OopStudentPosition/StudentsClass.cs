@@ -7,12 +7,25 @@ namespace OopStudentPosition
     public class StudentsClass
     {
         readonly Student[] students;
-        readonly double[] topPositions;
+        private double[] topPositions;
 
         public StudentsClass(Student[] students)
         {
             this.students = students;
             topPositions = GetTopPositions();
+        }
+
+        public void AddGradeToStudent(string studentName, string className, double grade)
+        {
+            foreach (Student st in students)
+            {
+                if (st.HasMatchedName(studentName))
+                {
+                    st.AddGradeByClassName(className, grade);
+                }
+            }
+
+            RefreshTopPositions();
         }
 
         public double GetTopPositionByName(string studentName)
@@ -54,6 +67,11 @@ namespace OopStudentPosition
             }
 
             return "doesn't exist";
+        }
+
+        private void RefreshTopPositions()
+        {
+            topPositions = GetTopPositions();
         }
 
         private double[] GetTopPositions()
