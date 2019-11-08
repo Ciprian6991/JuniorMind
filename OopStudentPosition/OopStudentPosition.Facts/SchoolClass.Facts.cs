@@ -48,5 +48,15 @@ namespace OopStudentPosition.Facts
             SchoolClass class1 = new SchoolClass(className1, grades1);
             Assert.Equal(0, class1.GetAverageGrade());
         }
+
+        [Fact]
+        public void TestForAddingGrade()
+        {
+            double[] grades1 = { 4, 4};
+            string className1 = "Math";
+            SchoolClass class1 = new SchoolClass(className1, grades1);
+            class1.AddGrade(10);
+            Assert.Equal(6, class1.GetAverageGrade());
+        }
     }
 }

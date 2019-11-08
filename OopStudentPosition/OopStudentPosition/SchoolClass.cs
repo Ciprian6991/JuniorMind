@@ -7,7 +7,7 @@ namespace OopStudentPosition
     public class SchoolClass
     {
         readonly string className;
-        readonly double[] grades;
+        private double[] grades;
 
         public SchoolClass(string className, double[] grades)
         {
@@ -35,6 +35,23 @@ namespace OopStudentPosition
         {
             return cls != null && className == cls.GetName();
         }
+
+        public void AddGrade(double grade)
+        {
+            grades = AddGradeToGrades(grade);
+        }
+
+        private double[] AddGradeToGrades(double grade)
+            {
+            double[] newGrades = new double[grades.Length + 1];
+            for (int i = 0; i < grades.Length; i++)
+            {
+                newGrades[i] = grades[i];
+            }
+
+            newGrades[grades.Length] = grade;
+            return newGrades;
+            }
 
         private string GetName()
         {
