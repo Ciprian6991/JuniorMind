@@ -40,6 +40,11 @@ namespace OopStudentPosition
             }
         }
 
+        public Student GetStudentByTopPosition(int position)
+        {
+            return GetStudentFromPosition(position - 1);
+        }
+
         public Student GetStudentFromPosition(int i)
         {
             return students[i];

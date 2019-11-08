@@ -6,8 +6,8 @@ namespace OopStudentPosition
 {
     public class Student
     {
-        private string name;
-        private SchoolClass[] classes;
+        private readonly string name;
+        private readonly SchoolClass[] classes;
 
         public Student(string name, SchoolClass[] classes)
         {
@@ -55,23 +55,6 @@ namespace OopStudentPosition
                     var.AddGrade(grade);
                 }
             }
-        }
-
-        public void SwapStudent(Student st)
-            {
-            if (st == null)
-            {
-                return;
-            }
-
-            string auxName = name;
-            SchoolClass[] auxclasses = classes;
-
-            this.name = st.name;
-            this.classes = st.classes;
-
-            st.name = auxName;
-            st.classes = auxclasses;
         }
     }
 }
