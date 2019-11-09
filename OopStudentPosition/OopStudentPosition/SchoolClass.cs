@@ -33,7 +33,7 @@ namespace OopStudentPosition
 
         public bool HasSameName(SchoolClass cls)
         {
-            return cls != null && className == cls.GetName();
+            return cls != null && className == cls.className;
         }
 
         public bool HasSameName(string cls)
@@ -43,24 +43,8 @@ namespace OopStudentPosition
 
         public void AddGrade(double grade)
         {
-            grades = AddGradeToGrades(grade);
-        }
-
-        private double[] AddGradeToGrades(double grade)
-            {
-            double[] newGrades = new double[grades.Length + 1];
-            for (int i = 0; i < grades.Length; i++)
-            {
-                newGrades[i] = grades[i];
-            }
-
-            newGrades[grades.Length] = grade;
-            return newGrades;
-            }
-
-        private string GetName()
-        {
-            return className;
+            Array.Resize(ref grades, grades.Length + 1);
+            grades[grades.Length - 1] = grade;
         }
     }
 }
