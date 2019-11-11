@@ -21,5 +21,22 @@ namespace Lesson4Abstracting.Facts
                 Assert.True(pattern.Match(text));
             }
         }
+
+        [Fact]
+        public void TestForIPatterInterfaceReturnsFalse()
+        {
+            var digitPatterns = new IPattern[]
+                {
+                    new Character('0'),
+                    new Range('0', '8'),
+                    new Choice(new Character('0'), new Range('1', '8'))
+                };
+
+            const string text = "9011";
+            foreach (IPattern pattern in digitPatterns)
+            {
+                Assert.False(pattern.Match(text));
+            }
+        }
     }
 }
