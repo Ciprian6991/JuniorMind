@@ -11,8 +11,7 @@ namespace Lesson4Abstracting.Facts
             var digitPatterns = new IPattern[]
                 {
                     new Character('0'),
-                    new Range('0', '9'),
-                    new Choice(new Character('0'), new Range('1', '9'))
+                    new Range('0', '9')
                 };
 
             const string text = "0011";
@@ -28,8 +27,7 @@ namespace Lesson4Abstracting.Facts
             var digitPatterns = new IPattern[]
                 {
                     new Character('0'),
-                    new Range('0', '8'),
-                    new Choice(new Character('0'), new Range('1', '8'))
+                    new Range('0', '8')
                 };
 
             const string text = "9011";

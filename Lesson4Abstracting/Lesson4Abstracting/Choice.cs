@@ -4,20 +4,26 @@ using System.Text;
 
 namespace Lesson4Abstracting
 {
-    public class Choice : IPattern
+    public class Choice
     {
-        readonly Character character;
-        readonly Range range;
+        readonly IPattern[] patterns;
 
-        public Choice(Character character, Range range)
+        public Choice(params IPattern[] patterns)
         {
-            this.character = character;
-            this.range = range;
+            this.patterns = patterns;
         }
 
         public bool Match(string text)
         {
-            return character.Match(text) || range.Match(text);
+            foreach (IPattern pattern in patterns)
+            {
+                if (pattern.Match(text))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }
