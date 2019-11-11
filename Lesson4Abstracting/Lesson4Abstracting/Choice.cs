@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Lesson4Abstracting
 {
-    public class Choice
+    public class Choice : IPattern
     {
         readonly Character character;
         readonly Range range;

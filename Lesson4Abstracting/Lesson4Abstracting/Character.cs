@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Lesson4Abstracting
 {
-    public class Character
+    public class Character : IPattern
     {
         readonly char pattern;
 
