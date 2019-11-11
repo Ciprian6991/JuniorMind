@@ -12,5 +12,13 @@ namespace Lesson4Abstracting.Facts
             const string text = "00001";
             Assert.True(digitPatterns.Match(text));
         }
+
+        [Fact]
+        public void TestIfIPatternWorksForCharacterAndRAngeClassesReturnsFalse()
+        {
+            var digitPatterns = new Choice(new Character('0'), new Range('1', '9'));
+            const string text = "a0001";
+            Assert.False(digitPatterns.Match(text));
+        }
     }
 }
