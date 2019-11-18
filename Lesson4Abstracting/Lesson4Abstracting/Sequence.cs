@@ -18,10 +18,9 @@ namespace Lesson4Abstracting
             Match matching = new Match(text, false);
             foreach (IPattern pattern in patterns)
             {
-                if (pattern.Match(matching.RemainingText()).Success())
-                {
-                    matching = new Match(pattern.Match(matching.RemainingText()).RemainingText(), true);
-                }
+                matching = pattern.Match(matching.RemainingText()).Success()
+                    ? new Match(pattern.Match(matching.RemainingText()).RemainingText(), true)
+                    : new Match(pattern.Match(matching.RemainingText()).RemainingText(), false);
             }
 
             return matching;
