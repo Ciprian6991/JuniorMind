@@ -27,5 +27,13 @@ namespace Lesson4Abstracting.Facts
             var ab = new Sequence(new Character('a'), new Character('b'));
             Assert.False(ab.Match("ax").Success());
         }
+
+        [Fact]
+        public void TestIfTwoCharSequenceReturnsCorrectString2()
+        {
+            var ab = new Sequence(new Character('a'), new Character('b'));
+            Assert.Equal("ax", ab.Match("ax").RemainingText());
+        }
+
     }
 }

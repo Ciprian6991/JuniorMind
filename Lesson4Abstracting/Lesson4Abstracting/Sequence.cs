@@ -20,7 +20,7 @@ namespace Lesson4Abstracting
             {
                 matching = pattern.Match(matching.RemainingText()).Success()
                     ? new Match(pattern.Match(matching.RemainingText()).RemainingText(), true)
-                    : new Match(pattern.Match(matching.RemainingText()).RemainingText(), false);
+                    : new Match(text, false);
             }
 
             return matching;
