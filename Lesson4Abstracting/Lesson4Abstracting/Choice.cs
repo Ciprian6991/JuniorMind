@@ -21,8 +21,6 @@ namespace Lesson4Abstracting
                 if (pattern.Match(matching.RemainingText()).Success())
                 {
                     matching = new Match(pattern.Match(matching.RemainingText()).RemainingText(), pattern.Match(matching.RemainingText()).Success());
-                    Console.WriteLine(matching.RemainingText());
-                    Console.WriteLine(matching.Success());
                 }
             }
 
