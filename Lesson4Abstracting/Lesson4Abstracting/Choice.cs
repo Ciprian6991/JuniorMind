@@ -13,17 +13,20 @@ namespace Lesson4Abstracting
             this.patterns = patterns;
         }
 
-        public bool Match(string text)
+        public IMatch Match(string text)
         {
+            Match matching = new Match(text, false);
             foreach (IPattern pattern in patterns)
             {
-                if (pattern.Match(text))
+                if (pattern.Match(matching.RemainingText()).Success())
                 {
-                    return true;
+                    matching = new Match(pattern.Match(matching.RemainingText()).RemainingText(), pattern.Match(matching.RemainingText()).Success());
+                    Console.WriteLine(matching.RemainingText());
+                    Console.WriteLine(matching.Success());
                 }
             }
 
-            return false;
+            return matching;
         }
     }
 }

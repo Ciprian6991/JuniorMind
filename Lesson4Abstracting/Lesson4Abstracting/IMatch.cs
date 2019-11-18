@@ -4,8 +4,10 @@ using System.Text;
 
 namespace Lesson4Abstracting
 {
-    public interface IPattern
+    public interface IMatch
     {
-        IMatch Match(string text);
+        bool Success();
+
+        string RemainingText();
     }
 }

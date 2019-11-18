@@ -17,7 +17,7 @@ namespace Lesson4Abstracting.Facts
             const string text = "0011";
             foreach (IPattern pattern in digitPatterns)
             {
-                Assert.True(pattern.Match(text));
+                Assert.True(pattern.Match(text).Success());
             }
         }
 
@@ -33,7 +33,7 @@ namespace Lesson4Abstracting.Facts
             const string text = "9011";
             foreach (IPattern pattern in digitPatterns)
             {
-                Assert.False(pattern.Match(text));
+                Assert.False(pattern.Match(text).Success());
             }
         }
     }
