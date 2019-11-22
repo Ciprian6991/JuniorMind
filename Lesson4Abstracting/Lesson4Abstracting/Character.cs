@@ -15,17 +15,12 @@ namespace Lesson4Abstracting
 
         public IMatch Match(string text)
         {
-            if (string.IsNullOrEmpty(text) || text[0] != pattern)
+            if (string.IsNullOrEmpty(text))
             {
                 return new Match(text, false);
             }
 
-            if (text[0] == pattern)
-            {
-                return new Match(text.Substring(1), true);
-            }
-
-            return new Match(text.Substring(1), true);
+            return text[0] == pattern ? new Match(text.Substring(1), true) : new Match(text, false);
         }
     }
 }
