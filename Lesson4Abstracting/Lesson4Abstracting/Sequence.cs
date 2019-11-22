@@ -15,15 +15,20 @@ namespace Lesson4Abstracting
 
         public IMatch Match(string text)
         {
-            Match matching = new Match(text, false);
+            IMatch matchingBackup = new Match(text, false);
+            IMatch matchingUsed = new Match(text, false);
             foreach (IPattern pattern in patterns)
             {
-                matching = pattern.Match(matching.RemainingText()).Success()
-                    ? new Match(pattern.Match(matching.RemainingText()).RemainingText(), true)
-                    : new Match(text, false);
+                matchingUsed = pattern.Match(matchingUsed.RemainingText());
+
+                if (!matchingUsed.Success())
+                {
+                    matchingUsed = matchingBackup;
+                    break;
+                }
             }
 
-            return matching;
+            return matchingUsed;
         }
     }
 }
