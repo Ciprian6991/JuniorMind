@@ -15,12 +15,14 @@ namespace Lesson4Abstracting
 
         public IMatch Match(string text)
         {
-            Match matching = new Match(text, false);
+            IMatch matching = new Match(text, false);
             foreach (IPattern pattern in patterns)
             {
-                if (pattern.Match(matching.RemainingText()).Success())
+                matching = pattern.Match(matching.RemainingText());
+
+                if (matching.Success())
                 {
-                    return new Match(pattern.Match(matching.RemainingText()).RemainingText(), true);
+                    break;
                 }
             }
 
