@@ -22,11 +22,11 @@ namespace Lesson4Abstracting
 
                 if (matching.Success())
                 {
-                    break;
+                    return matching;
                 }
             }
 
-            return matching;
+            return new Match(text, false);
         }
     }
 }
