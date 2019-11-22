@@ -22,12 +22,7 @@ namespace Lesson4Abstracting
                 return new Match(text, false);
             }
 
-            if (text[0] >= start && text[0] <= end)
-            {
-                return new Match(text.Substring(1), true);
-            }
-
-            return new Match(text, false);
+            return text[0] >= start && text[0] <= end ? new Match(text.Substring(1), true) : new Match(text, false);
         }
     }
 }
