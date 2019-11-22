@@ -23,8 +23,7 @@ namespace Lesson4Abstracting
 
                 if (!matchingUsed.Success())
                 {
-                    matchingUsed = matchingBackup;
-                    break;
+                    return matchingBackup;
                 }
             }
 
