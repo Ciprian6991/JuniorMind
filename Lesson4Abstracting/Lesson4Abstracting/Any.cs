@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Lesson4Abstracting
 {
-    public class Any
+    public class Any : IPattern
     {
         readonly string accepted;
 
