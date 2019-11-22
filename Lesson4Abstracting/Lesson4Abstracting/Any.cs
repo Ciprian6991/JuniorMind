@@ -15,6 +15,8 @@ namespace Lesson4Abstracting
 
         public IMatch Match(string text)
         {
+            if (!string.IsNullOrEmpty(text))
+            {
                 for (int i = 0; i < accepted.Length; i++)
                 {
                     if (text[0] == accepted[i])
@@ -22,8 +24,9 @@ namespace Lesson4Abstracting
                         return new Match(text.Substring(1), true);
                     }
                 }
+            }
 
-                return new Match(text, false);
+            return new Match(text, false);
         }
     }
 }
