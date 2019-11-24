@@ -35,5 +35,43 @@ namespace Lesson4Abstracting.Facts
             var truE = new Text("true");
             Assert.Equal("X", truE.Match("trueX").RemainingText());
         }
+
+
+        [Fact]
+        public void FalseAsStringParameterShouldReturnFalse()
+        {
+            var truE = new Text("true");
+            Assert.False(truE.Match("false").Success());
+        }
+
+        [Fact]
+        public void FalseAsStringParamReturnsFalseAsString()
+        {
+            var truE = new Text("true");
+            Assert.Equal("false", truE.Match("false").RemainingText());
+        }
+
+
+        [Fact]
+        public void EmptyStringParameterShouldReturnFalse()
+        {
+            var truE = new Text("true");
+            Assert.False(truE.Match("").Success());
+        }
+
+        [Fact]
+        public void EmptyStringParamReturnsEmptyString()
+        {
+            var truE = new Text("true");
+            Assert.Equal("", truE.Match("").RemainingText());
+        }
+
+
+        [Fact]
+        public void NullParameterShouldReturnFalse()
+        {
+            var truE = new Text("true");
+            Assert.False(truE.Match(null).Success());
+        }
     } 
 }

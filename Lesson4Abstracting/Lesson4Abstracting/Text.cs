@@ -15,7 +15,7 @@ namespace Lesson4Abstracting
 
         public IMatch Match(string text)
         {
-            if (text.Length >= prefix.Length)
+            if (!string.IsNullOrEmpty(text) && text.Length >= prefix.Length)
             {
                 if (text.Length == prefix.Length && string.Equals(prefix, text, StringComparison.Ordinal))
                 {
