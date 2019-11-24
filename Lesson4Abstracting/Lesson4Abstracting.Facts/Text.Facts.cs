@@ -170,5 +170,20 @@ namespace Lesson4Abstracting.Facts
             var empty = new Text("");
             Assert.True(empty.Match("true").Success());
         }
+
+
+        [Fact]
+        public void NullParamReturnsNull3()
+        {
+            var empty = new Text("");
+            Assert.Null(empty.Match(null).RemainingText());
+        }
+
+        [Fact]
+        public void TrueStringParameterShouldReturnTrue3()
+        {
+            var empty = new Text("");
+            Assert.True(empty.Match(null).Success());
+        }
     } 
 }
