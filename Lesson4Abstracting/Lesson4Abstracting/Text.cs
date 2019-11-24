@@ -26,7 +26,7 @@ namespace Lesson4Abstracting
                     {
                         if (prefix[i] == text[i] && i == prefix.Length - 1)
                         {
-                            return new Match(text.Substring(i), true);
+                            return new Match(text.Substring(i + 1), true);
                         }
                 }
             }
