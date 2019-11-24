@@ -15,6 +15,11 @@ namespace Lesson4Abstracting
 
         public IMatch Match(string text)
         {
+            if (string.IsNullOrEmpty(prefix))
+            {
+            return new Match(text, true);
+            }
+
             if (!string.IsNullOrEmpty(text) && text.Length >= prefix.Length)
             {
                 if (text.Length == prefix.Length && string.Equals(prefix, text, StringComparison.Ordinal))
