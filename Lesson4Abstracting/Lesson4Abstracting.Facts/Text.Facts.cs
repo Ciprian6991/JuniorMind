@@ -13,5 +13,19 @@ namespace Lesson4Abstracting.Facts
             var truE = new Text("true");
             Assert.True(truE.Match("true").Success());
         }
-    }
+
+        [Fact]
+        public void TrueAsStringParamReturnsEmptyStringFromSameParameter()
+        {
+            var truE = new Text("true");
+            Assert.Equal("",truE.Match("true").RemainingText());
+        }
+
+        [Fact]
+        public void TrueXAsStringParameterShouldReturnTrue()
+        {
+            var truE = new Text("true");
+            Assert.True(truE.Match("trueX").Success());
+        }
+    } 
 }

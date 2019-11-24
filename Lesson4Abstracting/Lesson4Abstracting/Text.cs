@@ -15,9 +15,20 @@ namespace Lesson4Abstracting
 
         public IMatch Match(string text)
         {
-            if (string.Equals(prefix, text, StringComparison.Ordinal))
+            if (text.Length >= prefix.Length)
             {
-                return new Match("", true);
+                if (text.Length == prefix.Length && string.Equals(prefix, text, StringComparison.Ordinal))
+                {
+                    return new Match("", true);
+                }
+
+                for (int i = 0; i < prefix.Length; i++)
+                    {
+                        if (prefix[i] == text[i] && i == prefix.Length - 1)
+                        {
+                            return new Match(text.Substring(i), true);
+                        }
+                }
             }
 
             return new Match(text, false);
