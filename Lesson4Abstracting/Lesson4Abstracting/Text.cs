@@ -15,13 +15,22 @@ namespace Lesson4Abstracting
 
         public IMatch Match(string text)
         {
-            return string.IsNullOrEmpty(prefix)
-                ? new Match(text, true)
-                : string.IsNullOrEmpty(text)
-                ? new Match(text, false)
-                : text.StartsWith(prefix)
-                ? new Match(text.TrimStart(prefix.ToCharArray()), true)
-                : new Match(text, false);
+            if (string.IsNullOrEmpty(prefix))
+            {
+                return new Match(text, true);
+            }
+
+            if (string.IsNullOrEmpty(text))
+            {
+                return new Match(text, false);
+            }
+
+            if (text.StartsWith(prefix))
+            {
+                return new Match(text.Substring(prefix.Length), true);
+            }
+
+            return new Match(text, false);
         }
     }
 }
