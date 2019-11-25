@@ -17,30 +17,16 @@ namespace Lesson4Abstracting
         {
             if (string.IsNullOrEmpty(prefix))
             {
-            return new Match(text, true);
+                return new Match(text, true);
             }
 
-            if (!string.IsNullOrEmpty(text) && text.Length >= prefix.Length)
+            if (!string.IsNullOrEmpty(text)
+                && text.Length >= prefix.Length
+                && text.Contains(prefix, StringComparison.Ordinal))
             {
-                return GetRemainingText(text);
-            }
-
-            return new Match(text, false);
-        }
-
-        private IMatch GetRemainingText(string text)
-        {
-            if (text.Length == prefix.Length && string.Equals(prefix, text, StringComparison.Ordinal))
-            {
-                return new Match("", true);
-            }
-
-            for (int i = 0; i < prefix.Length; i++)
-            {
-                if (prefix[i] == text[i] && i == prefix.Length - 1)
-                {
-                    return new Match(text.Substring(i + 1), true);
-                }
+                return prefix.Length != text.Length
+                    ? new Match(text.Substring(text.LastIndexOf(text[prefix.Length])), true)
+                    : new Match("", true);
             }
 
             return new Match(text, false);
