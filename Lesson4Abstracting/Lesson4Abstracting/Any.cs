@@ -15,16 +15,9 @@ namespace Lesson4Abstracting
 
         public IMatch Match(string text)
         {
-            if (!string.IsNullOrEmpty(text))
-            {
-                char character = text[0];
-                if (accepted.Contains(character, StringComparison.Ordinal))
-                {
-                    return new Match(text.Substring(1), true);
-                }
-            }
-
-            return new Match(text, false);
+        return !string.IsNullOrEmpty(text) && accepted.Contains(text[0])
+                ? new Match(text.Substring(1), true)
+                : new Match(text, false);
         }
     }
 }
