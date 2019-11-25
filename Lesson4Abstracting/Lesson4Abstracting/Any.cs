@@ -17,12 +17,10 @@ namespace Lesson4Abstracting
         {
             if (!string.IsNullOrEmpty(text))
             {
-                for (int i = 0; i < accepted.Length; i++)
+                char character = text[0];
+                if (accepted.Contains(character, StringComparison.Ordinal))
                 {
-                    if (text[0] == accepted[i])
-                    {
-                        return new Match(text.Substring(1), true);
-                    }
+                    return new Match(text.Substring(1), true);
                 }
             }
 
