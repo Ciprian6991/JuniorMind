@@ -15,22 +15,9 @@ namespace Lesson4Abstracting
 
         public IMatch Match(string text)
         {
-            if (string.IsNullOrEmpty(prefix))
-            {
-                return new Match(text, true);
-            }
-
-            if (string.IsNullOrEmpty(text))
-            {
-                return new Match(text, false);
-            }
-
-            if (text.StartsWith(prefix))
-            {
-                return new Match(text.Substring(prefix.Length), true);
-            }
-
-            return new Match(text, false);
+            return !string.IsNullOrEmpty(text) && text.StartsWith(prefix)
+                    ? new Match(text.Substring(prefix?.Length ?? 0), true)
+                    : new Match(text, false);
         }
     }
 }

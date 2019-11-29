@@ -180,10 +180,10 @@ namespace Lesson4Abstracting.Facts
         }
 
         [Fact]
-        public void TrueStringParameterShouldReturnTrue3()
+        public void NullParameterShouldReturnFalse3()
         {
             var empty = new Text("");
-            Assert.True(empty.Match(null).Success());
+            Assert.False(empty.Match(null).Success());
         }
     } 
 }
