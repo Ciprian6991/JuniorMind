@@ -13,5 +13,43 @@ namespace Lesson4Abstracting.Facts
             var a = new OneOrMore(new Range('0', '9'));
             Assert.Equal("", a.Match("123").RemainingText());
         }
+
+        [Fact]
+        public void NumberAsParamReturnsTrueForA()
+        {
+            var a = new OneOrMore(new Range('0', '9'));
+            Assert.True(a.Match("123").Success());
+        }
+
+
+        [Fact]
+        public void NumberAndStringAsParamReturnsStringForA()
+        {
+            var a = new OneOrMore(new Range('0', '9'));
+            Assert.Equal("a", a.Match("1a").RemainingText());
+        }
+
+        [Fact]
+        public void NumberAndStringAsParamReturnsTrueForA()
+        {
+            var a = new OneOrMore(new Range('0', '9'));
+            Assert.True(a.Match("1a").Success());
+        }
+
+
+
+        [Fact]
+        public void StringAsParamReturnsStringForA()
+        {
+            var a = new OneOrMore(new Range('0', '9'));
+            Assert.Equal("bc", a.Match("bc").RemainingText());
+        }
+
+        [Fact]
+        public void StringAsParamReturnsFalseForA()
+        {
+            var a = new OneOrMore(new Range('0', '9'));
+            Assert.False(a.Match("bc").Success());
+        }
     }
 }
