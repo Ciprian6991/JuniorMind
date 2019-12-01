@@ -15,14 +15,9 @@ namespace Lesson4Abstracting
 
         public IMatch Match(string text)
         {
-            string workingText = text;
-
-            if (pattern.Match(workingText).Success())
-            {
-                workingText = workingText.Substring(1);
-            }
-
-            return new Match(workingText, true);
+            return pattern.Match(text).Success() ?
+                new Match(text.Substring(1), true) :
+                new Match(text, true);
         }
     }
 }
