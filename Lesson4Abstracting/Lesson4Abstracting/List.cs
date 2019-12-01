@@ -10,7 +10,7 @@ namespace Lesson4Abstracting
 
         public List(IPattern element, IPattern separator)
         {
-            this.pattern = new Sequence(element, separator, element, separator, element);
+            this.pattern = new Choice(new Sequence(element, separator, element, separator, element), new Optional(element), new Optional(separator));
         }
 
         public IMatch Match(string text)
