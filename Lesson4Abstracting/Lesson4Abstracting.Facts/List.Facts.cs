@@ -118,5 +118,49 @@ namespace Lesson4Abstracting.Facts
             var list = new List(digits, separator);
             Assert.Equal("", list.Match("1; 22  ;\n 333 \t; 22").RemainingText());
         }
+
+
+        [Fact]
+        public void SimpleCombinationStringAsParamReturnsTrue()
+        {
+            var digits = new OneOrMore(new Range('0', '9'));
+            var whitespace = new Many(new Any(" \r\n\t"));
+            var separator = new Sequence(whitespace, new Character(';'), whitespace);
+            var list = new List(digits, separator);
+            var a = new List(new Range('0', '9'), new Character(','));
+            Assert.True(list.Match("1 \n;").Success());
+        }
+
+        [Fact]
+        public void SimpleCombinationStringReturnsPartOfString()
+        {
+            var digits = new OneOrMore(new Range('0', '9'));
+            var whitespace = new Many(new Any(" \r\n\t"));
+            var separator = new Sequence(whitespace, new Character(';'), whitespace);
+            var list = new List(digits, separator);
+            Assert.Equal(" \n;", list.Match("1 \n;").RemainingText());
+        }
+
+
+        [Fact]
+        public void AbcAsParamReturnsTrue()
+        {
+            var digits = new OneOrMore(new Range('0', '9'));
+            var whitespace = new Many(new Any(" \r\n\t"));
+            var separator = new Sequence(whitespace, new Character(';'), whitespace);
+            var list = new List(digits, separator);
+            var a = new List(new Range('0', '9'), new Character(','));
+            Assert.True(list.Match("1 \n;").Success());
+        }
+
+        [Fact]
+        public void AbcReturnsAbc()
+        {
+            var digits = new OneOrMore(new Range('0', '9'));
+            var whitespace = new Many(new Any(" \r\n\t"));
+            var separator = new Sequence(whitespace, new Character(';'), whitespace);
+            var list = new List(digits, separator);
+            Assert.Equal("abc", list.Match("abc").RemainingText());
+        }
     }
 }
