@@ -110,5 +110,22 @@ namespace Lesson4Abstracting.Facts
             var sign = new Optional(new Character('-'));
             Assert.True(sign.Match("-123").Success());
         }
+
+
+        [Fact]
+        public void StringAsParamReturnsTrue3()
+        {
+            var seqence = new Sequence(new Character('a'), new Character('b'));
+            var sign = new Optional(seqence);
+            Assert.True(sign.Match("abcd").Success());
+        }
+
+        [Fact]
+        public void StringAsParamReturnsTrimmedSequence()
+        {
+            var seqence = new Sequence(new Character('a'), new Character('b'));
+            var sign = new Optional(seqence);
+            Assert.Equal("cd", sign.Match("abcd").RemainingText());
+        }
     }
 }
