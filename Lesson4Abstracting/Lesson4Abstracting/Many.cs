@@ -24,7 +24,7 @@ namespace Lesson4Abstracting
         {
             while (pattern.Match(text).Success())
             {
-                text = text.Substring(1);
+                text = pattern.Match(text).RemainingText();
             }
 
             return new Match(text, true);

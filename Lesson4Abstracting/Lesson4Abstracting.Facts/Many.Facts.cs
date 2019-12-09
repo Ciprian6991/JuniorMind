@@ -110,5 +110,22 @@ namespace Lesson4Abstracting.Facts
             var digits = new Many(new Range('0', '9'));
             Assert.True(digits.Match("ab").Success());
         }
+
+
+        [Fact]
+        public void StringAsParamReturnsTrueForString()
+        {
+            var seqence = new Sequence(new Character('a'), new Character('b'));
+            var digits = new Many(seqence);
+            Assert.True(digits.Match("ababc").Success());
+        }
+
+        [Fact]
+        public void StringAsParamReturnsCorectFormatForString()
+        {
+            var seqence = new Sequence(new Character('a'), new Character('b'));
+            var digits = new Many(seqence);
+            Assert.Equal("ac", digits.Match("ababac").RemainingText());
+        }
     }
 }
