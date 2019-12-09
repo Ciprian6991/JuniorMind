@@ -43,5 +43,80 @@ namespace Lesson4Abstracting.Facts
             var a = new List(new Range('0', '9'), new Character(','));
             Assert.Equal("a", a.Match("1a").RemainingText());
         }
+
+
+        [Fact]
+        public void NumberAndStringAsParamReturnsTrueForA()
+        {
+            var a = new List(new Range('0', '9'), new Character(','));
+            Assert.True(a.Match("1a").Success());
+        }
+
+
+        [Fact]
+        public void StringAsParamReturnsStringForA()
+        {
+            var a = new List(new Range('0', '9'), new Character(','));
+            Assert.Equal("abc", a.Match("abc").RemainingText());
+        }
+
+        [Fact]
+        public void StringAsParamReturnsTrueForA()
+        {
+            var a = new List(new Range('0', '9'), new Character(','));
+            Assert.True(a.Match("abc").Success());
+        }
+
+
+        [Fact]
+        public void EmptyStringAsParamReturnsEmptyString()
+        {
+            var a = new List(new Range('0', '9'), new Character(','));
+            Assert.Equal("", a.Match("").RemainingText());
+        }
+
+        [Fact]
+        public void EmptyStringAsParamReturnsTrueForA()
+        {
+            var a = new List(new Range('0', '9'), new Character(','));
+            Assert.True(a.Match("").Success());
+        }
+
+
+        [Fact]
+        public void NullAsParamReturnsNull()
+        {
+            var a = new List(new Range('0', '9'), new Character(','));
+            Assert.Null(a.Match(null).RemainingText());
+        }
+
+        [Fact]
+        public void NullAsParamReturnsTrueForA()
+        {
+            var a = new List(new Range('0', '9'), new Character(','));
+            Assert.True(a.Match(null).Success());
+        }
+
+
+        [Fact]
+        public void ComplexAsParamReturnsTrue()
+        {
+            var digits = new OneOrMore(new Range('0', '9'));
+            var whitespace = new Many(new Any(" \r\n\t"));
+            var separator = new Sequence(whitespace, new Character(';'), whitespace);
+            var list = new List(digits, separator);
+            var a = new List(new Range('0', '9'), new Character(','));
+            Assert.True(list.Match("1; 22  ;\n 333 \t; 22").Success());
+        }
+
+        [Fact]
+        public void ComplexAsParamReturnsEmptyString()
+        {
+            var digits = new OneOrMore(new Range('0', '9'));
+            var whitespace = new Many(new Any(" \r\n\t"));
+            var separator = new Sequence(whitespace, new Character(';'), whitespace);
+            var list = new List(digits, separator);
+            Assert.Equal("", list.Match("1; 22  ;\n 333 \t; 22").RemainingText());
+        }
     }
 }
