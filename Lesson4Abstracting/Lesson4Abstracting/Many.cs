@@ -15,13 +15,19 @@ namespace Lesson4Abstracting
 
         public IMatch Match(string text)
         {
-            string workingString = text;
-            while (pattern.Match(workingString).Success())
+            return pattern.Match(text).Success()
+                ? GetTrimmedPattern(text)
+                : new Match(text, true);
+        }
+
+        private Match GetTrimmedPattern(string text)
+        {
+            while (pattern.Match(text).Success())
             {
-                workingString = workingString.Substring(1);
+                text = text.Substring(1);
             }
 
-            return new Match(workingString, true);
+            return new Match(text, true);
         }
     }
 }
