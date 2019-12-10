@@ -15,9 +15,7 @@ namespace Lesson4Abstracting
 
         public IMatch Match(string text)
         {
-            return pattern.Match(text).Success() ?
-                new Match(pattern.Match(text).RemainingText(), true) :
-                new Match(text, true);
+            return new Match(pattern.Match(text).RemainingText(), true);
         }
     }
 }
