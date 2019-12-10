@@ -15,13 +15,6 @@ namespace Lesson4Abstracting
 
         public IMatch Match(string text)
         {
-            return pattern.Match(text).Success()
-                ? GetTrimmedPattern(text)
-                : new Match(text, true);
-        }
-
-        private Match GetTrimmedPattern(string text)
-        {
             while (pattern.Match(text).Success())
             {
                 text = pattern.Match(text).RemainingText();
