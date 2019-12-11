@@ -162,5 +162,20 @@ namespace Lesson4Abstracting.Facts
             var list = new List(digits, separator);
             Assert.Equal("abc", list.Match("abc").RemainingText());
         }
+
+
+        [Fact]
+        public void CommaFirstAsParamReturnsTrueForA()
+        {
+            var a = new List(new Range('0', '9'), new Character(','));
+            Assert.True(a.Match(",1,2,3").Success());
+        }
+
+        [Fact]
+        public void CommaFirstAsParamReturnsOriginalStringForA()
+        {
+            var a = new List(new Range('0', '9'), new Character(','));
+            Assert.Equal(",1,2,3", a.Match(",1,2,3").RemainingText());
+        }
     }
 }
