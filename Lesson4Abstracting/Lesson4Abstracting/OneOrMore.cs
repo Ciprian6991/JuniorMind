@@ -10,7 +10,7 @@ namespace Lesson4Abstracting
 
         public OneOrMore(IPattern pattern)
         {
-            this.pattern = new Sequence(new Choice(pattern), new Many(pattern));
+            this.pattern = new Sequence(pattern, new Many(pattern));
         }
 
         public IMatch Match(string text)
