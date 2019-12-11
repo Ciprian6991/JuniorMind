@@ -15,12 +15,20 @@ namespace Lesson4Abstracting
 
         public IMatch Match(string text)
         {
-            while (pattern.Match(text).Success())
+            IMatch matchingUsed = new Match(text, true);
+            IMatch matchingBackup;
+            while (matchingUsed.Success())
             {
-                text = pattern.Match(text).RemainingText();
+                matchingBackup = matchingUsed;
+                matchingUsed = pattern.Match(matchingUsed.RemainingText());
+
+                if (!matchingUsed.Success())
+                {
+                    return matchingBackup;
+                }
             }
 
-            return new Match(text, true);
+            return matchingUsed;
         }
     }
 }
