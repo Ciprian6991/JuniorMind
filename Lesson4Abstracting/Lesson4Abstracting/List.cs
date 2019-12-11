@@ -12,7 +12,7 @@ namespace Lesson4Abstracting
         {
             this.pattern = new Many(
                 new Sequence(
-                    new Choice(element),
+                    element,
                     new Many(new Sequence(separator, element))));
         }
 
