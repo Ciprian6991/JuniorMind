@@ -16,19 +16,17 @@ namespace Lesson4Abstracting
         public IMatch Match(string text)
         {
             IMatch matchingUsed = new Match(text, true);
-            IMatch matchingBackup;
             while (matchingUsed.Success())
             {
-                matchingBackup = matchingUsed;
                 matchingUsed = pattern.Match(matchingUsed.RemainingText());
 
-                if (!matchingUsed.Success())
+                if (matchingUsed.Success())
                 {
-                    return matchingBackup;
+                    matchingUsed = pattern.Match(matchingUsed.RemainingText());
                 }
             }
 
-            return matchingUsed;
+            return new Match(matchingUsed.RemainingText(), true);
         }
     }
 }
