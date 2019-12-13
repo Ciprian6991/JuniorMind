@@ -19,11 +19,6 @@ namespace Lesson4Abstracting
             while (matchingUsed.Success())
             {
                 matchingUsed = pattern.Match(matchingUsed.RemainingText());
-
-                if (matchingUsed.Success())
-                {
-                    matchingUsed = pattern.Match(matchingUsed.RemainingText());
-                }
             }
 
             return new Match(matchingUsed.RemainingText(), true);
