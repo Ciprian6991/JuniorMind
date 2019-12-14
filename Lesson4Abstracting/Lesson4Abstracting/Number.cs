@@ -10,7 +10,7 @@ namespace Lesson4Abstracting
 
         public Number()
         {
-            pattern = new Many(new Range('0', '9'));
+            pattern = new Sequence(new Optional(new Character('-')), new Many(new Range('0', '9')));
         }
 
         public IMatch Match(string text)
