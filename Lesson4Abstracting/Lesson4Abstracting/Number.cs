@@ -11,7 +11,18 @@ namespace Lesson4Abstracting
         public Number()
         {
             pattern = new Sequence(
-                new Optional(new Character('-')), new Many(new Range('0', '9')), new Optional(new Sequence(new Character('.'), new Many(new Range('0', '9')))));
+                                    new Optional(
+                                        new Character('-')), new Many(new Range('0', '9')),
+                                    new Optional(
+                                        new Sequence(new Character('.'), new Many(new Range('0', '9')))),
+                                    new Optional(new Sequence(
+                                        new Choice(
+                                            new Character('e'),
+                                            new Character('E')),
+                                        new Choice(
+                                            new Character('+'),
+                                            new Character('-')),
+                                        new Optional(new Range('0', '9')))));
         }
 
         public IMatch Match(string text)
