@@ -128,10 +128,62 @@ namespace Lesson4Abstracting.Facts
 
 
         [Fact]
-        public void ExponentAsParamReturnsEmptyString()
+        public void ExponentePlusAsParamReturnsEmptyString()
         {
             var number = new Number();
             Assert.Equal("", number.Match("123e+1").RemainingText());
+        }
+
+        [Fact]
+        public void ExponentePlusAsParamReturnsTrue()
+        {
+            var number = new Number();
+            Assert.True(number.Match("123e+1").Success());
+        }
+
+
+        [Fact]
+        public void ExponentEPlusAsParamReturnsEmptyString()
+        {
+            var number = new Number();
+            Assert.Equal("", number.Match("123E+1").RemainingText());
+        }
+
+        [Fact]
+        public void ExponentEPlusAsParamReturnsTrue()
+        {
+            var number = new Number();
+            Assert.True(number.Match("123E+1").Success());
+        }
+
+
+        [Fact]
+        public void ExponenteMinusAsParamReturnsEmptyString()
+        {
+            var number = new Number();
+            Assert.Equal("", number.Match("123e-1").RemainingText());
+        }
+
+        [Fact]
+        public void ExponenteMinusAsParamReturnsTrue()
+        {
+            var number = new Number();
+            Assert.True(number.Match("123e-1").Success());
+        }
+
+
+        [Fact]
+        public void ExponentEMinusAsParamReturnsEmptyString()
+        {
+            var number = new Number();
+            Assert.Equal("", number.Match("123E-1").RemainingText());
+        }
+
+        [Fact]
+        public void ExponentEMinusAsParamReturnsTrue()
+        {
+            var number = new Number();
+            Assert.True(number.Match("123E-1").Success());
         }
     }
 }
