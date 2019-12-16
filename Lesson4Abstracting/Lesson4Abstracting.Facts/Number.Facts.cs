@@ -185,5 +185,80 @@ namespace Lesson4Abstracting.Facts
             var number = new Number();
             Assert.True(number.Match("123E-1").Success());
         }
+
+
+        [Fact]
+        public void ZeroDigitsAsParamReturnsString()
+        {
+            var number = new Number();
+            Assert.Equal("123", number.Match("0123").RemainingText());
+        }
+
+        [Fact]
+        public void ZeroDigitsAsParamReturnsFalse()
+        {
+            var number = new Number();
+            Assert.True(number.Match("0123").Success());
+        }
+
+
+        [Fact]
+        public void ExponenteDotPlusAsParamReturnsEmptyString()
+        {
+            var number = new Number();
+            Assert.Equal("", number.Match("12.3e+1").RemainingText());
+        }
+
+        [Fact]
+        public void ExponenteDotPlusAsParamReturnsTrue()
+        {
+            var number = new Number();
+            Assert.True(number.Match("12.3e+1").Success());
+        }
+
+
+        [Fact]
+        public void MinusExponenteDotPlusAsParamReturnsEmptyString()
+        {
+            var number = new Number();
+            Assert.Equal("", number.Match("-12.3e+1").RemainingText());
+        }
+
+        [Fact]
+        public void MinusExponenteDotPlusAsParamReturnsTrue()
+        {
+            var number = new Number();
+            Assert.True(number.Match("-12.3e+1").Success());
+        }
+
+
+        [Fact]
+        public void MinusDotAsParamReturnsDotString()
+        {
+            var number = new Number();
+            Assert.Equal(".", number.Match("-12.").RemainingText());
+        }
+
+        [Fact]
+        public void MinusDotAsParamReturnsTrue()
+        {
+            var number = new Number();
+            Assert.True(number.Match("-12.").Success());
+        }
+
+
+        [Fact]
+        public void MinusExponenteDotAsParamReturnseString()
+        {
+            var number = new Number();
+            Assert.Equal("e", number.Match("-12.3e").RemainingText());
+        }
+
+        [Fact]
+        public void MinusExponenteDotAsParamReturnsTrue()
+        {
+            var number = new Number();
+            Assert.True(number.Match("-12.3e").Success());
+        }
     }
 }
