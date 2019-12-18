@@ -50,5 +50,20 @@ namespace Lesson4Abstracting.Facts
             var text = new String();
             Assert.True(text.Match("\"Test\"").Success());
         }
+
+
+        [Fact]
+        public void HexStringReturnsString()
+        {
+            var text = new String();
+            Assert.Equal("", text.Match("\"\u1234\"").RemainingText());
+        }
+
+        [Fact]
+        public void HexStringReturnsTrue()
+        {
+            var text = new String();
+            Assert.True(text.Match("\"\u1234\"").Success());
+        }
     }
 }
