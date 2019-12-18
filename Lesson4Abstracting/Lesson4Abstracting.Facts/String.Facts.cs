@@ -20,5 +20,20 @@ namespace Lesson4Abstracting.Facts
             var text = new String();
             Assert.True(text.Match("\"\"").Success());
         }
+
+
+        [Fact]
+        public void SpaceStringReturnsEmptyString()
+        {
+            var text = new String();
+            Assert.Equal("", text.Match("\" \"").RemainingText());
+        }
+
+        [Fact]
+        public void SpaceStringReturnsTrue()
+        {
+            var text = new String();
+            Assert.True(text.Match("\" \"").Success());
+        }
     }
 }
