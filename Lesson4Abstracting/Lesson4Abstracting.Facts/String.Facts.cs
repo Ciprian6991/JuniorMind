@@ -35,5 +35,20 @@ namespace Lesson4Abstracting.Facts
             var text = new String();
             Assert.True(text.Match("\" \"").Success());
         }
+
+
+        [Fact]
+        public void SimpleStringReturnsString()
+        {
+            var text = new String();
+            Assert.Equal("", text.Match("\"Test\"").RemainingText());
+        }
+
+        [Fact]
+        public void SimpleStringReturnsTrue()
+        {
+            var text = new String();
+            Assert.True(text.Match("\"Test\"").Success());
+        }
     }
 }

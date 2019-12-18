@@ -13,7 +13,7 @@ namespace Lesson4Abstracting
         {
             var space = (char)uint.Parse("0020", System.Globalization.NumberStyles.AllowHexSpecifier);
             var reverse_solidus = (char)uint.Parse("005C", System.Globalization.NumberStyles.AllowHexSpecifier);
-            var quatation_mark = (char)uint.Parse("0222", System.Globalization.NumberStyles.AllowHexSpecifier);
+            var quatation_mark = (char)uint.Parse("022", System.Globalization.NumberStyles.AllowHexSpecifier);
             var finalHex = (char)uint.Parse("10FFFF", System.Globalization.NumberStyles.AllowHexSpecifier);
 
             var character = new Choice(
@@ -23,7 +23,7 @@ namespace Lesson4Abstracting
 
             var characters = new Many(character);
 
-            pattern = new Sequence(characters);
+            pattern = new Sequence(new Character('\"'), characters, new Character('\"'));
         }
 
         public IMatch Match(string text)
