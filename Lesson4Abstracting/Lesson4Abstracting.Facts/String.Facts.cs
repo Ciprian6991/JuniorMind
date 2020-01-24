@@ -120,5 +120,22 @@ namespace Lesson4Abstracting.Facts
             var text = new String();
             Assert.Equal("", text.Match("\"\\\"\"").RemainingText());
         }
+
+
+
+        [Fact]
+        public void SolidusSolidusReturnsEmptyString()
+        {
+            var text = new String();
+            Assert.True(text.Match("\"\\\\\"").Success());
+        }
+
+
+        [Fact]
+        public void SolidusSolidusReturnsTrue()
+        {
+            var text = new String();
+            Assert.Equal("", text.Match("\"\\\\\"").RemainingText());
+        }
     }
 }
