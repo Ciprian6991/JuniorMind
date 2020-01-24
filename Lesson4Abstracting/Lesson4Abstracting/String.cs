@@ -29,7 +29,8 @@ namespace Lesson4Abstracting
 
             var escape = new Choice(
                 new Any("\b\f\n\r\t"),
-                new Sequence(new Text("\\u"), hex, hex, hex, hex));
+                new Sequence(new Text("\\u"), hex, hex, hex, hex),
+                new Text("\\/"));
 
             var character = new Choice(
                     new Range(space, (char)(quatation_mark - 1)),

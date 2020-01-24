@@ -88,5 +88,22 @@ namespace Lesson4Abstracting.Facts
             var text = new String();
             Assert.Equal("", text.Match("\"\n\"").RemainingText());
         }
+
+
+        [Fact]
+        public void SolidusReverseSolidusReturnsEmptyString()
+        {
+            var text = new String();
+            Assert.True(text.Match("\"\\/\"").Success());
+        }
+
+
+        [Fact]
+        public void SolidusReverseSolidusReturnsTrue()
+        {
+            var text = new String();
+            Assert.Equal("", text.Match("\"\\/\"").RemainingText());
+        }
+
     }
 }
