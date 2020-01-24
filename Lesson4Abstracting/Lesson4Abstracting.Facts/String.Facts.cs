@@ -53,17 +53,40 @@ namespace Lesson4Abstracting.Facts
 
 
         [Fact]
-        public void HexStringReturnsString()
+        public void SimpleTextPlusHexStringReturnsString()
         {
             var text = new String();
-            Assert.Equal("", text.Match("\"\u1234\"").RemainingText());
+            Assert.Equal("", text.Match("\"Test\\u0097\"").RemainingText());
         }
 
         [Fact]
-        public void HexStringReturnsTrue()
+        public void SimpleTextPlusHexStringReturnsTrue()
         {
             var text = new String();
-            Assert.True(text.Match("\"\u1234\"").Success());
+            Assert.True(text.Match("\"Test\\u1234\"").Success());
+        }
+
+
+        [Fact]
+        public void NewLineReturnsString()
+        {
+            var text = new String();
+            Assert.Equal("", text.Match("\"\n\"").RemainingText());
+        }
+
+        [Fact]
+        public void NewLineReturnsTrue()
+        {
+            var text = new String();
+            Assert.True(text.Match("\"\n\"").Success());
+        }
+
+
+        [Fact]
+        public void NewLineReturnsTrueee()
+        {
+            var text = new String();
+            Assert.Equal("", text.Match("\"\n\"").RemainingText());
         }
     }
 }

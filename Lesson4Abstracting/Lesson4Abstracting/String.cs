@@ -28,14 +28,14 @@ namespace Lesson4Abstracting
                                  new Range('a', 'f'));
 
             var escape = new Choice(
-                new Any("bfnrt\\\"/"),
-                new Sequence(new Character('u'), hex, hex, hex, hex));
+                new Any("\b\f\n\r\t"),
+                new Sequence(new Text("\\u"), hex, hex, hex, hex));
 
             var character = new Choice(
                     new Range(space, (char)(quatation_mark - 1)),
                     new Range((char)(quatation_mark + 1), (char)(reverse_solidus - 1)),
                     new Range((char)(reverse_solidus + 1), finalHex),
-                    new Sequence(new Any("\\"), escape));
+                    new Sequence(escape));
 
             var characters = new Many(character);
 
