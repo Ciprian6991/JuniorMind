@@ -40,7 +40,7 @@ namespace Lesson4Abstracting
                     new Range((char)(reverse_solidus + 1), finalHex),
                     new Sequence(escape));
 
-            var characters = new Many(character);
+            var characters = new Optional(new OneOrMore(character));
 
             pattern = new Sequence(new Character('\"'), characters, new Character('\"'));
         }
