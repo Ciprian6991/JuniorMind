@@ -105,5 +105,20 @@ namespace Lesson4Abstracting.Facts
             Assert.Equal("", text.Match("\"\\/\"").RemainingText());
         }
 
+
+        [Fact]
+        public void SolidusQuatationMarkReturnsEmptyString()
+        {
+            var text = new String();
+            Assert.True(text.Match("\"\\\"\"").Success());
+        }
+
+
+        [Fact]
+        public void SolidusQuatationMarkReturnsTrue()
+        {
+            var text = new String();
+            Assert.Equal("", text.Match("\"\\\"\"").RemainingText());
+        }
     }
 }
