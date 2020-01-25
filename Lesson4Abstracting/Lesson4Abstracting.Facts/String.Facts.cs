@@ -137,5 +137,70 @@ namespace Lesson4Abstracting.Facts
             var text = new String();
             Assert.Equal("", text.Match("\"\\\\\"").RemainingText());
         }
+
+
+
+        [Fact]
+        public void MissingQuatationMarkReturningFalse1()
+        {
+            var text = new String();
+            Assert.False(text.Match("Test\"").Success());
+        }
+
+
+        [Fact]
+        public void MissingQuatationMarkReturnsRemainingString1()
+        {
+            var text = new String();
+            Assert.Equal("Test\"", text.Match("Test\"").RemainingText());
+        }
+
+
+        [Fact]
+        public void MissingQuatationMarkReturningFalse2()
+        {
+            var text = new String();
+            Assert.False(text.Match("\"Test").Success());
+        }
+
+
+        [Fact]
+        public void MissingQuatationMarkReturnsRemainingString2()
+        {
+            var text = new String();
+            Assert.Equal("\"Test", text.Match("\"Test").RemainingText());
+        }
+
+
+        [Fact]
+        public void QuatationMarkSolidReturningFalse()
+        {
+            var text = new String();
+            Assert.False(text.Match("\"\\Test\"").Success());
+        }
+
+
+        [Fact]
+        public void QuatationMarkSolidReturnsRemainingString()
+        {
+            var text = new String();
+            Assert.Equal("\"\\Test\"", text.Match("\"\\Test\"").RemainingText());
+        }
+
+
+        [Fact]
+        public void CharactersQuatationMarkCharactersReturningFalse()
+        {
+            var text = new String();
+            Assert.True(text.Match("\"Te\"st\"").Success());
+        }
+
+
+        [Fact]
+        public void CharactersQuatationMarkCharactersReturnsRemainingString()
+        {
+            var text = new String();
+            Assert.Equal("st\"", text.Match("\"Te\"st\"").RemainingText());
+        }
     }
 }
