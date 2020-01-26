@@ -32,14 +32,14 @@ namespace Lesson4Abstracting
         public void Add(IPattern patternToAdd)
         {
             IPattern[] finalPatterns = new IPattern[patterns.Length + 1];
-            uint index = 0;
+            finalPatterns[0] = patternToAdd;
+            uint index = 1;
             foreach (IPattern pattern in patterns)
             {
                 finalPatterns[index] = pattern;
                 index++;
             }
 
-            finalPatterns[index] = patternToAdd;
             patterns = finalPatterns;
         }
     }

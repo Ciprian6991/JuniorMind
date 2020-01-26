@@ -85,9 +85,9 @@ namespace Lesson4Abstracting.Facts
             var obj = new Text("zero");
             value.Add(obj);
 
-            const string string1 = "zero0";
+            const string string1 = "zerotruefalsenull";
 
-            Assert.Equal("0", value.Match(string1).RemainingText());
+            Assert.Equal("truefalsenull", value.Match(string1).RemainingText());
         }
     }
 }
