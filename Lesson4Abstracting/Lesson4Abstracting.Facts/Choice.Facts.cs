@@ -73,5 +73,21 @@ namespace Lesson4Abstracting.Facts
             const string text = null;
             Assert.False(hex.Match(text).Success());
         }
+
+
+        [Fact]
+        public void AddMethodTest()
+        {
+            var value = new Choice(
+            new Text("true"),
+            new Text("false"),
+            new Text("null"));
+            var obj = new Text("zero");
+            value.Add(obj);
+
+            const string string1 = "zero0";
+
+            Assert.Equal("0", value.Match(string1).RemainingText());
+        }
     }
 }
