@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Lesson4Abstracting
 {
-    public class String
+    public class String : IPattern
     {
         private readonly IPattern pattern;
 
