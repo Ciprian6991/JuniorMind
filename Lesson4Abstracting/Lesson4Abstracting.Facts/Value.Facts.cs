@@ -25,5 +25,14 @@ namespace Lesson4Abstracting.Facts
         }
 
 
+        [Fact]
+        public void TestForNumber()
+        {
+            var value = new Value();
+            const string number = "-12.3e";
+            Assert.True(value.Match(number).Success());
+        }
+
+
     }
 }
