@@ -15,5 +15,15 @@ namespace Lesson4Abstracting.Facts
             Assert.True(value.Match(text).Success());
         }
 
+
+        [Fact]
+        public void TestForString()
+        {
+            var value = new Value();
+            const string text = "\"Abc123\"";
+            Assert.True(value.Match(text).Success());
+        }
+
+
     }
 }

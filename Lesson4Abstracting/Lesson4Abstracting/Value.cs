@@ -11,6 +11,7 @@ namespace Lesson4Abstracting
         public Value()
         {
             pattern = new Choice(
+                                new String(),
                                 new Text("true"),
                                 new Text("false"),
                                 new Text("null"));
