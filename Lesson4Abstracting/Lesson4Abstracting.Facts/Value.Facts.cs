@@ -60,5 +60,14 @@ namespace Lesson4Abstracting.Facts
             Assert.True(value.Match(number).Success());
         }
 
+
+        [Fact]
+        public void TestForObjMembers()
+        {
+            var value = new Value();
+            const string number = "{ \"string\" : true ,  \"string\" : false }";
+            Assert.True(value.Match(number).Success());
+        }
+
     }
 }

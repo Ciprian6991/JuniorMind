@@ -26,7 +26,11 @@ namespace Lesson4Abstracting
                                     new Sequence(new Character('['), ws, new Character(']')),
                                     new Sequence(new Character('['), elements, new Character(']')));
 
-            var obj = new Sequence(new Character('{'), ws, new Character('}'));
+            var member = new Sequence(ws, new String(), ws, new Character(':'), element);
+            var members = new List(member, new Character(','));
+            var obj = new Choice(
+                                    new Sequence(new Character('{'), ws, new Character('}')),
+                                    new Sequence(new Character('{'), members, new Character('}')));
 
             value.Add(array);
             value.Add(obj);
