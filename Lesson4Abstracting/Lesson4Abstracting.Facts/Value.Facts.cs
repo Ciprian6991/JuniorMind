@@ -34,5 +34,14 @@ namespace Lesson4Abstracting.Facts
         }
 
 
+        [Fact]
+        public void TestForArrayWs()
+        {
+            var value = new Value();
+            const string number = "[  ]";
+            Assert.True(value.Match(number).Success());
+        }
+
+
     }
 }
