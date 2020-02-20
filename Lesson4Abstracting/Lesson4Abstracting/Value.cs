@@ -19,7 +19,12 @@ namespace Lesson4Abstracting
 
             var ws = new Many(new Any("\u0020\u000A\u000A\u000D\u0009"));
 
-            var array = new Sequence(new Character('['), ws, new Character(']'));
+            var element = new Sequence(ws, value, ws);
+            var elements = new List(element, new Character(','));
+
+            var array = new Choice(
+                                    new Sequence(new Character('['), ws, new Character(']')),
+                                    new Sequence(new Character('['), elements, new Character(']')));
 
             value.Add(array);
 
