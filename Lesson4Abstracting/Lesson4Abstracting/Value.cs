@@ -26,7 +26,10 @@ namespace Lesson4Abstracting
                                     new Sequence(new Character('['), ws, new Character(']')),
                                     new Sequence(new Character('['), elements, new Character(']')));
 
+            var obj = new Sequence(new Character('{'), ws, new Character('}'));
+
             value.Add(array);
+            value.Add(obj);
 
             pattern = value;
         }
