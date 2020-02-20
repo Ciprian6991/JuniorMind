@@ -11,11 +11,6 @@ namespace Lesson4Abstracting
 
         public String()
         {
-            var space = (char)uint.Parse("0020", System.Globalization.NumberStyles.AllowHexSpecifier);
-            var reverse_solidus = (char)uint.Parse("005C", System.Globalization.NumberStyles.AllowHexSpecifier);
-            var quatation_mark = (char)uint.Parse("022", System.Globalization.NumberStyles.AllowHexSpecifier);
-            var finalHex = (char)uint.Parse("10FFFF", System.Globalization.NumberStyles.AllowHexSpecifier);
-
             var onenine = new Range('1', '9');
 
             var digit = new Range('0', '9');
@@ -31,9 +26,7 @@ namespace Lesson4Abstracting
                 new Sequence(new Text("\\u"), hex, hex, hex, hex));
 
             var character = new Choice(
-                    new Range(space, (char)(quatation_mark - 1)),
-                    new Range((char)(quatation_mark + 1), (char)(reverse_solidus - 1)),
-                    new Range((char)(reverse_solidus + 1), finalHex),
+                    new Range(' ', '\uffff', "\"\\"),
                     new Sequence(escape));
 
             var characters = new Many(character);
