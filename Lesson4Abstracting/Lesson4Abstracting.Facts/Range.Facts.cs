@@ -39,5 +39,12 @@ namespace Lesson4Abstracting.Facts
             var digit = new Range('1', '9', "7");
             Assert.False(digit.Match("751").Success());
         }
+
+        [Fact]
+        public void TestForExceptedCharactersTrue()
+        {
+            var digit = new Range('1', '9', "7");
+            Assert.True(digit.Match("851").Success());
+        }
     }
 }
