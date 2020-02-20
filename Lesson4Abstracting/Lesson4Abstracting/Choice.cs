@@ -31,16 +31,13 @@ namespace Lesson4Abstracting
 
         public void Add(IPattern patternToAdd)
         {
-            IPattern[] finalPatterns = new IPattern[patterns.Length + 1];
-            finalPatterns[0] = patternToAdd;
-            uint index = 1;
-            foreach (IPattern pattern in patterns)
+            Array.Resize(ref patterns, patterns.Length + 1);
+            for (int i = patterns.Length - 1; i >= 1; i--)
             {
-                finalPatterns[index] = pattern;
-                index++;
+                patterns[i] = patterns[i - 1];
             }
 
-            patterns = finalPatterns;
+            patterns[0] = patternToAdd;
         }
     }
 }
