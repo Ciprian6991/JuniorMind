@@ -18,9 +18,7 @@ namespace Lesson4Abstracting
 
             var onenine = new Range('1', '9');
 
-            var digit = new Choice(
-                                    new Character('0'),
-                                    onenine);
+            var digit = new Range('0', '9');
 
             var hex = new Choice(
                                  digit,
