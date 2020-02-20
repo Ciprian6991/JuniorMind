@@ -11,9 +11,7 @@ namespace Lesson4Abstracting
         public Number()
         {
             var onenine = new Range('1', '9');
-            var digit = new Choice(
-                                    new Character('0'),
-                                    onenine);
+            var digit = new Range('0', '9');
 
             var digits = new OneOrMore(digit);
 
