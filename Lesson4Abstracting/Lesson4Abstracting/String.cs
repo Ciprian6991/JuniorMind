@@ -21,13 +21,12 @@ namespace Lesson4Abstracting
                                  new Range('a', 'f'));
 
             var escape = new Choice(
-                new Any("\b\f\n\r\t"),
-                new Sequence(new Text("\\"), new Any("\"\\/")),
-                new Sequence(new Text("\\u"), hex, hex, hex, hex));
+                new Any("bfnrt\"\\/"),
+                new Sequence(new Character('u'), hex, hex, hex, hex));
 
             var character = new Choice(
                     new Range(' ', '\uffff', "\"\\"),
-                    new Sequence(escape));
+                    new Sequence(new Character('\\'), escape));
 
             var characters = new Many(character);
 

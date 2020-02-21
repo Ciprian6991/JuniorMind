@@ -71,14 +71,14 @@ namespace Lesson4Abstracting.Facts
         public void NewLineReturnsString()
         {
             var text = new String();
-            Assert.Equal("", text.Match("\"\n\"").RemainingText());
+            Assert.Equal("", text.Match("\"\\n\"").RemainingText());
         }
 
         [Fact]
         public void NewLineReturnsTrue()
         {
             var text = new String();
-            Assert.True(text.Match("\"\n\"").Success());
+            Assert.True(text.Match("\"\\n\"").Success());
         }
 
 
@@ -86,7 +86,7 @@ namespace Lesson4Abstracting.Facts
         public void NewLineReturnsTrueee()
         {
             var text = new String();
-            Assert.Equal("", text.Match("\"\n\"").RemainingText());
+            Assert.Equal("", text.Match("\"\\n\"").RemainingText());
         }
 
 
