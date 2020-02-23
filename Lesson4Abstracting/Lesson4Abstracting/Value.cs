@@ -24,13 +24,13 @@ namespace Lesson4Abstracting
 
             var array = new Choice(
                                     new Sequence(new Character('['), ws, new Character(']')),
-                                    new Sequence(new Character('['), elements, new Character(']')));
+                                    new Sequence(new Character('['), ws, elements, ws, new Character(']')));
 
             var member = new Sequence(ws, new String(), ws, new Character(':'), element);
             var members = new List(member, new Character(','));
             var obj = new Choice(
                                     new Sequence(new Character('{'), ws, new Character('}')),
-                                    new Sequence(new Character('{'), members, new Character('}')));
+                                    new Sequence(new Character('{'), ws, members, ws, new Character('}')));
 
             value.Add(array);
             value.Add(obj);
