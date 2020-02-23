@@ -17,7 +17,7 @@ namespace Lesson4Abstracting
                                 new Text("false"),
                                 new Text("null"));
 
-            var ws = new Many(new Any("\u0020\u000A\u000A\u000D\u0009"));
+            var ws = new Many(new Any(" \n\t\r"));
 
             var element = new Sequence(ws, value, ws);
             var elements = new List(element, new Character(','));
