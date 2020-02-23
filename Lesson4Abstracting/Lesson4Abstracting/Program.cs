@@ -6,8 +6,10 @@ namespace Lesson4Abstracting
     {
         static void Main(string[] args)
         {
-            string text = System.IO.File.ReadAllText(@"C:\Users\Anita Ciprian\Desktop\afis.txt");
-            Console.WriteLine("Contents of WriteText.txt = {0}", text);
+            string text = System.IO.File.ReadAllText(@"E:\ProiecteVS\GitHub\Lesson4Abstracting\Lesson4Abstracting.Facts\JSON1.txt");
+            var value = new Value();
+            Console.WriteLine(string.IsNullOrEmpty(value.Match(text).RemainingText()) ? "Valid JSON!" : "Invalid JSON!");
+
             Console.Read();
         }
     }
