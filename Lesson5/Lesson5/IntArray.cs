@@ -28,5 +28,10 @@ namespace Lesson5
         {
             return array[index];
         }
+
+        public void SetElement(int index, int element)
+        {
+            array[index] = element;
+        }
     }
 }

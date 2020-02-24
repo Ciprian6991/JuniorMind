@@ -23,5 +23,17 @@ namespace Lesson5.Tests
             testArray.Add(5);
             Assert.Equal(4, testArray.Element(2));
         }
+
+        [Fact]
+        public void TestSetElement()
+        {
+            var testArray = new IntArray();
+            testArray.Add(2);
+            testArray.Add(3);
+            testArray.Add(4);
+            testArray.Add(5);
+            testArray.SetElement(2, 10);
+            Assert.Equal(10, testArray.Element(2));
+        }
     }
 }
