@@ -123,5 +123,32 @@ namespace Lesson5.Tests
 
             Assert.Equal(3, testArray.Element(0));
         }
+
+
+        [Fact]
+        public void TestRemoveSize()
+        {
+            var testArray = new IntArray();
+            testArray.Add(2);
+            testArray.Add(3);
+            testArray.Add(2);
+            testArray.Add(5);
+            testArray.Remove(2);
+
+            Assert.Equal(3, testArray.Count());
+        }
+
+        [Fact]
+        public void TestRemoveAtValue()
+        {
+            var testArray = new IntArray();
+            testArray.Add(2);
+            testArray.Add(3);
+            testArray.Add(2);
+            testArray.Add(5);
+            testArray.RemoveAt(2);
+
+            Assert.Equal(5, testArray.Element(2));
+        }
     }
 }
