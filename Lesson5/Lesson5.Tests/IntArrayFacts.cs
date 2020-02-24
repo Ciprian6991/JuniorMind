@@ -47,5 +47,29 @@ namespace Lesson5.Tests
             
             Assert.True(testArray.Contains(5));
         }
+
+        [Fact]
+        public void TestContainsFalse()
+        {
+            var testArray = new IntArray();
+            testArray.Add(2);
+            testArray.Add(3);
+            testArray.Add(4);
+            testArray.Add(5);
+
+            Assert.False(testArray.Contains(10));
+        }
+
+        [Fact]
+        public void TestIndexOfHasOne()
+        {
+            var testArray = new IntArray();
+            testArray.Add(2);
+            testArray.Add(3);
+            testArray.Add(4);
+            testArray.Add(5);
+
+            Assert.Equal(3, testArray.IndexOf(5));
+        }
     }
 }
