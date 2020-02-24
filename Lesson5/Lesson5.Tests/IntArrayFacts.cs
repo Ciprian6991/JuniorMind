@@ -150,5 +150,18 @@ namespace Lesson5.Tests
 
             Assert.Equal(5, testArray.Element(2));
         }
+
+        [Fact]
+        public void TestRemoveAtCount()
+        {
+            var testArray = new IntArray();
+            testArray.Add(2);
+            testArray.Add(3);
+            testArray.Add(2);
+            testArray.Add(5);
+            testArray.RemoveAt(2);
+
+            Assert.Equal(3, testArray.Count());
+        }
     }
 }
