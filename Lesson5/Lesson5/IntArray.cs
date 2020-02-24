@@ -23,5 +23,10 @@ namespace Lesson5
         {
             return array.Length;
         }
+
+        public int Element(int index)
+        {
+            return array[index];
+        }
     }
 }
