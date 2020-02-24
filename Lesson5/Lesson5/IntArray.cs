@@ -75,5 +75,20 @@ namespace Lesson5
         {
             Array.Resize(ref array, 0);
         }
+
+        public void Remove(int element)
+        {
+            if (!Contains(element))
+            {
+                return;
+            }
+
+            for (int i = IndexOf(element); i < array.Length - 1; i++)
+            {
+                array[i] = array[i + 1];
+            }
+
+            Array.Resize(ref array, array.Length - 1);
+        }
     }
 }

@@ -109,5 +109,19 @@ namespace Lesson5.Tests
             testArray.Clear();
             Assert.Equal(0, testArray.Count());
         }
+
+
+        [Fact]
+        public void TestRemoveValue()
+        {
+            var testArray = new IntArray();
+            testArray.Add(2);
+            testArray.Add(3);
+            testArray.Add(2);
+            testArray.Add(5);
+            testArray.Remove(2);
+
+            Assert.Equal(3, testArray.Element(0));
+        }
     }
 }
