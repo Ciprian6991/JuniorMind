@@ -97,5 +97,17 @@ namespace Lesson5.Tests
 
             Assert.Equal(10, testArray.Element(2));
         }
+
+
+        [Fact]
+        public void TestClear()
+        {
+            var testArray = new IntArray();
+            testArray.Add(2);
+            testArray.Add(3);
+            testArray.Add(4);
+            testArray.Clear();
+            Assert.Equal(0, testArray.Count());
+        }
     }
 }
