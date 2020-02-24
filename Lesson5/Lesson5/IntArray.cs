@@ -33,5 +33,18 @@ namespace Lesson5
         {
             array[index] = element;
         }
+
+        public bool Contains(int element)
+        {
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (array[i] == element)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
     }
 }
