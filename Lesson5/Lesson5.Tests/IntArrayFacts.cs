@@ -71,5 +71,31 @@ namespace Lesson5.Tests
 
             Assert.Equal(3, testArray.IndexOf(5));
         }
+
+
+        [Fact]
+        public void TestIndexOfDoesntHaveOne()
+        {
+            var testArray = new IntArray();
+            testArray.Add(2);
+            testArray.Add(3);
+            testArray.Add(4);
+            testArray.Add(5);
+
+            Assert.Equal(-1, testArray.IndexOf(10));
+        }
+
+        [Fact]
+        public void TestInsert()
+        {
+            var testArray = new IntArray();
+            testArray.Add(2);
+            testArray.Add(3);
+            testArray.Add(4);
+            testArray.Add(5);
+            testArray.Insert(2, 10);
+
+            Assert.Equal(10, testArray.Element(2));
+        }
     }
 }

@@ -59,5 +59,16 @@ namespace Lesson5
 
             return -1;
         }
+
+        public void Insert(int index, int element)
+        {
+            Array.Resize(ref array, array.Length + 1);
+            for (int i = array.Length - 1; i > index; i--)
+            {
+                array[i] = array[i - 1];
+            }
+
+            array[index] = element;
+        }
     }
 }
