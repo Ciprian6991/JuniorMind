@@ -64,13 +64,7 @@ namespace Lesson5
 
         public void Remove(int element)
         {
-            if (!Contains(element))
-            {
-                return;
-            }
-
-            ShiftLeftFromIndex(IndexOf(element));
-            ModifyArraySizeBy(-1);
+            RemoveAt(IndexOf(element));
         }
 
         public void RemoveAt(int index)
