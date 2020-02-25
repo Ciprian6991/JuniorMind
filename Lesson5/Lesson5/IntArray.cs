@@ -4,22 +4,32 @@ namespace Lesson5
 {
     public class IntArray
     {
+        private const int SizeFactor = 4;
         private int[] array;
+        private int index;
 
         public IntArray()
         {
-            array = new int[0];
+            index = 0;
+            array = new int[SizeFactor];
         }
 
         public void Add(int element)
         {
-            ModifyArraySizeBy(1);
-            array[array.Length - 1] = element;
+            if (index < array.Length - 1 - 1)
+            {
+                array[index++] = element;
+            }
+            else
+            {
+                ModifyArraySizeBy(SizeFactor);
+                array[index++] = element;
+            }
         }
 
         public int Count()
         {
-            return array.Length;
+            return index;
         }
 
         public int Element(int index)
@@ -39,7 +49,7 @@ namespace Lesson5
 
         public int IndexOf(int element)
         {
-            for (int i = 0; i < array.Length; i++)
+            for (int i = 0; i <= index; i++)
             {
                 if (array[i] == element)
                 {
@@ -59,7 +69,12 @@ namespace Lesson5
 
         public void Clear()
         {
-            Array.Resize(ref array, 0);
+            for (int i = 0; i <= index; i++)
+            {
+                array[i] = 0;
+            }
+
+            index = 0;
         }
 
         public void Remove(int element)
@@ -69,13 +84,8 @@ namespace Lesson5
 
         public void RemoveAt(int index)
         {
-            if (Count() - 1 < index)
-            {
-                return;
-            }
-
             ShiftLeftFromIndex(index);
-            Array.Resize(ref array, array.Length - 1);
+            this.index--;
         }
 
         private void ModifyArraySizeBy(int size)
@@ -85,7 +95,7 @@ namespace Lesson5
 
         private void ShiftLeftFromIndex(int index)
         {
-            for (int i = index; i < array.Length - 1; i++)
+            for (int i = index; i < this.index - 1; i++)
             {
                 array[i] = array[i + 1];
             }
@@ -93,7 +103,7 @@ namespace Lesson5
 
         private void ShiftRightFromIndex(int index)
         {
-            for (int i = array.Length - 1; i > index; i--)
+            for (int i = this.index - 1; i > index; i--)
             {
                 array[i] = array[i - 1];
             }
