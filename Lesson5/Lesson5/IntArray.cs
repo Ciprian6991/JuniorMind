@@ -76,11 +76,6 @@ namespace Lesson5
             this.count--;
         }
 
-        private void ModifyArraySizeBy(int size)
-        {
-            Array.Resize(ref array, array.Length + size);
-        }
-
         private void ShiftLeftFromIndex(int index)
         {
             for (int i = index; i < this.count - 1; i++)
@@ -104,7 +99,7 @@ namespace Lesson5
                 return;
             }
 
-            ModifyArraySizeBy(SizeFactor);
+            Array.Resize(ref array, array.Length + SizeFactor);
         }
     }
 }
