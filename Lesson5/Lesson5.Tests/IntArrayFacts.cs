@@ -21,7 +21,7 @@ namespace Lesson5.Tests
             testArray.Add(3);
             testArray.Add(4);
             testArray.Add(5);
-            Assert.Equal(4, testArray.Element(2));
+            Assert.Equal(4, testArray[2]);
         }
 
         [Fact]
@@ -32,8 +32,8 @@ namespace Lesson5.Tests
             testArray.Add(3);
             testArray.Add(4);
             testArray.Add(5);
-            testArray.SetElement(2, 10);
-            Assert.Equal(10, testArray.Element(2));
+            testArray[2] = 10;
+            Assert.Equal(10, testArray[2]);
         }
 
         [Fact]
@@ -95,7 +95,7 @@ namespace Lesson5.Tests
             testArray.Add(5);
             testArray.Insert(2, 10);
 
-            Assert.Equal(10, testArray.Element(2));
+            Assert.Equal(10, testArray[2]);
         }
 
         [Fact]
@@ -108,7 +108,7 @@ namespace Lesson5.Tests
             testArray.Add(5);
             testArray.Insert(2, 10);
 
-            Assert.Equal(5, testArray.Element(4));
+            Assert.Equal(5, testArray[4]);
         }
 
 
@@ -134,7 +134,7 @@ namespace Lesson5.Tests
             testArray.Add(5);
             testArray.Remove(2);
 
-            Assert.Equal(3, testArray.Element(0));
+            Assert.Equal(3, testArray[0]);
         }
 
 
@@ -161,7 +161,7 @@ namespace Lesson5.Tests
             testArray.Add(5);
             testArray.RemoveAt(2);
 
-            Assert.Equal(5, testArray.Element(2));
+            Assert.Equal(5, testArray[2]);
         }
 
         [Fact]
