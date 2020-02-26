@@ -6,15 +6,13 @@ namespace Lesson5
     {
         private const int SizeFactor = 4;
         private int[] array;
-        private int count;
 
         public IntArray()
         {
-            count = 0;
             array = new int[SizeFactor];
         }
 
-        public int Count { get => count; }
+        public int Count { get; private set; }
 
         public int this[int index]
         {
@@ -25,7 +23,7 @@ namespace Lesson5
         public void Add(int element)
         {
             CheckSize();
-            array[count++] = element;
+            array[Count++] = element;
         }
 
         public bool Contains(int element)
@@ -35,7 +33,7 @@ namespace Lesson5
 
         public int IndexOf(int element)
         {
-            for (int i = 0; i < count; i++)
+            for (int i = 0; i < Count; i++)
             {
                 if (array[i] == element)
                 {
@@ -55,7 +53,7 @@ namespace Lesson5
 
         public void Clear()
         {
-            count = 0;
+            Count = 0;
         }
 
         public void Remove(int element)
@@ -66,12 +64,12 @@ namespace Lesson5
         public void RemoveAt(int index)
         {
             ShiftLeftFromIndex(index);
-            this.count--;
+            this.Count--;
         }
 
         private void ShiftLeftFromIndex(int index)
         {
-            for (int i = index; i < this.count - 1; i++)
+            for (int i = index; i < this.Count - 1; i++)
             {
                 array[i] = array[i + 1];
             }
@@ -79,7 +77,7 @@ namespace Lesson5
 
         private void ShiftRightFromIndex(int index)
         {
-            for (int i = this.count; i > index; i--)
+            for (int i = this.Count; i > index; i--)
             {
                 array[i] = array[i - 1];
             }
@@ -87,7 +85,7 @@ namespace Lesson5
 
         private void CheckSize()
             {
-            if (count <= array.Length - 1)
+            if (Count <= array.Length - 1)
             {
                 return;
             }
