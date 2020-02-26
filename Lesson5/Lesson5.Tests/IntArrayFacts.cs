@@ -98,6 +98,19 @@ namespace Lesson5.Tests
             Assert.Equal(10, testArray.Element(2));
         }
 
+        [Fact]
+        public void TestInsertLastIndex()
+        {
+            var testArray = new IntArray();
+            testArray.Add(2);
+            testArray.Add(3);
+            testArray.Add(4);
+            testArray.Add(5);
+            testArray.Insert(2, 10);
+
+            Assert.Equal(5, testArray.Element(4));
+        }
+
 
         [Fact]
         public void TestClear()

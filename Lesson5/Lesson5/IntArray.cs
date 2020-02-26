@@ -42,7 +42,7 @@ namespace Lesson5
 
         public int IndexOf(int element)
         {
-            for (int i = 0; i <= count; i++)
+            for (int i = 0; i < count; i++)
             {
                 if (array[i] == element)
                 {
@@ -86,7 +86,7 @@ namespace Lesson5
 
         private void ShiftRightFromIndex(int index)
         {
-            for (int i = this.count - 1; i > index; i--)
+            for (int i = this.count; i > index; i--)
             {
                 array[i] = array[i - 1];
             }
@@ -94,7 +94,7 @@ namespace Lesson5
 
         private void CheckSize()
             {
-            if (count < array.Length - 1 - 1)
+            if (count <= array.Length - 1)
             {
                 return;
             }
