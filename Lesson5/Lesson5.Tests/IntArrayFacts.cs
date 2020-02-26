@@ -10,7 +10,7 @@ namespace Lesson5.Tests
         {
             var testArray = new IntArray();
             testArray.Add(2);
-            Assert.Equal(1, testArray.Count());
+            Assert.Equal(1, testArray.Count);
         }
 
         [Fact]
@@ -120,7 +120,7 @@ namespace Lesson5.Tests
             testArray.Add(3);
             testArray.Add(4);
             testArray.Clear();
-            Assert.Equal(0, testArray.Count());
+            Assert.Equal(0, testArray.Count);
         }
 
 
@@ -148,7 +148,7 @@ namespace Lesson5.Tests
             testArray.Add(5);
             testArray.Remove(2);
 
-            Assert.Equal(3, testArray.Count());
+            Assert.Equal(3, testArray.Count);
         }
 
         [Fact]
@@ -174,7 +174,7 @@ namespace Lesson5.Tests
             testArray.Add(5);
             testArray.RemoveAt(2);
 
-            Assert.Equal(3, testArray.Count());
+            Assert.Equal(3, testArray.Count);
         }
     }
 }

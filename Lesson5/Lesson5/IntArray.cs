@@ -14,15 +14,12 @@ namespace Lesson5
             array = new int[SizeFactor];
         }
 
+        public int Count { get => count; }
+
         public void Add(int element)
         {
             CheckSize();
             array[count++] = element;
-        }
-
-        public int Count()
-        {
-            return count;
         }
 
         public int Element(int index)
