@@ -176,5 +176,19 @@ namespace Lesson5.Tests
 
             Assert.Equal(3, testArray.Count);
         }
+
+        [Fact]
+        public void TestMultipleInserts()
+        {
+            var testArray = new IntArray();
+            testArray.Add(2);
+            testArray.Add(3);
+            testArray.Add(4);
+            testArray.Add(5);
+            testArray.Insert(2, 10);
+            testArray.Insert(3, 10);
+
+            Assert.Equal(6, testArray.Count);
+        }
     }
 }

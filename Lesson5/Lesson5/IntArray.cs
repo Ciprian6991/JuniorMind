@@ -49,6 +49,7 @@ namespace Lesson5
             CheckSize();
             ShiftRightFromIndex(index);
             array[index] = element;
+            Count++;
         }
 
         public void Clear()

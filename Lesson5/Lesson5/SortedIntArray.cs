@@ -20,9 +20,9 @@ namespace Lesson5
             }
             else
             {
-                for (int i = Count - 1; i >= 0; i--)
+                for (int i = 0; i < Count; i++)
                 {
-                    if (element <= this[i])
+                    if (element < this[i])
                     {
                         Insert(i, element);
                         break;
