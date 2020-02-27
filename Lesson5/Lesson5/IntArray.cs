@@ -12,7 +12,7 @@ namespace Lesson5
             array = new int[SizeFactor];
         }
 
-        public int Count { get; private set; }
+        public int Count { get; protected set; }
 
         public int this[int index]
         {
@@ -20,7 +20,7 @@ namespace Lesson5
             set => array[index] = value;
         }
 
-        public void Add(int element)
+        public virtual void Add(int element)
         {
             CheckSize();
             array[Count++] = element;
@@ -67,6 +67,16 @@ namespace Lesson5
             this.Count--;
         }
 
+        protected void CheckSize()
+        {
+            if (Count <= array.Length - 1)
+            {
+                return;
+            }
+
+            Array.Resize(ref array, array.Length + SizeFactor);
+        }
+
         private void ShiftLeftFromIndex(int index)
         {
             for (int i = index; i < this.Count - 1; i++)
@@ -81,16 +91,6 @@ namespace Lesson5
             {
                 array[i] = array[i - 1];
             }
-        }
-
-        private void CheckSize()
-            {
-            if (Count <= array.Length - 1)
-            {
-                return;
-            }
-
-            Array.Resize(ref array, array.Length + SizeFactor);
         }
     }
 }
