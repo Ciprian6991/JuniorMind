@@ -37,5 +37,46 @@ namespace Lesson5.Tests
             Assert.Equal(3, notSortedArray[2]);
             Assert.Equal(6, notSortedArray[3]);
         }
+
+        [Fact]
+        public void TestForAddingSameValues()
+        {
+            var notSortedArray = new SortedIntArray();
+            notSortedArray.Add(1);
+            notSortedArray.Add(1);
+            notSortedArray.Add(1);
+            notSortedArray.Add(1);
+            Assert.Equal(0, notSortedArray.IndexOf(1));
+            Assert.Equal(-1, notSortedArray.IndexOf(2));
+        }
+
+
+        [Fact]
+        public void TestForInsertingInASortedArray()
+        {
+            var sortedArray = new SortedIntArray();
+            sortedArray.Add(1);
+            sortedArray.Add(4);
+            sortedArray.Add(6);
+            sortedArray.Add(12);
+            sortedArray.Insert(2, 8);
+            Assert.Equal(2, sortedArray.IndexOf(8));
+            Assert.Equal(5, sortedArray.Count);
+        }
+
+
+        [Fact]
+        public void TestForInsertingInAnUnsortedArrayShouldNotWork()
+        {
+            var notSortedArray = new SortedIntArray();
+            notSortedArray.Add(1);
+            notSortedArray.Add(4);
+            notSortedArray.Add(6);
+            notSortedArray.Add(12);
+            notSortedArray.Insert(2, 100);
+            Assert.Equal(-1, notSortedArray.IndexOf(100));
+            Assert.Equal(4, notSortedArray.Count);
+        }
+
     }
 }

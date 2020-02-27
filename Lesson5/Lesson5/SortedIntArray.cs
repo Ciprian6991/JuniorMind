@@ -30,5 +30,15 @@ namespace Lesson5
                 }
             }
         }
+
+        public override void Insert(int index, int element)
+            {
+            if (index != 0 && (element <= this[index - 1] || element >= this[index + 1]))
+            {
+                return;
+            }
+
+            base.Insert(index, element);
+        }
     }
 }

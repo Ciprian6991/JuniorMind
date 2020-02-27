@@ -44,7 +44,7 @@ namespace Lesson5
             return -1;
         }
 
-        public void Insert(int index, int element)
+        public virtual void Insert(int index, int element)
         {
             CheckSize();
             ShiftRightFromIndex(index);
