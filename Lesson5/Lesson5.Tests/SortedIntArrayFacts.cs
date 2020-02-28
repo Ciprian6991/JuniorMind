@@ -59,8 +59,8 @@ namespace Lesson5.Tests
             sortedArray.Add(4);
             sortedArray.Add(6);
             sortedArray.Add(12);
-            sortedArray.Insert(2, 8);
-            Assert.Equal(2, sortedArray.IndexOf(8));
+            sortedArray.Insert(2, 5);
+            Assert.Equal(2, sortedArray.IndexOf(5));
             Assert.Equal(5, sortedArray.Count);
         }
 
@@ -78,5 +78,39 @@ namespace Lesson5.Tests
             Assert.Equal(4, notSortedArray.Count);
         }
 
+
+        [Fact]
+        public void TestForInsertingInEmptyArray()
+        {
+            var testArray = new SortedIntArray();
+            testArray.Insert(0, 100);
+            Assert.Equal(0, testArray.IndexOf(100));
+            Assert.Equal(1, testArray.Count);
+        }
+
+
+        [Fact]
+        public void TestForIndexWhenResultsSortedArray()
+        {
+            var testArray = new SortedIntArray();
+            testArray.Add(1);
+            testArray.Add(5);
+            testArray.Add(10);
+            testArray[1] = 3;
+            Assert.Equal(3, testArray[1]);
+        }
+
+
+        [Fact]
+        public void TestForIndexWhenResultsNotSortedArray()
+        {
+            var testArray = new SortedIntArray();
+            testArray.Add(2);
+            testArray.Add(5);
+            testArray.Add(10);
+            testArray[0] = 1;
+            Assert.Equal(1, testArray[0]);
+            Assert.Equal(10, testArray[2]);
+        }
     }
 }

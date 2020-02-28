@@ -10,6 +10,20 @@ namespace Lesson5
         {
         }
 
+        public override int this[int index]
+        {
+            get => base[index];
+            set
+            {
+                if (!CheckSetElement(index, value))
+                {
+                    return;
+                }
+
+                base[index] = value;
+            }
+        }
+
         public override void Add(int element)
         {
             CheckSize();
@@ -32,13 +46,37 @@ namespace Lesson5
         }
 
         public override void Insert(int index, int element)
-            {
-            if (index != 0 && (element <= this[index - 1] || element >= this[index + 1]))
+        {
+            if (!CheckSetElement(index, element))
             {
                 return;
             }
 
-            base.Insert(index, element);
+            CheckSize();
+            ShiftRightFromIndex(index);
+            this[index] = element;
+            Count++;
+        }
+
+        private bool CheckSetElement(int index, int element)
+        {
+            if (index == 0)
+            {
+                return Count <= 1 || element <= this[0];
+            }
+
+            if (index == Count - 1)
+            {
+                return element > this[index];
+            }
+
+            return CheckNeighbours(index, element);
+        }
+
+        private bool CheckNeighbours(int index, int element)
+        {
+            return (element <= this[index + 1] || element <= this[index])
+                 && element >= this[index - 1];
         }
     }
 }

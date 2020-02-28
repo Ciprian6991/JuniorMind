@@ -14,7 +14,7 @@ namespace Lesson5
 
         public int Count { get; protected set; }
 
-        public int this[int index]
+        public virtual int this[int index]
         {
             get => array[index];
             set => array[index] = value;
@@ -78,7 +78,7 @@ namespace Lesson5
             Array.Resize(ref array, array.Length + SizeFactor);
         }
 
-        private void ShiftLeftFromIndex(int index)
+        protected void ShiftLeftFromIndex(int index)
         {
             for (int i = index; i < this.Count - 1; i++)
             {
@@ -86,7 +86,7 @@ namespace Lesson5
             }
         }
 
-        private void ShiftRightFromIndex(int index)
+        protected void ShiftRightFromIndex(int index)
         {
             for (int i = this.Count; i > index; i--)
             {
