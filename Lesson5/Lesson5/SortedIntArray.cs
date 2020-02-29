@@ -28,7 +28,7 @@ namespace Lesson5
         {
             CheckSize();
 
-            if (Count == 0 || element > this[Count - 1])
+            if (Count == 0 || element >= this[Count - 1])
             {
                 this[Count++] = element;
             }

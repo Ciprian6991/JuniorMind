@@ -147,5 +147,18 @@ namespace Lesson5.Tests
             testArray[2] = 15;
             Assert.Equal(15, testArray[2]);
         }
+
+
+        [Fact]
+        public void TestForIndexRepetedValues()
+        {
+            var testArray = new SortedIntArray();
+            testArray.Add(1);
+            testArray.Add(1);
+            testArray.Add(1);
+            testArray.Add(1);
+            Assert.Equal(4, testArray.Count);
+            Assert.Equal(1, testArray[2]);
+        }
     }
 }
