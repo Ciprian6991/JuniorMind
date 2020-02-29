@@ -88,6 +88,17 @@ namespace Lesson5.Tests
             Assert.Equal(1, testArray.Count);
         }
 
+        [Fact]
+        public void TestForInsertingAtEnd()
+        {
+            var testArray = new SortedIntArray();
+            testArray.Add(100);
+            testArray.Add(200);
+            testArray.Insert(2, 300);
+            Assert.Equal(2, testArray.IndexOf(300));
+            Assert.Equal(3, testArray.Count);
+        }
+
 
         [Fact]
         public void TestForIndexWhenResultsSortedArray()
@@ -111,6 +122,30 @@ namespace Lesson5.Tests
             testArray[0] = 1;
             Assert.Equal(1, testArray[0]);
             Assert.Equal(10, testArray[2]);
+        }
+
+        [Fact]
+        public void TestForIndexAtTheEndWhenResultsNotSortedArrayResultsFalse()
+        {
+            var testArray = new SortedIntArray();
+            testArray.Add(2);
+            testArray.Add(5);
+            testArray.Add(10);
+            testArray[2] = 1;
+            Assert.Equal(10, testArray[2]);
+            Assert.Equal(5, testArray[1]);
+        }
+
+
+        [Fact]
+        public void TestForIndexAtTheEndWhenResultsSortedArrayResultsTrue()
+        {
+            var testArray = new SortedIntArray();
+            testArray.Add(1);
+            testArray.Add(5);
+            testArray.Add(10);
+            testArray[2] = 15;
+            Assert.Equal(15, testArray[2]);
         }
     }
 }

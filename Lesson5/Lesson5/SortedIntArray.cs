@@ -70,6 +70,11 @@ namespace Lesson5
                 return element > this[index];
             }
 
+            if (index == Count)
+            {
+                return element > this[index - 1];
+            }
+
             return CheckNeighbours(index, element);
         }
 
