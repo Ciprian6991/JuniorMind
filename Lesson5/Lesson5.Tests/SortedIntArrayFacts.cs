@@ -160,5 +160,22 @@ namespace Lesson5.Tests
             Assert.Equal(4, testArray.Count);
             Assert.Equal(1, testArray[2]);
         }
+
+        [Fact]
+        public void TestSetShouldSetElementInEmptyArray()
+        {
+            var testArray = new SortedIntArray();
+            testArray[0] = 1;
+            Assert.Equal(1, testArray[0]);
+        }
+
+        [Fact]
+        public void TestIndexForOneElementArray()
+        {
+            var array = new SortedIntArray();
+            array.Add(4);
+            array[0] = 1;
+            Assert.Equal(1, array[0]);
+        }
     }
 }
