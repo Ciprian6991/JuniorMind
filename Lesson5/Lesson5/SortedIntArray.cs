@@ -65,11 +65,13 @@ namespace Lesson5
                 return Count <= 1 || element <= this[0];
             }
 
+            // adding with .Add()
             if (index == Count - 1)
             {
                 return element > this[index];
             }
 
+            // inserting at the end
             if (index == Count)
             {
                 return element > this[index - 1];
