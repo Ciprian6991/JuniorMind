@@ -46,6 +46,22 @@ namespace Lesson5
             return IndexOf(element) != -1;
         }
 
+        public virtual void Insert(int index, object element)
+        {
+            CheckSize();
+            ShiftRightFromIndex(index);
+            objArray[index] = element;
+            Count++;
+        }
+
+        private void ShiftRightFromIndex(int index)
+        {
+            for (int i = Count; i > index; i--)
+            {
+                objArray[i] = objArray[i - 1];
+            }
+        }
+
         private void CheckSize()
             {
             if (Count != objArray.Length)

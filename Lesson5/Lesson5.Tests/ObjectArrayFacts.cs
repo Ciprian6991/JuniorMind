@@ -53,5 +53,32 @@ namespace Lesson5.Tests
             Assert.True(testObj.Contains("String"));
             Assert.True(testObj.Contains(123.123));
         }
+
+
+        [Fact]
+        void TestForContainsFalseInObjectArray()
+        {
+            var testObj = new ObjectArray();
+            testObj.Add(1);
+            testObj.Add("String");
+            testObj.Add(123.123);
+
+            Assert.False(testObj.Contains(123));
+        }
+
+        [Fact]
+        void TestForInsertInObjectArray()
+        {
+            var testObj = new ObjectArray();
+            testObj.Add(1);
+            testObj.Add("String");
+            testObj.Add(123.123);
+            testObj.Insert(2, "Inserted String");
+
+            Assert.True(testObj.Contains("Inserted String"));
+            Assert.Equal(2, testObj.IndexOf("Inserted String"));
+            Assert.Equal(4 ,testObj.Count);
+        }
+
     }
 }
