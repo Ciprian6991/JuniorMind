@@ -54,6 +54,20 @@ namespace Lesson5
             Count++;
         }
 
+        public virtual void RemoveAt(int index)
+        {
+            ShiftLeftFromIndex(index);
+            Count--;
+        }
+
+        private void ShiftLeftFromIndex(int index)
+        {
+            for (int i = index; i < Count - 1; i++)
+            {
+                objArray[i] = objArray[i + 1];
+            }
+        }
+
         private void ShiftRightFromIndex(int index)
         {
             for (int i = Count; i > index; i--)
