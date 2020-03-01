@@ -126,5 +126,61 @@ namespace Lesson5.Tests
             Assert.Equal(0, testObj.Count);
         }
 
+
+        [Fact]
+        void TestForIndexAssignInObjectArray()
+        {
+            var testObj = new ObjectArray();
+            testObj.Add(1);
+            testObj.Add("String");
+            testObj.Add(123.123);
+            testObj[0] = "first";
+
+            Assert.False(testObj.Contains(1));
+            Assert.True(testObj.Contains("first"));
+            Assert.Equal(0, testObj.IndexOf("first"));
+            Assert.Equal(1, testObj.IndexOf("String"));
+            Assert.Equal(2, testObj.IndexOf(123.123));
+            Assert.Equal(3, testObj.Count);
+        }
+
+
+        [Fact]
+        public void TestIndexOfBooleanInObjectArray()
+        {
+
+            var objectArray = new ObjectArray();
+            objectArray.Add(true);
+            objectArray.Add(false);
+
+            Assert.False(objectArray.Contains("test"));
+            Assert.False(objectArray.Contains(null));
+            Assert.Equal(0, objectArray.IndexOf(true));
+
+        }
+
+        [Fact]
+        public void TestInsertObjectsInObjectArray()
+        {
+
+            var objectArray = new ObjectArray();
+            objectArray.Add(true);
+            objectArray.Add(false);
+            objectArray.Add("string");
+            objectArray.Add(null);
+            objectArray.Add(string.Empty);
+            objectArray.Add(int.MinValue);
+            objectArray.Insert(1, 1);
+            objectArray.Insert(4, string.Empty);
+            objectArray.Insert(5, "string2");
+            objectArray[9] = int.MaxValue;
+
+            Assert.False(objectArray.Contains("test"));
+            Assert.True(objectArray.Contains(null));
+            Assert.Equal(0, objectArray.IndexOf(true));
+            Assert.Equal(1, objectArray.IndexOf(1));
+            Assert.Equal(8, objectArray.Count);
+
+        }
     }
 }
