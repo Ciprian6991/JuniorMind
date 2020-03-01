@@ -179,7 +179,7 @@ namespace Lesson5.Tests
             Assert.True(objectArray.Contains(null));
             Assert.Equal(0, objectArray.IndexOf(true));
             Assert.Equal(1, objectArray.IndexOf(1));
-            Assert.Equal(8, objectArray.Count);
+            Assert.Equal(9, objectArray.Count);
 
         }
     }

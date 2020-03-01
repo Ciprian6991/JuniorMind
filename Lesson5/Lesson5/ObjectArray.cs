@@ -32,7 +32,7 @@ namespace Lesson5
         {
             for (int i = 0; i < Count; i++)
             {
-                if (objArray[i]?.Equals(element) == true)
+                if (objArray[i] == element || (objArray[i]?.Equals(element) == true))
                 {
                     return i;
                 }
