@@ -28,6 +28,19 @@ namespace Lesson5
             objArray[Count++] = element;
         }
 
+        public int IndexOf(object element)
+        {
+            for (int i = 0; i < Count; i++)
+            {
+                if (objArray[i].Equals(element))
+                {
+                    return i;
+                }
+            }
+
+            return -1;
+        }
+
         private void CheckSize()
             {
             if (Count != objArray.Length)
