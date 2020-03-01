@@ -41,6 +41,11 @@ namespace Lesson5
             return -1;
         }
 
+        public bool Contains(object element)
+        {
+            return IndexOf(element) != -1;
+        }
+
         private void CheckSize()
             {
             if (Count != objArray.Length)
