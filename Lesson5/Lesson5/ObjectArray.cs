@@ -65,6 +65,11 @@ namespace Lesson5
             RemoveAt(IndexOf(element));
         }
 
+        public void Clear()
+        {
+            Count = 0;
+        }
+
         private void ShiftLeftFromIndex(int index)
         {
             for (int i = index; i < Count - 1; i++)

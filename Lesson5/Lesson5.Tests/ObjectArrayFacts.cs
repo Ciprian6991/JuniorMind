@@ -111,5 +111,20 @@ namespace Lesson5.Tests
             Assert.Equal(2, testObj.Count);
         }
 
+        [Fact]
+        void TestForClearInObjectArray()
+        {
+            var testObj = new ObjectArray();
+            testObj.Add(1);
+            testObj.Add("String");
+            testObj.Add(123.123);
+            testObj.Clear();
+
+            Assert.False(testObj.Contains(1));
+            Assert.False(testObj.Contains("String"));
+            Assert.False(testObj.Contains(123.123));
+            Assert.Equal(0, testObj.Count);
+        }
+
     }
 }
