@@ -95,5 +95,21 @@ namespace Lesson5.Tests
             Assert.Equal(2, testObj.Count);
         }
 
+
+        [Fact]
+        void TestForRemoveInObjectArray()
+        {
+            var testObj = new ObjectArray();
+            testObj.Add(1);
+            testObj.Add("String");
+            testObj.Add(123.123);
+            testObj.Remove("String");
+
+            Assert.Equal(0, testObj.IndexOf(1));
+            Assert.Equal(-1, testObj.IndexOf("String"));
+            Assert.Equal(1, testObj.IndexOf(123.123));
+            Assert.Equal(2, testObj.Count);
+        }
+
     }
 }

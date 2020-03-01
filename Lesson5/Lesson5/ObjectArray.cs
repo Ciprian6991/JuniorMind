@@ -54,10 +54,15 @@ namespace Lesson5
             Count++;
         }
 
-        public virtual void RemoveAt(int index)
+        public void RemoveAt(int index)
         {
             ShiftLeftFromIndex(index);
             Count--;
+        }
+
+        public void Remove(object element)
+        {
+            RemoveAt(IndexOf(element));
         }
 
         private void ShiftLeftFromIndex(int index)
