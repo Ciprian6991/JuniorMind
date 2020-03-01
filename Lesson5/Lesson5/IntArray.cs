@@ -12,7 +12,7 @@ namespace Lesson5
             array = new int[SizeFactor];
         }
 
-        public int Count { get; protected set; }
+        public int Count { get; set; }
 
         public virtual int this[int index]
         {
