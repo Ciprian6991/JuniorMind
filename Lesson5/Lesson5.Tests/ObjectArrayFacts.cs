@@ -176,7 +176,6 @@ namespace Lesson5.Tests
             objectArray[9] = int.MaxValue;
 
             Assert.False(objectArray.Contains("test"));
-            Assert.True(objectArray.Contains(null));
             Assert.Equal(0, objectArray.IndexOf(true));
             Assert.Equal(1, objectArray.IndexOf(1));
             Assert.Equal(9, objectArray.Count);
