@@ -1,15 +1,16 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Lesson5
 {
-    public class ObjectArray
+    public class ObjectArrayCollection : IEnumerable
     {
         protected const int SizeFactor = 4;
         private object[] objArray;
 
-        public ObjectArray()
+        public ObjectArrayCollection()
         {
             objArray = new object[SizeFactor];
         }
@@ -20,6 +21,16 @@ namespace Lesson5
         {
             get => objArray[index];
             set => objArray[index] = value;
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return (IEnumerator)GetEnumerator();
+        }
+
+        public ObjIEnumerator GetEnumerator()
+        {
+            return new ObjIEnumerator(objArray);
         }
 
         public virtual void Add(object element)

@@ -4,11 +4,11 @@ namespace Lesson5
 {
     public class IntArray
     {
-        private readonly ObjectArray array;
+        private readonly ObjectArrayCollection array;
 
         public IntArray()
         {
-            array = new ObjectArray();
+            array = new ObjectArrayCollection();
         }
 
         public int Count => array.Count;

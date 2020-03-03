@@ -7,7 +7,7 @@ namespace Lesson5.Tests
         [Fact]
         void TestForIntAndStringInObjectArray()
         {
-            var testObj = new ObjectArray();
+            var testObj = new ObjectArrayCollection();
             testObj.Add(1);
             testObj.Add("String");
             Assert.Equal(1, testObj[0]);
@@ -18,7 +18,7 @@ namespace Lesson5.Tests
         [Fact]
         void TestForIndexOfInObjectArray()
         {
-            var testObj = new ObjectArray();
+            var testObj = new ObjectArrayCollection();
             testObj.Add(1);
             testObj.Add("String");
             testObj.Add(123.123);
@@ -32,7 +32,7 @@ namespace Lesson5.Tests
         [Fact]
         void TestForIndexOfNotPresentInObjectArray()
         {
-            var testObj = new ObjectArray();
+            var testObj = new ObjectArrayCollection();
             testObj.Add(1);
             testObj.Add("String");
             testObj.Add(123.123);
@@ -44,7 +44,7 @@ namespace Lesson5.Tests
         [Fact]
         void TestForContainsInObjectArray()
         {
-            var testObj = new ObjectArray();
+            var testObj = new ObjectArrayCollection();
             testObj.Add(1);
             testObj.Add("String");
             testObj.Add(123.123);
@@ -58,7 +58,7 @@ namespace Lesson5.Tests
         [Fact]
         void TestForContainsFalseInObjectArray()
         {
-            var testObj = new ObjectArray();
+            var testObj = new ObjectArrayCollection();
             testObj.Add(1);
             testObj.Add("String");
             testObj.Add(123.123);
@@ -69,7 +69,7 @@ namespace Lesson5.Tests
         [Fact]
         void TestForInsertInObjectArray()
         {
-            var testObj = new ObjectArray();
+            var testObj = new ObjectArrayCollection();
             testObj.Add(1);
             testObj.Add("String");
             testObj.Add(123.123);
@@ -83,7 +83,7 @@ namespace Lesson5.Tests
         [Fact]
         void TestForRemoveAtInObjectArray()
         {
-            var testObj = new ObjectArray();
+            var testObj = new ObjectArrayCollection();
             testObj.Add(1);
             testObj.Add("String");
             testObj.Add(123.123);
@@ -99,7 +99,7 @@ namespace Lesson5.Tests
         [Fact]
         void TestForRemoveInObjectArray()
         {
-            var testObj = new ObjectArray();
+            var testObj = new ObjectArrayCollection();
             testObj.Add(1);
             testObj.Add("String");
             testObj.Add(123.123);
@@ -114,7 +114,7 @@ namespace Lesson5.Tests
         [Fact]
         void TestForClearInObjectArray()
         {
-            var testObj = new ObjectArray();
+            var testObj = new ObjectArrayCollection();
             testObj.Add(1);
             testObj.Add("String");
             testObj.Add(123.123);
@@ -130,7 +130,7 @@ namespace Lesson5.Tests
         [Fact]
         void TestForIndexAssignInObjectArray()
         {
-            var testObj = new ObjectArray();
+            var testObj = new ObjectArrayCollection();
             testObj.Add(1);
             testObj.Add("String");
             testObj.Add(123.123);
@@ -149,7 +149,7 @@ namespace Lesson5.Tests
         public void TestIndexOfBooleanInObjectArray()
         {
 
-            var objectArray = new ObjectArray();
+            var objectArray = new ObjectArrayCollection();
             objectArray.Add(true);
             objectArray.Add(false);
 
@@ -163,7 +163,7 @@ namespace Lesson5.Tests
         public void TestInsertObjectsInObjectArray()
         {
 
-            var objectArray = new ObjectArray();
+            var objectArray = new ObjectArrayCollection();
             objectArray.Add(true);
             objectArray.Add(false);
             objectArray.Add("string");
