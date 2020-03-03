@@ -26,11 +26,9 @@ namespace Lesson5
 
         public override void Add(int element)
         {
-            CheckSize();
-
             if (Count == 0 || element >= this[Count - 1])
             {
-                this[Count++] = element;
+                base.Insert(Count, element);
             }
             else
             {
@@ -52,10 +50,7 @@ namespace Lesson5
                 return;
             }
 
-            CheckSize();
-            ShiftRightFromIndex(index);
-            this[index] = element;
-            Count++;
+            base.Insert(index, element);
         }
 
         private bool CheckSetElement(int index, int element)
