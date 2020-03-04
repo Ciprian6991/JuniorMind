@@ -7,12 +7,12 @@ namespace Lesson5
 {
     public class ObjIEnumerator : IEnumerator
     {
-        private readonly object[] objArray;
+        private readonly ObjectArrayCollection objArray = new ObjectArrayCollection();
         private int position = -1;
 
-        public ObjIEnumerator(object[] objectArray)
+        public ObjIEnumerator(object[] array)
         {
-            this.objArray = objectArray;
+            this.objArray.Add(array);
         }
 
         public object Current => objArray[position];
@@ -20,7 +20,7 @@ namespace Lesson5
         public bool MoveNext()
         {
             position++;
-            return position < objArray.Length;
+            return position < objArray.Count;
         }
 
         public void Reset()
