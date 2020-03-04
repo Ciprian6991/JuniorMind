@@ -30,28 +30,13 @@ namespace Lesson5
 
         public ObjIEnumerator GetEnumerator()
         {
-            return new ObjIEnumerator(objArray);
+            return new ObjIEnumerator(this);
         }
 
         public virtual void Add(object element)
         {
             CheckSize();
             objArray[Count++] = element;
-        }
-
-        public virtual void Add(object[] elements)
-        {
-            if (elements == null)
-            {
-                CheckSize();
-                objArray[Count++] = null;
-            }
-
-            for (int i = 0; i < elements?.Length; i++)
-            {
-                CheckSize();
-                objArray[Count++] = elements[i];
-            }
         }
 
         public int IndexOf(object element)
