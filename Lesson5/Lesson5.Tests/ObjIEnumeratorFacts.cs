@@ -90,5 +90,29 @@ namespace Lesson5.Tests
             Assert.Equal(6, array.IndexOf(float.MaxValue));
             Assert.Equal(7, array.Count);
         }
+
+
+        [Fact]
+        public void TestForNumerator_Move_Next_InObjectArrayColectionOutOfIndex()
+        {
+            var array = new ObjectArrayCollection {
+                (object)true, (object)false,
+                (object)"string", (object)null,
+                (object)string.Empty, (object)int.MaxValue,
+                (object)float.MaxValue};
+
+            var numerator = array.GetEnumerator();
+
+            for (int i = 0; i < 10; i++)
+            {
+                numerator.MoveNext();
+            }
+
+            var current = numerator.Current;
+
+            Assert.Equal(array[array.Count - 1], current);
+            Assert.Equal(6, array.IndexOf(float.MaxValue));
+            Assert.Equal(7, array.Count);
+        }
     }
 }
