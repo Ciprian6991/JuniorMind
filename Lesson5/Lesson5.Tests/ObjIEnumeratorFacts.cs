@@ -46,5 +46,49 @@ namespace Lesson5.Tests
             Assert.True(myArray.Contains("string"));
 
         }
+
+
+        [Fact]
+        public void TestInsertObjectMixedArray()
+        {
+
+            var array = new ObjectArrayCollection {
+                (object)true, (object)false,
+                (object)"string", (object)null,
+                (object)string.Empty, (object)int.MaxValue,
+                (object)float.MaxValue};
+
+
+            array.Insert(1, 4);
+            array.Insert(4, string.Empty);
+
+            Assert.False(array.Contains("string2"));
+            Assert.True(array.Contains(null));
+            Assert.Equal(0, array.IndexOf(true));
+            Assert.Equal(1, array.IndexOf(4));
+            Assert.Equal(9, array.Count);
+            Assert.Equal(float.MaxValue, array[array.Count - 1]);
+
+        }
+
+        [Fact]
+        public void TestForNumeratorInObjectArrayColection()
+        {
+            var array = new ObjectArrayCollection {
+                (object)true, (object)false,
+                (object)"string", (object)null,
+                (object)string.Empty, (object)int.MaxValue,
+                (object)float.MaxValue};
+
+            var numerator = array.GetEnumerator();
+            numerator.MoveNext();
+            numerator.MoveNext();
+            numerator.MoveNext();
+            var current = numerator.Current;
+
+            Assert.Equal("string", current);
+            Assert.Equal(6, array.IndexOf(float.MaxValue));
+            Assert.Equal(7, array.Count);
+        }
     }
 }

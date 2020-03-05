@@ -23,14 +23,20 @@ namespace Lesson5
             set => objArray[index] = value;
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
+        public IEnumerator GetEnumerator()
         {
-            return (IEnumerator)GetEnumerator();
-        }
+            int position = -1;
+            while (position < Count)
+            {
+                position++;
 
-        public ObjIEnumerator GetEnumerator()
-        {
-            return new ObjIEnumerator(this);
+                if (position == Count)
+                {
+                    yield break;
+                }
+
+                yield return objArray[position];
+            }
         }
 
         public virtual void Add(object element)
