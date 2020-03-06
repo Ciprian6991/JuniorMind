@@ -16,9 +16,18 @@ namespace Lesson5
             get => base[index];
             set
             {
-                if (!CheckSetElement(index, value))
+                if (index < Count)
                 {
-                    return;
+                    if (!CheckSetElement(index, value))
+                    {
+                        return;
+                    }
+
+                    base[index] = value;
+                }
+                else
+                {
+                    throw new ArgumentException("Invalid index; must be less than", "Count = " + Count.ToString());
                 }
 
                 base[index] = value;

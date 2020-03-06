@@ -112,5 +112,112 @@ namespace Lesson5.Tests
             Assert.Equal('d', array[3]);
             Assert.Equal('e', array[4]);
         }
+
+        [Fact]
+        public void TestInsertElementWhenResultingIntListIsSorted()
+        {
+            var array = new SortedListCollection<int>
+            {
+                1,
+                4,
+                6,
+                8
+            };
+
+            array.Insert(2, 5);
+
+            Assert.Equal(2, array.IndexOf(5));
+            Assert.Equal(5, array.Count);
+        }
+
+
+
+        [Fact]
+        public void TestInsertElementWhenResultingIntListIsNotSorted()
+        {
+            var array = new SortedListCollection<int>
+            {
+                1,
+                4,
+                6,
+                8
+            };
+
+            array.Insert(2, 100);
+
+            Assert.Equal(-1, array.IndexOf(100));
+            Assert.Equal(4, array.Count);
+        }
+
+
+        [Fact]
+        public void TestInsertElementWhenSortedListIsEmpty()
+        {
+            var array = new SortedListCollection<int>();
+
+            array.Insert(0, 100);
+            array.Insert(2, 111);
+
+            Assert.Equal(0, array.IndexOf(100));
+            Assert.Equal(1, array.Count);
+        }
+
+
+        [Fact]
+        public void TestGetElementForSimpleList()
+        {
+            var array = new SortedListCollection<double>
+            {
+                1,
+                5,
+                10
+            };
+
+            Assert.Equal(5, array[1]);
+        }
+
+
+        [Fact]
+        public void TestSetElementWhenResultingListIsSorted()
+        {
+            var array = new SortedListCollection<byte>
+            {
+                1,
+                5,
+                10
+            };
+            array[1] = 3;
+
+            Assert.Equal(3, array[1]);
+        }
+
+
+        [Fact]
+        public void TestSetElementWhenResultingListNotSorted()
+        {
+            var array = new SortedListCollection<byte>
+            {
+                1,
+                5,
+                10
+            };
+            array[1] = 100;
+
+            Assert.Equal(5, array[1]);
+        }
+
+        [Fact]
+        public void TestSetElementWhereIndexOutOfRange()
+        {
+            var array = new SortedListCollection<byte>
+            {
+                1,
+                5,
+                10
+            };
+            ArgumentException ex = Assert.Throws<ArgumentException>(() => array[10] = 100);
+            Assert.Equal("Invalid index; must be less than\r\nParameter name: Count = 3", ex.Message);
+            Assert.Equal(5, array[1]);
+        }
     }
 }
