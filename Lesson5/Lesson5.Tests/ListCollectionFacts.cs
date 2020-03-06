@@ -92,5 +92,26 @@ namespace Lesson5.Tests
             Assert.Equal(4, boolValues.Count);
 
         }
+
+
+        [Fact]
+        public void TestInsertListOfStringObjectsWithNullValue()
+        {
+
+            var objectsList = new ListCollection<string>
+            {
+                "string0",
+                "strin1",
+                "string2",
+                "string4",
+                string.Empty
+
+            };
+
+            objectsList.Insert(3, null);
+            Assert.Equal("string0", objectsList[0]);
+            Assert.True(objectsList.Contains(null));
+            Assert.Equal(6, objectsList.Count);
+        }
     }
 }

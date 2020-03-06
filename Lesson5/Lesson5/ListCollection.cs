@@ -71,6 +71,22 @@ namespace Lesson5
             return IndexOf(element) != -1;
         }
 
+        public virtual void Insert(int index, T element)
+        {
+            CheckSize();
+            ShiftRightFromIndex(index);
+            array[index] = element;
+            Count++;
+        }
+
+        private void ShiftRightFromIndex(int index)
+        {
+            for (int i = Count; i > index; i--)
+            {
+                array[i] = array[i - 1];
+            }
+        }
+
         private void CheckSize()
             {
             if (Count != array.Length)
