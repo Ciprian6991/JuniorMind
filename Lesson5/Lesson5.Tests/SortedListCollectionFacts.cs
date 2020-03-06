@@ -219,5 +219,59 @@ namespace Lesson5.Tests
             Assert.Equal("Invalid index; must be less than\r\nParameter name: Count = 3", ex.Message);
             Assert.Equal(5, array[1]);
         }
+
+
+        [Fact]
+        public void TestSetElementEmptyListException()
+        {
+            var array = new SortedListCollection<byte>();
+
+            ArgumentException ex = Assert.Throws<ArgumentException>(() => array[0] = 3);
+            Assert.Equal("Invalid index; must be less than\r\nParameter name: Count = 0", ex.Message);
+
+            Assert.Equal(0, array.Count);
+        }
+
+
+        [Fact]
+        public void TestSetLastElementSameValuesBefore()
+        {
+            var array = new SortedListCollection<byte>
+            {
+                2,
+                2,
+                2
+            };
+            array[2] = 3;
+
+            Assert.Equal(3, array[2]);
+        }
+
+
+        [Fact]
+        public void TestSetElementLowerValueShouldNotWork()
+        {
+            var array = new SortedListCollection<byte>
+            {
+                2,
+                2,
+                2
+            };
+            array[2] = 1;
+
+            Assert.Equal(2, array[2]);
+        }
+
+        [Fact]
+        public void TestSetElementOneValueForWholeList()
+        {
+            var array = new SortedListCollection<byte>
+            {
+                2,
+            };
+            array[0] = 10;
+
+            Assert.Equal(10, array[0]);
+        }
     }
 }
