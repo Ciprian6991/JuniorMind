@@ -31,5 +31,22 @@ namespace Lesson5.Tests
             Assert.Equal(4, stringList.Count);
 
         }
+
+
+        [Fact]
+        public void TestContainsListOfIntegers()
+        {
+
+            var intList = new ListCollection<int>();
+            intList.Add(123);
+            intList.Add(int.MaxValue);
+            intList.Add(int.MinValue);
+
+            intList[3] = int.MaxValue;
+            Assert.True(intList.Contains(123));
+            Assert.True(intList.Contains(int.MinValue));
+            Assert.Equal(4, intList.Count);
+
+        }
     }
 }

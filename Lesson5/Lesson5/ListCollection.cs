@@ -20,7 +20,20 @@ namespace Lesson5
         public virtual T this[int index]
         {
             get => array[index];
-            set => array[index] = value;
+            set
+                {
+                if (index < Count)
+                {
+                    array[index] = value;
+                }
+
+                if (index != Count)
+                {
+                    return;
+                }
+
+                Add(value);
+            }
         }
 
         public virtual void Add(T element)
@@ -40,6 +53,25 @@ namespace Lesson5
             {
                 yield return array[i];
             }
+        }
+
+        public int IndexOf(T element)
+        {
+            for (int i = 0; i < Count; i++)
+            {
+                if ((element == null && array[i] == null)
+                    || element?.Equals(array[i]) == true)
+                {
+                    return i;
+                }
+            }
+
+            return -1;
+        }
+
+        public bool Contains(T element)
+        {
+            return IndexOf(element) != -1;
         }
 
         private void CheckSize()
