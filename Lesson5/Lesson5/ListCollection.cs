@@ -79,6 +79,30 @@ namespace Lesson5
             Count++;
         }
 
+        public void RemoveAt(int index)
+        {
+            ShiftLeftFromIndex(index);
+            Count--;
+        }
+
+        public void Remove(T element)
+        {
+            RemoveAt(IndexOf(element));
+        }
+
+        public void Clear()
+        {
+            Count = 0;
+        }
+
+        private void ShiftLeftFromIndex(int index)
+        {
+            for (int i = index; i < Count - 1; i++)
+            {
+                array[i] = array[i + 1];
+            }
+        }
+
         private void ShiftRightFromIndex(int index)
         {
             for (int i = Count; i > index; i--)

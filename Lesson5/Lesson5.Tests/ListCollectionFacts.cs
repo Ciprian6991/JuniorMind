@@ -113,5 +113,30 @@ namespace Lesson5.Tests
             Assert.True(objectsList.Contains(null));
             Assert.Equal(6, objectsList.Count);
         }
+
+
+        [Fact]
+        public void Test_Remove_RemoveAt_ClearListOfStringObjects()
+        {
+
+            var objectsList = new ListCollection<string>
+            {
+                "string0",
+                "strin1",
+                "string2",
+                "string4",
+                string.Empty
+
+            };
+
+            objectsList.Remove("string0");
+            objectsList.RemoveAt(0);
+            Assert.Equal("string2", objectsList[0]);
+            Assert.Equal(3, objectsList.Count);
+
+            objectsList.Clear();
+            Assert.Equal(0, objectsList.Count);
+        }
+
     }
 }
