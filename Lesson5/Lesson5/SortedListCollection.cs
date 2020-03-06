@@ -35,7 +35,7 @@ namespace Lesson5
             {
                 for (int i = 0; i < Count; i++)
                 {
-                    if (this[i].CompareTo(element) > 0)
+                    if (this[i].CompareTo(element) >= 0)
                     {
                         Insert(i, element);
                         break;
@@ -58,19 +58,19 @@ namespace Lesson5
         {
             if (index == 0)
             {
-                return Count <= 1 || this[0].CompareTo(element) > 0;
+                return Count <= 1 || this[0].CompareTo(element) >= 0;
             }
 
             // adding with .Add()
             if (index == Count - 1)
             {
-                return this[index].CompareTo(element) < 0;
+                return this[index].CompareTo(element) <= 0;
             }
 
             // inserting at the end
             if (index == Count)
             {
-                return this[index - 1].CompareTo(element) < 0;
+                return this[index - 1].CompareTo(element) <= 0;
             }
 
             return CheckNeighbours(index, element);
