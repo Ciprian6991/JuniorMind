@@ -138,5 +138,31 @@ namespace Lesson5.Tests
             Assert.Equal(0, objectsList.Count);
         }
 
+
+        [Fact]
+        public void TestListOfObjects()
+        {
+
+            var listOfObjects = new ListCollection<object>
+            {
+                true,
+                false,
+                "string",
+                null,
+                string.Empty,
+                int.MaxValue
+            };
+
+            listOfObjects.Insert(1, 123);
+            listOfObjects.Insert(0, string.Empty);
+
+            Assert.False(listOfObjects.Contains("string2"));
+            Assert.True(listOfObjects.Contains(null));
+            Assert.Equal(0, listOfObjects.IndexOf(string.Empty));
+            Assert.Equal(2, listOfObjects.IndexOf(123));
+            Assert.Equal(8, listOfObjects.Count);
+
+        }
+
     }
 }
