@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using System;
+using Xunit;
 
 namespace Lesson5.Tests
 {
@@ -42,10 +43,53 @@ namespace Lesson5.Tests
             intList.Add(int.MaxValue);
             intList.Add(int.MinValue);
 
-            intList[3] = int.MaxValue;
             Assert.True(intList.Contains(123));
             Assert.True(intList.Contains(int.MinValue));
-            Assert.Equal(4, intList.Count);
+            Assert.Equal(3, intList.Count);
+
+        }
+
+
+        [Fact]
+        public void TestListOfBooleans()
+        {
+
+            var boolValues = new ListCollection<bool>
+            {
+                true,
+                false,
+                true,
+                false
+            };
+
+            Assert.True(boolValues.Contains(false));
+            Assert.True(boolValues.Contains(true));
+            Assert.Equal(0, boolValues.IndexOf(true));
+            Assert.Equal(4, boolValues.Count);
+
+        }
+
+        [Fact]
+        public void TestInvalidIndexList()
+        {
+
+            var boolValues = new ListCollection<bool>
+            {
+                true,
+                false,
+                true,
+                false
+            };
+
+
+            Exception ex = Assert.Throws<ArgumentException>(() => (boolValues[4] = true));
+
+            Assert.Equal("Invalid Index; must be less than \r\nParameter name: Count = 4", ex.Message);
+
+            Assert.True(boolValues.Contains(false));
+            Assert.True(boolValues.Contains(true));
+            Assert.Equal(0, boolValues.IndexOf(true));
+            Assert.Equal(4, boolValues.Count);
 
         }
     }

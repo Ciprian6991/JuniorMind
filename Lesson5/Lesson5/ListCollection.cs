@@ -21,18 +21,15 @@ namespace Lesson5
         {
             get => array[index];
             set
-                {
-                if (index < Count)
-                {
-                    array[index] = value;
-                }
-
-                if (index != Count)
-                {
-                    return;
-                }
-
-                Add(value);
+            {
+                    if (index < Count)
+                    {
+                        array[index] = value;
+                    }
+                    else
+                    {
+                        throw new ArgumentException("Invalid Index; must be less than ", "Count = " + Count.ToString());
+                    }
             }
         }
 
