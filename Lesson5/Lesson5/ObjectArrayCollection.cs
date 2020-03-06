@@ -25,17 +25,9 @@ namespace Lesson5
 
         public IEnumerator GetEnumerator()
         {
-            int position = -1;
-            while (position < Count)
+            for (int i = 0; i < Count; i++)
             {
-                position++;
-
-                if (position == Count)
-                {
-                    yield break;
-                }
-
-                yield return objArray[position];
+                yield return objArray[i];
             }
         }
 
