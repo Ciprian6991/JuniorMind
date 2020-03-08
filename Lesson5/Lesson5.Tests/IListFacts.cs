@@ -32,5 +32,15 @@ namespace Lesson5.Tests
             Assert.Equal(5, array[3]);
             Assert.Equal(4, array.Count);
         }
+
+
+        [Fact]
+        public void Test_RemoveShouldReturnFalseWhenItemDoesNotExist()
+        {
+            var intList = new ListCollection<int> { 1, 2, 3, 4, 5 };
+            var checkRemove = intList.Remove(100);
+
+            Assert.False(checkRemove);
+        }
     }
 }

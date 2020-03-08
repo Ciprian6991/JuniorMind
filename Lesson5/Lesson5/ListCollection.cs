@@ -109,7 +109,10 @@ namespace Lesson5
         public bool Remove(T item)
         {
             int initialCount = Count;
-            RemoveAt(IndexOf(item));
+            if (IndexOf(item) != -1)
+            {
+                RemoveAt(IndexOf(item));
+            }
 
             return initialCount > Count;
         }
