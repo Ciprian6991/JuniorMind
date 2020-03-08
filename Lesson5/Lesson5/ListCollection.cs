@@ -87,11 +87,6 @@ namespace Lesson5
             Count--;
         }
 
-        public void Remove(T element)
-        {
-            RemoveAt(IndexOf(element));
-        }
-
         public void Clear()
         {
             Count = 0;
@@ -111,7 +106,7 @@ namespace Lesson5
             }
         }
 
-        bool ICollection<T>.Remove(T item)
+        public bool Remove(T item)
         {
             int initialCount = Count;
             RemoveAt(IndexOf(item));
