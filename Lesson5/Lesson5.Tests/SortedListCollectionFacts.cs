@@ -273,5 +273,33 @@ namespace Lesson5.Tests
 
             Assert.Equal(10, array[0]);
         }
+
+        [Fact]
+        public void TestSortedListOfStringsEnumerator()
+        {
+
+            var stringList = new SortedListCollection<string> { "string1", "string2" };
+
+            stringList.Add("string3");
+            stringList.Add("string4");
+
+            var numerator = stringList.GetEnumerator();
+
+            for (int i = 0; i < 10; i++)
+            {
+                numerator.MoveNext();
+            }
+
+            var current = numerator.Current;
+
+            Assert.Equal("string4", current);
+
+            Assert.Equal("string1", stringList[0]);
+            Assert.Equal("string2", stringList[1]);
+            Assert.Equal("string3", stringList[2]);
+            Assert.Equal("string4", stringList[3]);
+            Assert.Equal(4, stringList.Count);
+
+        }
     }
 }

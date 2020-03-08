@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Lesson5
 {
-    public class ListCollection<T> : IEnumerable<T>
+    public class ListCollection<T> : IList<T>
     {
         protected const int SizeFactor = 4;
         private T[] array;
@@ -16,6 +16,8 @@ namespace Lesson5
         }
 
         public int Count { get; private set; }
+
+        public bool IsReadOnly { get => false; }
 
         public virtual T this[int index]
         {
@@ -33,10 +35,10 @@ namespace Lesson5
             }
         }
 
-        public virtual void Add(T element)
+        public virtual void Add(T item)
         {
             CheckSize();
-            array[Count++] = element;
+            array[Count++] = item;
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -52,12 +54,12 @@ namespace Lesson5
             }
         }
 
-        public int IndexOf(T element)
+        public int IndexOf(T item)
         {
             for (int i = 0; i < Count; i++)
             {
-                if ((element == null && array[i] == null)
-                    || element?.Equals(array[i]) == true)
+                if ((item == null && array[i] == null)
+                    || item?.Equals(array[i]) == true)
                 {
                     return i;
                 }
@@ -66,16 +68,16 @@ namespace Lesson5
             return -1;
         }
 
-        public bool Contains(T element)
+        public bool Contains(T item)
         {
-            return IndexOf(element) != -1;
+            return IndexOf(item) != -1;
         }
 
-        public virtual void Insert(int index, T element)
+        public virtual void Insert(int index, T item)
         {
             CheckSize();
             ShiftRightFromIndex(index);
-            array[index] = element;
+            array[index] = item;
             Count++;
         }
 
@@ -93,6 +95,28 @@ namespace Lesson5
         public void Clear()
         {
             Count = 0;
+        }
+
+        public void CopyTo(T[] array, int arrayIndex)
+        {
+            if (array == null || arrayIndex < 0 || arrayIndex >= Count || array.Length < this.array.Length - arrayIndex)
+            {
+                return;
+            }
+
+            int usedIndex = 0;
+            for (int i = arrayIndex; i < Count; i++)
+            {
+                array[usedIndex++] = this.array[i];
+            }
+        }
+
+        bool ICollection<T>.Remove(T item)
+        {
+            int initialCount = Count;
+            RemoveAt(IndexOf(item));
+
+            return initialCount > Count;
         }
 
         private void ShiftLeftFromIndex(int index)

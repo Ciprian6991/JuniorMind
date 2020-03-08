@@ -34,33 +34,33 @@ namespace Lesson5
             }
         }
 
-        public override void Add(T element)
+        public override void Add(T item)
         {
-            if (Count == 0 || this[Count - 1].CompareTo(element) <= 0)
+            if (Count == 0 || this[Count - 1].CompareTo(item) <= 0)
             {
-                base.Insert(Count, element);
+                base.Insert(Count, item);
             }
             else
             {
                 for (int i = 0; i < Count; i++)
                 {
-                    if (this[i].CompareTo(element) >= 0)
+                    if (this[i].CompareTo(item) >= 0)
                     {
-                        Insert(i, element);
+                        Insert(i, item);
                         break;
                     }
                 }
             }
         }
 
-        public override void Insert(int index, T element)
+        public override void Insert(int index, T item)
         {
-            if (!CheckSetElement(index, element))
+            if (!CheckSetElement(index, item))
             {
                 return;
             }
 
-            base.Insert(index, element);
+            base.Insert(index, item);
         }
 
         private bool CheckSetElement(int index, T element)
