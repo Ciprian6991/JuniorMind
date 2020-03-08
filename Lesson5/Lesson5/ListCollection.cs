@@ -94,7 +94,7 @@ namespace Lesson5
 
         public void CopyTo(T[] array, int arrayIndex)
         {
-            if (array == null || arrayIndex < 0 || arrayIndex < Count || array.Length < this.array.Length - arrayIndex)
+            if (array == null || arrayIndex < 0 || arrayIndex < Count || array.Length < Count + arrayIndex)
             {
                 return;
             }
