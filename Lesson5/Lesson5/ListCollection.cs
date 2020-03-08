@@ -94,15 +94,15 @@ namespace Lesson5
 
         public void CopyTo(T[] array, int arrayIndex)
         {
-            if (array == null || arrayIndex < 0 || arrayIndex >= Count || array.Length < this.array.Length - arrayIndex)
+            if (array == null || arrayIndex < 0 || arrayIndex < Count || array.Length < this.array.Length - arrayIndex)
             {
                 return;
             }
 
             int usedIndex = 0;
-            for (int i = arrayIndex; i < Count; i++)
+            for (int i = arrayIndex; i < Count + arrayIndex; i++)
             {
-                array[usedIndex++] = this.array[i];
+                array[i] = this.array[usedIndex++];
             }
         }
 
