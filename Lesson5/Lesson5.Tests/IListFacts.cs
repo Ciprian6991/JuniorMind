@@ -101,5 +101,37 @@ namespace Lesson5.Tests
             Assert.Equal(1, array[0]);
             Assert.Equal(3, array[2]);
         }
+
+
+        [Fact]
+        public void Test_CopyListToArrayForEmptyArray()
+        {
+            var intList = new ListCollection<int> { 1, 2, 3 };
+            int[] array = new int[2];
+
+            intList.CopyTo(array, 3);
+
+            Assert.Equal(0, array[1]);
+            Assert.Equal(0, array[0]);
+        }
+
+        [Fact]
+        public void Test_CopyListToArrayWhenIndexIsSmallerThenZero()
+        {
+            var intList = new ListCollection<int> { 1, 2, 3 };
+            int[] array = new int[5];
+            array[0] = 1;
+            array[1] = 2;
+            array[2] = 3;
+
+            intList.CopyTo(array, -2);
+
+            Assert.Equal(0, array[3]);
+            Assert.Equal(0, array[4]);
+
+            Assert.Equal(2, array[1]);
+            Assert.Equal(1, array[0]);
+            Assert.Equal(3, array[2]);
+        }
     }
 }
