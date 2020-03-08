@@ -35,6 +35,17 @@ namespace Lesson5
             }
         }
 
+        public void Swap(T a, T b)
+        {
+            T temp = a;
+
+            var a_index = IndexOf(a);
+            var b_index = IndexOf(b);
+
+            this[a_index] = b;
+            this[b_index] = temp;
+        }
+
         public virtual void Add(T item)
         {
             CheckSize();
