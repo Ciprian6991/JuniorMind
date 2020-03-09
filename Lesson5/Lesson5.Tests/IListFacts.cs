@@ -133,25 +133,5 @@ namespace Lesson5.Tests
             Assert.Equal(1, array[0]);
             Assert.Equal(3, array[2]);
         }
-
-        [Fact]
-        public void Test_SwapMethodForListOfIntegers()
-        {
-            var array = new ListCollection<int> { 3, 4 };
-            array.Swap(3, 4);
-
-            Assert.Equal(4, array[0]);
-            Assert.Equal(3, array[1]);
-        }
-
-        [Fact]
-        public void Test_SwapMethodForListOfIntegersOneNotFromList()
-        {
-            var array = new ListCollection<int> { 3, 4 };
-            array.Swap(3, 6);
-
-            Assert.Equal(3, array[0]);
-            Assert.Equal(4, array[1]);
-        }
     }
 }
