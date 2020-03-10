@@ -29,7 +29,8 @@ namespace Lesson5
 
             set
             {
-                    if (index < Count)
+                CheckIfListIsEmpty();
+                if (index < Count)
                     {
                         array[index] = value;
                     }

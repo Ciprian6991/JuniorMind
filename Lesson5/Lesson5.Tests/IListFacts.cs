@@ -159,5 +159,15 @@ namespace Lesson5.Tests
 
             Assert.Equal("List is empty!", checkGet.Message);
         }
+
+        [Fact]
+        public void Test_ExceptionSetItemOnEmptyList()
+        {
+            var intList = new ListCollection<int>();
+
+            var checkGet = Assert.Throws<ArgumentException>(() => intList[0] = 123);
+
+            Assert.Equal("List is empty!", checkGet.Message);
+        }
     }
 }
