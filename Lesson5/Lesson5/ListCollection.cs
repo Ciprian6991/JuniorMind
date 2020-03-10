@@ -94,6 +94,7 @@ namespace Lesson5
 
         public void Clear()
         {
+            CheckIfListIsReadonly();
             Count = 0;
         }
 
