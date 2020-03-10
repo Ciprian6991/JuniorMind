@@ -24,6 +24,7 @@ namespace Lesson5
             get
             {
                 CheckIfListIsEmpty();
+                CheckParameter(index);
                 return array[index];
             }
 

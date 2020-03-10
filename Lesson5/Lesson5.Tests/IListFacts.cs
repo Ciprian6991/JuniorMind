@@ -169,5 +169,15 @@ namespace Lesson5.Tests
 
             Assert.Equal("List is empty!", checkGet.Message);
         }
+
+        [Fact]
+        public void Test_ExceptionGetItemOnInvalidIndex()
+        {
+            var intList = new ListCollection<int> { 1, 2, 3, 4 , 5};
+
+            var checkGet = Assert.Throws<ArgumentException>(() => intList[6]);
+
+            Assert.Equal("Invalid Index; must be greater then 0 and less than \r\nParameter name: Count = 5", checkGet.Message);
+        }
     }
 }
