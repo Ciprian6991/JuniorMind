@@ -148,5 +148,16 @@ namespace Lesson5.Tests
             Assert.Equal(backupIntList2, intList1);
             Assert.Equal(backupIntList1, intList2);
         }
+
+
+        [Fact]
+        public void Test_ExceptionGetItemOnEmptyList()
+        {
+            var intList = new ListCollection<int>();
+
+            var checkGet = Assert.Throws<ArgumentException>(() => intList[1]);
+
+            Assert.Equal("List is empty!", checkGet.Message);
+        }
     }
 }

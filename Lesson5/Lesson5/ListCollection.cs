@@ -21,7 +21,12 @@ namespace Lesson5
 
         public virtual T this[int index]
         {
-            get => array[index];
+            get
+            {
+                CheckIfListIsEmpty();
+                return array[index];
+            }
+
             set
             {
                     if (index < Count)
@@ -148,6 +153,16 @@ namespace Lesson5
             }
 
             Array.Resize(ref array, array.Length + SizeFactor);
+        }
+
+        private void CheckIfListIsEmpty()
+            {
+            if (Count != 0)
+            {
+                return;
+            }
+
+            throw new ArgumentException(message: "List is empty!");
         }
     }
 }
