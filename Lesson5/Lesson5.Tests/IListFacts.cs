@@ -269,5 +269,18 @@ namespace Lesson5.Tests
 
             Assert.Equal("List is readonly!", checkGet.Message);
         }
+
+
+        [Fact]
+        public void Test_CopyListToArrayIsNull()
+        {
+
+            var intList = new ListCollection<int> { 1, 2, 3 };
+            int[] array = null;
+
+            var checkGet = Assert.Throws<ArgumentNullException>(() => intList.CopyTo(array, 3));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: array", checkGet.Message);
+        }
     }
 }

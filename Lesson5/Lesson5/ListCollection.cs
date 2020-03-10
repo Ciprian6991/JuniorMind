@@ -102,7 +102,8 @@ namespace Lesson5
 
         public void CopyTo(T[] array, int arrayIndex)
         {
-            if (array == null || arrayIndex < 0 || arrayIndex < Count || array.Length < Count + arrayIndex)
+            CheckIfArrayIsNull(array);
+            if (arrayIndex < 0 || arrayIndex < Count || array.Length < Count + arrayIndex)
             {
                 return;
             }
@@ -192,6 +193,16 @@ namespace Lesson5
             }
 
             throw new NotSupportedException("List is readonly!");
+        }
+
+        private void CheckIfArrayIsNull(T[] array)
+            {
+            if (array != null)
+            {
+                return;
+            }
+
+            throw new ArgumentNullException(paramName: nameof(array));
         }
     }
 }
