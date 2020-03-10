@@ -114,6 +114,7 @@ namespace Lesson5
 
         public bool Remove(T item)
         {
+            CheckIfListIsReadonly();
             int initialCount = Count;
             if (IndexOf(item) != -1)
             {
