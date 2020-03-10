@@ -84,7 +84,7 @@ namespace Lesson5.Tests
 
             Exception ex = Assert.Throws<ArgumentException>(() => (boolValues[4] = true));
 
-            Assert.Equal("Invalid Index; must be less than \r\nParameter name: Count = 4", ex.Message);
+            Assert.Equal("Invalid Index; must be greater then 0 and less than \r\nParameter name: Count = 4", ex.Message);
 
             Assert.True(boolValues.Contains(false));
             Assert.True(boolValues.Contains(true));

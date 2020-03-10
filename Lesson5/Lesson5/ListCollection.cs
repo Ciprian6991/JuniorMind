@@ -30,14 +30,8 @@ namespace Lesson5
             set
             {
                 CheckIfListIsEmpty();
-                if (index < Count)
-                    {
-                        array[index] = value;
-                    }
-                    else
-                    {
-                        throw new ArgumentException("Invalid Index; must be less than ", "Count = " + Count.ToString());
-                    }
+                CheckParameter(index);
+                array[index] = value;
             }
         }
 
@@ -164,6 +158,16 @@ namespace Lesson5
             }
 
             throw new ArgumentException(message: "List is empty!");
+        }
+
+        private void CheckParameter(int index)
+            {
+            if (index >= 0 && index < Count)
+            {
+                return;
+            }
+
+            throw new ArgumentException("Invalid Index; must be greater then 0 and less than ", "Count = " + Count.ToString());
         }
     }
 }
