@@ -133,5 +133,20 @@ namespace Lesson5.Tests
             Assert.Equal(1, array[0]);
             Assert.Equal(3, array[2]);
         }
+
+        [Fact]
+        public void Test_SwapIlist()
+        {
+            var intList1 = new ListCollection<int> { 1, 2, 3 };
+            var intList2 = new ListCollection<int> { 3, 4, 5};
+
+            var backupIntList1 = new ListCollection<int> { 1, 2, 3 };
+            var backupIntList2 = new ListCollection<int> { 3, 4, 5 };
+
+            intList1.Swap(ref intList1, ref intList2);
+
+            Assert.Equal(backupIntList2, intList1);
+            Assert.Equal(backupIntList1, intList2);
+        }
     }
 }

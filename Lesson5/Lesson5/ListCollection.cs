@@ -117,6 +117,13 @@ namespace Lesson5
             return initialCount > Count;
         }
 
+        public void Swap<T>(ref T a, ref T b)
+        {
+            T temp = a;
+            a = b;
+            b = temp;
+        }
+
         private void ShiftLeftFromIndex(int index)
         {
             for (int i = index; i < Count - 1; i++)
