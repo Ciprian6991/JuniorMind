@@ -179,5 +179,16 @@ namespace Lesson5.Tests
 
             Assert.Equal("Invalid Index; must be greater then 0 and less than \r\nParameter name: Count = 5", checkGet.Message);
         }
+
+        [Fact]
+        public void Test_ExceptionSetterListIsReadOnly()
+        {
+            var intList = new ListCollection<int> { 1, 2, 3, 4, 5 };
+            intList.AsReadOnly();
+
+            var checkGet = Assert.Throws<NotSupportedException>(() => intList[1] = 100);
+
+            Assert.Equal("List is readonly!", checkGet.Message);
+        }
     }
 }

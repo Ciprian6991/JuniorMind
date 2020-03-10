@@ -156,8 +156,9 @@ namespace Lesson5.Tests
             var array = new SortedListCollection<int>();
 
             array.Insert(0, 100);
-            array.Insert(2, 111);
+            var checkGet = Assert.Throws<ArgumentException>(() => array.Insert(2, 111));
 
+            Assert.Equal("Invalid Index; must be greater then 0 and less than \r\nParameter name: Count = 1", checkGet.Message);
             Assert.Equal(0, array.IndexOf(100));
             Assert.Equal(1, array.Count);
         }

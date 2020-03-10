@@ -17,7 +17,7 @@ namespace Lesson5
 
         public int Count { get; private set; }
 
-        public bool IsReadOnly { get => false; }
+        public bool IsReadOnly { get; private set; }
 
         public virtual T this[int index]
         {
@@ -32,6 +32,7 @@ namespace Lesson5
             {
                 CheckIfListIsEmpty();
                 CheckParameter(index);
+                CheckIfListIsReadonly();
                 array[index] = value;
             }
         }
@@ -125,6 +126,11 @@ namespace Lesson5
             b = temp;
         }
 
+        public void AsReadOnly()
+        {
+            IsReadOnly = true;
+        }
+
         private void ShiftLeftFromIndex(int index)
         {
             for (int i = index; i < Count - 1; i++)
@@ -169,6 +175,16 @@ namespace Lesson5
             }
 
             throw new ArgumentException("Invalid Index; must be greater then 0 and less than ", "Count = " + Count.ToString());
+        }
+
+        private void CheckIfListIsReadonly()
+            {
+            if (!IsReadOnly)
+            {
+                return;
+            }
+
+            throw new NotSupportedException("List is readonly!");
         }
     }
 }
