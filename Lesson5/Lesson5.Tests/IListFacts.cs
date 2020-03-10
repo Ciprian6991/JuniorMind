@@ -246,5 +246,16 @@ namespace Lesson5.Tests
 
             Assert.Equal("List is readonly!", checkGet.Message);
         }
+
+
+        [Fact]
+        public void Test_ExceptionRemoveAtListCheckParameter()
+        {
+            var intList = new ListCollection<int> { 1, 2, 3, 4, 5 };
+
+            var checkGet = Assert.Throws<ArgumentException>(() => intList.RemoveAt(10));
+
+            Assert.Equal("Invalid Index; must be greater then 0 and less than \r\nParameter name: Count = 5", checkGet.Message);
+        }
     }
 }

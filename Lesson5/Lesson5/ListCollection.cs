@@ -88,6 +88,7 @@ namespace Lesson5
 
         public void RemoveAt(int index)
         {
+            CheckParameter(index);
             ShiftLeftFromIndex(index);
             Count--;
         }
