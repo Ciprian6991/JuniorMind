@@ -79,6 +79,7 @@ namespace Lesson5
         public virtual void Insert(int index, T item)
         {
             CheckParameter(index);
+            CheckIfListIsReadonly();
             CheckSize();
             ShiftRightFromIndex(index);
             array[index] = item;
