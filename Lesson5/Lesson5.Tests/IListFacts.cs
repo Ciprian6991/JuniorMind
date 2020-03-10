@@ -190,5 +190,16 @@ namespace Lesson5.Tests
 
             Assert.Equal("List is readonly!", checkGet.Message);
         }
+
+        [Fact]
+        public void Test_ExceptionAddingInListAsReadOnly()
+        {
+            var intList = new ListCollection<int> { 1, 2, 3, 4, 5 };
+            intList.AsReadOnly();
+
+            var checkGet = Assert.Throws<NotSupportedException>(() => intList.Add(6));
+
+            Assert.Equal("List is readonly!", checkGet.Message);
+        }
     }
 }

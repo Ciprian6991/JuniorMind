@@ -39,6 +39,7 @@ namespace Lesson5
 
         public virtual void Add(T item)
         {
+            CheckIfListIsReadonly();
             CheckSize();
             array[Count++] = item;
         }
