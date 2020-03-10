@@ -201,5 +201,15 @@ namespace Lesson5.Tests
 
             Assert.Equal("List is readonly!", checkGet.Message);
         }
+
+        [Fact]
+        public void Test_ExceptionInsertInListInvalidIndex()
+        {
+            var intList = new ListCollection<int> { 1, 2, 3, 4, 5 };
+
+            var checkGet = Assert.Throws<ArgumentException>(() => intList.Insert(10, 100));
+
+            Assert.Equal("Invalid Index; must be greater then 0 and less than \r\nParameter name: Count = 5", checkGet.Message);
+        }
     }
 }
