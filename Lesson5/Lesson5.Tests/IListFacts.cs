@@ -294,5 +294,18 @@ namespace Lesson5.Tests
 
             Assert.Equal("Index does not exist!\r\nParameter name: arrayIndex", checkGet.Message);
         }
+
+
+        [Fact]
+        public void Test_CopyListInvalidIndex2()
+        {
+
+            var intList = new ListCollection<int> { 1, 2, 3 };
+            int[] array = { 1, 2 };
+
+            var checkGet = Assert.Throws<ArgumentException>(() => intList.CopyTo(array, 4));
+
+            Assert.Equal("Index does not exist!\r\nParameter name: arrayIndex", checkGet.Message);
+        }
     }
 }

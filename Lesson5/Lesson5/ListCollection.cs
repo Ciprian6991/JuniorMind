@@ -104,10 +104,7 @@ namespace Lesson5
         {
             CheckIfArrayIsNull(array);
             CheckArrayIndex(arrayIndex);
-            if (array.Length < Count + arrayIndex)
-            {
-                return;
-            }
+            CheckArrayCapacity(array, arrayIndex);
 
             int usedIndex = 0;
             for (int i = arrayIndex; i < Count + arrayIndex; i++)
@@ -214,6 +211,21 @@ namespace Lesson5
             }
 
             throw new ArgumentOutOfRangeException(paramName: nameof(arrayIndex), message: "Index does not exist!");
+        }
+
+        private void CheckArrayCapacity(T[] array, int arrayIndex)
+            {
+            if (arrayIndex < 0 || arrayIndex >= array.Length)
+            {
+                throw new ArgumentException(message: "Index does not exist!", paramName: nameof(arrayIndex));
+            }
+
+            if (array.Length >= Count + arrayIndex)
+            {
+                return;
+            }
+
+            throw new ArgumentException(message: "Copying proccess cannot be initialised; final array length is too big", paramName: nameof(array));
         }
     }
 }
