@@ -282,5 +282,17 @@ namespace Lesson5.Tests
 
             Assert.Equal("Value cannot be null.\r\nParameter name: array", checkGet.Message);
         }
+
+        [Fact]
+        public void Test_CopyListInvalidIndex()
+        {
+
+            var intList = new ListCollection<int> { 1, 2, 3 };
+            int[] array = {1, 2};
+
+            var checkGet = Assert.Throws<ArgumentOutOfRangeException>(() => intList.CopyTo(array, -10));
+
+            Assert.Equal("Index does not exist!\r\nParameter name: arrayIndex", checkGet.Message);
+        }
     }
 }

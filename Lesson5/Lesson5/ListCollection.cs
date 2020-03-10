@@ -103,7 +103,8 @@ namespace Lesson5
         public void CopyTo(T[] array, int arrayIndex)
         {
             CheckIfArrayIsNull(array);
-            if (arrayIndex < 0 || arrayIndex < Count || array.Length < Count + arrayIndex)
+            CheckArrayIndex(arrayIndex);
+            if (array.Length < Count + arrayIndex)
             {
                 return;
             }
@@ -203,6 +204,16 @@ namespace Lesson5
             }
 
             throw new ArgumentNullException(paramName: nameof(array));
+        }
+
+        private void CheckArrayIndex(int arrayIndex)
+            {
+            if (arrayIndex >= 0)
+            {
+                return;
+            }
+
+            throw new ArgumentOutOfRangeException(paramName: nameof(arrayIndex), message: "Index does not exist!");
         }
     }
 }
