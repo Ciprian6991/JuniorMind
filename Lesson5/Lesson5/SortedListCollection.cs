@@ -63,18 +63,6 @@ namespace Lesson5
             base.Insert(index, item);
         }
 
-        public SortedListCollection<T> GetReadOnly()
-        {
-            var readOnlyList = new SortedListCollection<T>();
-            for (int i = 0; i < Count; i++)
-            {
-                readOnlyList.Insert(i, this[i]);
-            }
-
-            readOnlyList.IsReadOnly = true;
-            return readOnlyList;
-        }
-
         private bool CheckSetElement(int index, T element)
         {
             if (index == 0)

@@ -17,7 +17,7 @@ namespace Lesson5
 
         public int Count { get; protected set; }
 
-        public bool IsReadOnly { get; protected set; }
+        public bool IsReadOnly { get; private set; }
 
         public virtual T this[int index]
         {
