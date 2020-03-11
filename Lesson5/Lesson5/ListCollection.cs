@@ -15,9 +15,9 @@ namespace Lesson5
             array = new T[SizeFactor];
         }
 
-        public int Count { get; private set; }
+        public int Count { get; protected set; }
 
-        public bool IsReadOnly { get; private set; }
+        public bool IsReadOnly { get; protected set; }
 
         public virtual T this[int index]
         {

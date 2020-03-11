@@ -302,5 +302,18 @@ namespace Lesson5.Tests
             Assert.Equal(4, stringList.Count);
 
         }
+
+
+        [Fact]
+        public void Test_ExceptionForRemoveMethodListIsReadOnly()
+        {
+            var intList = new SortedListCollection<int>();
+            var readOnlyList = intList.GetReadOnly();
+            var checkRemove = Assert.Throws<NotSupportedException>(() => readOnlyList.Remove(100));
+
+            Assert.False(intList.IsReadOnly);
+            Assert.True(readOnlyList.IsReadOnly);
+            Assert.Equal("List is readonly!", checkRemove.Message);
+        }
     }
 }
