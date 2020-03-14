@@ -26,6 +26,11 @@ namespace Lesson6LinkedList
             AddFirst(node);
         }
 
+        public void AddAtFront(DNode<T> node)
+        {
+            AddFirst(node);
+        }
+
         public void Add(T item)
         {
             throw new NotImplementedException();
