@@ -9,7 +9,7 @@ namespace LinkedList.Tests
     public class DoubleLinkedListCollectionFacts
     {
         [Fact]
-        void Test_AddNodesInEmptyList()
+        public void Test_AddNodesInEmptyList()
         {
             DoubleLinkedListCollection<int> dlList = new DoubleLinkedListCollection<int>();
 
@@ -32,7 +32,7 @@ namespace LinkedList.Tests
         }
 
         [Fact]
-        void Test_AddAtFrontAsNode()
+        public void Test_AddAtFrontAsNode()
         {
             DoubleLinkedListCollection<int> dlList = new DoubleLinkedListCollection<int>();
 
@@ -61,8 +61,8 @@ namespace LinkedList.Tests
             Assert.False(enumerator.MoveNext());
         }
 
-
-        void Test_Add()
+        [Fact]
+        public void Test_Add()
         {
             DoubleLinkedListCollection<int> dlList = new DoubleLinkedListCollection<int>
             {
@@ -82,6 +82,24 @@ namespace LinkedList.Tests
             Assert.True(enumerator.MoveNext());
             Assert.Equal(3, enumerator.Current);
 
+            Assert.False(enumerator.MoveNext());
+        }
+
+        [Fact]
+        public void Test_Clear()
+        {
+            DoubleLinkedListCollection<int> dlList = new DoubleLinkedListCollection<int>
+            {
+                1,
+                2,
+                3
+            };
+
+            dlList.Clear();
+
+            var enumerator = dlList.GetEnumerator();
+
+            Assert.False(enumerator.MoveNext());
             Assert.False(enumerator.MoveNext());
         }
 

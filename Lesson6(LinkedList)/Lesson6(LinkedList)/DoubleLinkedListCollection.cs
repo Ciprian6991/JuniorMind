@@ -39,7 +39,8 @@ namespace Lesson6LinkedList
 
         public void Clear()
         {
-            throw new NotImplementedException();
+            sentinel.LinkTo(sentinel, sentinel);
+            Count = 0;
         }
 
         public bool Contains(T item)
