@@ -33,7 +33,8 @@ namespace Lesson6LinkedList
 
         public void Add(T item)
         {
-            throw new NotImplementedException();
+            DNode<T> node = new DNode<T>(item);
+            AddLast(node);
         }
 
         public void Clear()
@@ -81,6 +82,23 @@ namespace Lesson6LinkedList
                 sentinel.Next.Previous = node;
                 node.Next = sentinel.Next;
                 sentinel.Next = node;
+            }
+
+            Count++;
+        }
+
+        private void AddLast(DNode<T> node)
+        {
+            if (IsListEmpty() && node != null)
+            {
+                LinkToSentinel(node);
+            }
+            else
+            if (node != null)
+            {
+                node.LinkTo(sentinel.Previous, sentinel);
+                sentinel.Previous.Next = node;
+                sentinel.Previous = node;
             }
 
             Count++;

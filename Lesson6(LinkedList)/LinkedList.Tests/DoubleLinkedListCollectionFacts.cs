@@ -62,6 +62,29 @@ namespace LinkedList.Tests
         }
 
 
+        void Test_Add()
+        {
+            DoubleLinkedListCollection<int> dlList = new DoubleLinkedListCollection<int>
+            {
+                1,
+                2,
+                3
+            };
+
+            var enumerator = dlList.GetEnumerator();
+
+            Assert.True(enumerator.MoveNext());
+            Assert.Equal(1, enumerator.Current);
+
+            Assert.True(enumerator.MoveNext());
+            Assert.Equal(2, enumerator.Current);
+
+            Assert.True(enumerator.MoveNext());
+            Assert.Equal(3, enumerator.Current);
+
+            Assert.False(enumerator.MoveNext());
+        }
+
 
 
     }
