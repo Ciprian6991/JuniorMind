@@ -6,8 +6,6 @@ namespace Lesson6LinkedList
     {
         static void Main()
         {
-            Console.WriteLine("Hello World!");
-            Console.Read();
         }
     }
 }
