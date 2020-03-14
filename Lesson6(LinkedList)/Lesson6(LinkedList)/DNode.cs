@@ -21,7 +21,16 @@ namespace Lesson6LinkedList
 
         public void LinkTo(DNode<T> prev = null, DNode<T> next = null)
         {
-            Previous = prev;
+            if (prev != null)
+            {
+                Previous = prev;
+            }
+
+            if (next == null)
+            {
+                return;
+            }
+
             Next = next;
         }
     }
