@@ -18,5 +18,11 @@ namespace Lesson6LinkedList
         public DNode<T> Next { get; set; }
 
         public DNode<T> Previous { get; set; }
+
+        public void LinkTo(DNode<T> prev = null, DNode<T> next = null)
+        {
+            Previous = prev;
+            Next = next;
+        }
     }
 }
