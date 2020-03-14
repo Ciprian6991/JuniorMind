@@ -6,6 +6,7 @@ using System.Text;
 namespace Lesson6LinkedList
 {
     public class DoubleLinkedListCollection<T> : ICollection<T>
+        where T : IComparable<T>
     {
         private readonly DNode<T> sentinel;
 
@@ -45,7 +46,15 @@ namespace Lesson6LinkedList
 
         public bool Contains(T item)
         {
-            throw new NotImplementedException();
+            foreach (DNode<T> node in GetNodesAtStart())
+            {
+                if (node.Data.CompareTo(item) == 0)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         public void CopyTo(T[] array, int arrayIndex)
@@ -114,6 +123,14 @@ namespace Lesson6LinkedList
         {
             sentinel.LinkTo(node, node);
             node.LinkTo(sentinel, sentinel);
+        }
+
+        private IEnumerable<DNode<T>> GetNodesAtStart()
+        {
+            for (DNode<T> i = sentinel.Next; i != sentinel; i = i.Next)
+            {
+                yield return i;
+            }
         }
     }
 }

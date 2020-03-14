@@ -103,6 +103,23 @@ namespace LinkedList.Tests
             Assert.False(enumerator.MoveNext());
         }
 
+        [Fact]
+        public void Test_Contains()
+        {
+            DoubleLinkedListCollection<int> dlList = new DoubleLinkedListCollection<int>
+            {
+                1,
+                2,
+                3
+            };
+
+            Assert.Contains(1, dlList);
+            Assert.Contains(2, dlList);
+            Assert.Contains(3, dlList);
+            Assert.DoesNotContain(4, dlList);
+
+        }
+
 
 
     }
