@@ -169,6 +169,44 @@ namespace LinkedList.Tests
 
         }
 
+        [Fact]
+        public void Test_CopyTo()
+        {
+            DoubleLinkedListCollection<int> dlList = new DoubleLinkedListCollection<int>
+            {
+                1,
+                2,
+                3,
+            };
+
+            int[] list = { 4, 5, 6 };
+
+            dlList.CopyTo(list, 3);
+
+            var enumerator = dlList.GetEnumerator();
+
+            Assert.True(enumerator.MoveNext());
+            Assert.Equal(1, enumerator.Current);
+
+            Assert.True(enumerator.MoveNext());
+            Assert.Equal(2, enumerator.Current);
+
+            Assert.True(enumerator.MoveNext());
+            Assert.Equal(3, enumerator.Current);
+
+            Assert.True(enumerator.MoveNext());
+            Assert.Equal(4, enumerator.Current);
+
+            Assert.True(enumerator.MoveNext());
+            Assert.Equal(5, enumerator.Current);
+
+            Assert.True(enumerator.MoveNext());
+            Assert.Equal(6, enumerator.Current);
+
+            Assert.False(enumerator.MoveNext());
+
+        }
+
 
 
     }

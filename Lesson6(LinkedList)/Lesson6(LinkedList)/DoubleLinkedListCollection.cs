@@ -51,7 +51,18 @@ namespace Lesson6LinkedList
 
         public void CopyTo(T[] array, int arrayIndex)
         {
-            throw new NotImplementedException();
+            if (array == null)
+            {
+                return;
+            }
+
+            DNode<T> curentNode = GetDnodeAtIndex(arrayIndex);
+
+            foreach (T item in array)
+            {
+                InsertDNodeAfter(curentNode, item);
+                curentNode = curentNode.Next;
+            }
         }
 
         public bool Remove(T item)
@@ -148,6 +159,38 @@ namespace Lesson6LinkedList
             }
 
             return sentinel;
+        }
+
+        private DNode<T> GetDnodeAtIndex(int arrayIndex)
+        {
+            if (arrayIndex < 0 || arrayIndex > Count)
+            {
+                return sentinel; // add exception
+            }
+
+            int curentIndex = 1;
+
+            foreach (DNode<T> node in GetNodesAtStart())
+            {
+                if (curentIndex == arrayIndex)
+                {
+                    return node;
+                }
+
+                curentIndex++;
+            }
+
+            return sentinel;
+        }
+
+        private void InsertDNodeAfter(DNode<T> curentNode, T item)
+        {
+            DNode<T> newNode = new DNode<T>(item);
+
+            newNode.LinkTo(curentNode, curentNode.Next);
+            curentNode.Next = newNode;
+            curentNode.Next.Previous = newNode;
+            Count++;
         }
     }
 }
