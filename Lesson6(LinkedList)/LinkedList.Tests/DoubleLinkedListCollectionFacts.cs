@@ -314,5 +314,35 @@ namespace LinkedList.Tests
 
             Assert.False(enumerator.MoveNext());
         }
+
+        [Fact]
+        public void Test_AddAtFrontNull()
+        {
+            DoubleLinkedListCollection<int> dlList = new DoubleLinkedListCollection<int>()
+            {
+                1,
+                2,
+                3
+            };
+
+            DNode<int> node = null;
+
+            var checkGet = Assert.Throws<InvalidOperationException>(() => dlList.AddAtFront(node));
+
+            Assert.Equal("Null Node!", checkGet.Message);
+
+            var enumerator = dlList.GetEnumerator();
+
+            Assert.True(enumerator.MoveNext());
+            Assert.Equal(1, enumerator.Current);
+
+            Assert.True(enumerator.MoveNext());
+            Assert.Equal(2, enumerator.Current);
+
+            Assert.True(enumerator.MoveNext());
+            Assert.Equal(3, enumerator.Current);
+
+            Assert.False(enumerator.MoveNext());
+        }
     }
 }

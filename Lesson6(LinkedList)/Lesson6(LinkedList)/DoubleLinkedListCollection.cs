@@ -142,12 +142,16 @@ namespace Lesson6LinkedList
 
         private void AddFirst(DNode<T> node)
         {
-            if (IsListEmpty() && node != null)
+            if (node == null)
+            {
+                throw NullNodeException();
+            }
+
+            if (IsListEmpty())
             {
                 LinkToSentinel(node);
             }
             else
-            if (node != null)
             {
                 sentinel.Next.Previous = node;
                 node.Next = sentinel.Next;
@@ -243,6 +247,11 @@ namespace Lesson6LinkedList
         private Exception NotFoundNodeException()
         {
             throw new InvalidOperationException("Node does not exists!");
+        }
+
+        private Exception NullNodeException()
+        {
+            throw new InvalidOperationException("Null Node!");
         }
     }
 }
