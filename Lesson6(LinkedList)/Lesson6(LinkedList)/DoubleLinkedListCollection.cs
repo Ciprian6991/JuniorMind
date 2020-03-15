@@ -170,7 +170,7 @@ namespace Lesson6LinkedList
         {
             if (arrayIndex < 0 || arrayIndex > Count)
             {
-                return sentinel; // add exception
+                throw InvalidIndexException();
             }
 
             int curentIndex = 1;
@@ -201,6 +201,11 @@ namespace Lesson6LinkedList
         private Exception InvalidValueException()
         {
             throw new InvalidOperationException("Invalid Value!");
+        }
+
+        private Exception InvalidIndexException()
+        {
+            throw new InvalidOperationException("Invalid Index!");
         }
     }
 }
