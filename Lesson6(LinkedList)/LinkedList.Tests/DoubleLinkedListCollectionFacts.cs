@@ -259,5 +259,50 @@ namespace LinkedList.Tests
             Assert.Equal("Null Array!", checkGet.Message);
 
         }
+
+        [Fact]
+        public void Test_NumeratorAtEnd_AndFindAtEnd()
+        {
+            DoubleLinkedListCollection<int> dlList = new DoubleLinkedListCollection<int>()
+            {
+                1,
+                2,
+                3,
+                4,
+                3,
+                5
+            };
+
+            //Find at End
+
+            DNode<int> nodeAtEnd = dlList.FindAtEnd(3);
+
+            Assert.Equal(4, nodeAtEnd.Previous.Data);
+            Assert.Equal(5, nodeAtEnd.Next.Data);
+
+
+            // backwards enumerator
+            var enumerator = dlList.GetEnumeratorAtEnd();
+
+            Assert.True(enumerator.MoveNext());
+            Assert.Equal(5, enumerator.Current);
+
+            Assert.True(enumerator.MoveNext());
+            Assert.Equal(3, enumerator.Current);
+
+            Assert.True(enumerator.MoveNext());
+            Assert.Equal(4, enumerator.Current);
+
+            Assert.True(enumerator.MoveNext());
+            Assert.Equal(3, enumerator.Current);
+
+            Assert.True(enumerator.MoveNext());
+            Assert.Equal(2, enumerator.Current);
+
+            Assert.True(enumerator.MoveNext());
+            Assert.Equal(1, enumerator.Current);
+
+            Assert.False(enumerator.MoveNext());
+        }
     }
 }

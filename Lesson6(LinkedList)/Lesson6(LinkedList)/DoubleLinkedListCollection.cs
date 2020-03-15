@@ -46,7 +46,7 @@ namespace Lesson6LinkedList
 
         public bool Contains(T item)
         {
-            return FindDnode(item) != sentinel;
+            return FindDnode(item, GetNodesAtStart()) != sentinel;
         }
 
         public void CopyTo(T[] array, int arrayIndex)
@@ -72,12 +72,24 @@ namespace Lesson6LinkedList
                 throw InvalidValueException();
             }
 
-            DNode<T> nodeToBeRemoved = FindDnode(item);
+            DNode<T> nodeToBeRemoved = FindDnode(item, GetNodesAtStart());
 
             nodeToBeRemoved.Previous.Next = nodeToBeRemoved.Next;
             nodeToBeRemoved.Next.Previous = nodeToBeRemoved.Previous;
 
             return true;
+        }
+
+        public DNode<T> FindAtEnd(T value)
+        {
+            try
+            {
+                return FindDnode(value, GetNodesAtEnd());
+            }
+            catch (InvalidOperationException)
+            {
+                throw NotFoundNodeException();
+            }
         }
 
         public IEnumerator<T> GetEnumerator()
@@ -93,6 +105,16 @@ namespace Lesson6LinkedList
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
+        }
+
+        public IEnumerator<T> GetEnumeratorAtEnd()
+        {
+            DNode<T> curentNode = sentinel;
+            for (int i = Count - 1; i >= 0; i--)
+            {
+                curentNode = curentNode.Previous;
+                yield return curentNode.Data;
+            }
         }
 
         public ReadOnlyDLListCollection<T> AsReadOnly()
@@ -153,9 +175,17 @@ namespace Lesson6LinkedList
             }
         }
 
-        private DNode<T> FindDnode(T item)
+        private IEnumerable<DNode<T>> GetNodesAtEnd()
         {
-            foreach (DNode<T> node in GetNodesAtStart())
+            for (DNode<T> i = sentinel.Previous; i != sentinel; i = i.Previous)
+            {
+                yield return i;
+            }
+        }
+
+        private DNode<T> FindDnode(T item, IEnumerable<DNode<T>> nodes)
+        {
+            foreach (DNode<T> node in nodes)
             {
                 if (node.Data.CompareTo(item) == 0)
                 {
@@ -185,7 +215,7 @@ namespace Lesson6LinkedList
                 curentIndex++;
             }
 
-            return sentinel;
+            throw NotFoundNodeException();
         }
 
         private void InsertDNodeAfter(DNode<T> curentNode, T item)
@@ -211,6 +241,11 @@ namespace Lesson6LinkedList
         private Exception NullArrayException()
         {
             throw new InvalidOperationException("Null Array!");
+        }
+
+        private Exception NotFoundNodeException()
+        {
+            throw new InvalidOperationException("Node does not exists!");
         }
     }
 }
