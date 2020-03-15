@@ -116,7 +116,10 @@ namespace LinkedList.Tests
             Assert.Contains(1, dlList);
             Assert.Contains(2, dlList);
             Assert.Contains(3, dlList);
-            Assert.DoesNotContain(4, dlList);
+
+            var checkGet = Assert.Throws<InvalidOperationException>(() => dlList.Contains(4));
+
+            Assert.Equal("Node does not exists!", checkGet.Message);
 
         }
 
@@ -133,7 +136,9 @@ namespace LinkedList.Tests
             };
 
             Assert.True(dlList.Remove(3));
-            Assert.DoesNotContain(3, dlList);
+            var checkGet = Assert.Throws<InvalidOperationException>(() => dlList.Contains(3));
+
+            Assert.Equal("Node does not exists!", checkGet.Message);
 
         }
 
@@ -149,7 +154,10 @@ namespace LinkedList.Tests
             };
 
             Assert.True(dlList.Remove(1));
-            Assert.DoesNotContain(1, dlList);
+
+            var checkGet = Assert.Throws<InvalidOperationException>(() => dlList.Contains(1));
+
+            Assert.Equal("Node does not exists!", checkGet.Message);
 
         }
 
@@ -165,7 +173,9 @@ namespace LinkedList.Tests
             };
 
             Assert.True(dlList.Remove(4));
-            Assert.DoesNotContain(4, dlList);
+            var checkGet = Assert.Throws<InvalidOperationException>(() => dlList.Contains(4));
+
+            Assert.Equal("Node does not exists!", checkGet.Message);
 
         }
 
@@ -219,7 +229,7 @@ namespace LinkedList.Tests
 
             var checkGet = Assert.Throws<InvalidOperationException>(() => dlList.Remove(4));
 
-            Assert.Equal("Invalid Value!", checkGet.Message);
+            Assert.Equal("Node does not exists!", checkGet.Message);
         }
 
 

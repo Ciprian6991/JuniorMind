@@ -46,7 +46,9 @@ namespace Lesson6LinkedList
 
         public bool Contains(T item)
         {
-            return FindDnode(item, GetNodesAtStart()) != sentinel;
+            DNode<T> nodeToFind = FindDnode(item, GetNodesAtStart());
+
+            return true;
         }
 
         public void CopyTo(T[] array, int arrayIndex)
@@ -92,6 +94,11 @@ namespace Lesson6LinkedList
             }
         }
 
+        public ReadOnlyDLListCollection<T> AsReadOnly()
+        {
+            return new ReadOnlyDLListCollection<T>(this);
+        }
+
         public IEnumerator<T> GetEnumerator()
         {
             DNode<T> curentNode = sentinel;
@@ -117,9 +124,20 @@ namespace Lesson6LinkedList
             }
         }
 
-        public ReadOnlyDLListCollection<T> AsReadOnly()
+        private IEnumerable<DNode<T>> GetNodesAtStart()
         {
-            return new ReadOnlyDLListCollection<T>(this);
+            for (DNode<T> i = sentinel.Next; i != sentinel; i = i.Next)
+            {
+                yield return i;
+            }
+        }
+
+        private IEnumerable<DNode<T>> GetNodesAtEnd()
+        {
+            for (DNode<T> i = sentinel.Previous; i != sentinel; i = i.Previous)
+            {
+                yield return i;
+            }
         }
 
         private void AddFirst(DNode<T> node)
@@ -167,22 +185,6 @@ namespace Lesson6LinkedList
             node.LinkTo(sentinel, sentinel);
         }
 
-        private IEnumerable<DNode<T>> GetNodesAtStart()
-        {
-            for (DNode<T> i = sentinel.Next; i != sentinel; i = i.Next)
-            {
-                yield return i;
-            }
-        }
-
-        private IEnumerable<DNode<T>> GetNodesAtEnd()
-        {
-            for (DNode<T> i = sentinel.Previous; i != sentinel; i = i.Previous)
-            {
-                yield return i;
-            }
-        }
-
         private DNode<T> FindDnode(T item, IEnumerable<DNode<T>> nodes)
         {
             foreach (DNode<T> node in nodes)
@@ -193,7 +195,7 @@ namespace Lesson6LinkedList
                 }
             }
 
-            return sentinel;
+            throw NotFoundNodeException();
         }
 
         private DNode<T> GetDnodeAtIndex(int arrayIndex)
