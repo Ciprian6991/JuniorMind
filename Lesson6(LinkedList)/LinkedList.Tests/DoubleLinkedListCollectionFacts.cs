@@ -240,5 +240,24 @@ namespace LinkedList.Tests
             Assert.Equal("Invalid Index!", checkGet.Message);
 
         }
+
+
+        [Fact]
+        public void Test_ExceptionCopyToNullArray()
+        {
+            DoubleLinkedListCollection<int> dlList = new DoubleLinkedListCollection<int>
+            {
+                1,
+                2,
+                3,
+            };
+
+            int[] list = null;
+
+            var checkGet = Assert.Throws<InvalidOperationException>(() => dlList.CopyTo(list, 12));
+
+            Assert.Equal("Null Array!", checkGet.Message);
+
+        }
     }
 }

@@ -53,7 +53,7 @@ namespace Lesson6LinkedList
         {
             if (array == null)
             {
-                return;
+                throw NullArrayException();
             }
 
             DNode<T> curentNode = GetDnodeAtIndex(arrayIndex);
@@ -206,6 +206,11 @@ namespace Lesson6LinkedList
         private Exception InvalidIndexException()
         {
             throw new InvalidOperationException("Invalid Index!");
+        }
+
+        private Exception NullArrayException()
+        {
+            throw new InvalidOperationException("Null Array!");
         }
     }
 }
