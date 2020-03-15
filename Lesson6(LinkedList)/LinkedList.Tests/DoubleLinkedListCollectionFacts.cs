@@ -206,5 +206,20 @@ namespace LinkedList.Tests
             Assert.False(enumerator.MoveNext());
 
         }
+
+        [Fact]
+        public void Test_ExceptionRemoveInvalidValue()
+        {
+            DoubleLinkedListCollection<int> dlList = new DoubleLinkedListCollection<int>
+            {
+                1,
+                2,
+                3,
+            };
+
+            var checkGet = Assert.Throws<InvalidOperationException>(() => dlList.Remove(4));
+
+            Assert.Equal("Invalid Value!", checkGet.Message);
+        }
     }
 }

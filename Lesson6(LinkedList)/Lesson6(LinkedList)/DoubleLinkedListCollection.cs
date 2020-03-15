@@ -69,7 +69,7 @@ namespace Lesson6LinkedList
         {
             if (!Contains(item))
             {
-                return false;
+                throw InvalidValueException();
             }
 
             DNode<T> nodeToBeRemoved = FindDnode(item);
@@ -196,6 +196,11 @@ namespace Lesson6LinkedList
             curentNode.Next = newNode;
             curentNode.Next.Previous = newNode;
             Count++;
+        }
+
+        private Exception InvalidValueException()
+        {
+            throw new InvalidOperationException("Invalid Value!");
         }
     }
 }
