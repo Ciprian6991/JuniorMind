@@ -121,6 +121,23 @@ namespace LinkedList.Tests
         }
 
 
+        [Fact]
+        public void Test_RemoveInsideList()
+        {
+            DoubleLinkedListCollection<int> dlList = new DoubleLinkedListCollection<int>
+            {
+                1,
+                2,
+                3,
+                4
+            };
+
+            Assert.True(dlList.Remove(3));
+            Assert.DoesNotContain(3, dlList);
+
+        }
+
+
 
     }
 }

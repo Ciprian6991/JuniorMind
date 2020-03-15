@@ -64,7 +64,17 @@ namespace Lesson6LinkedList
 
         public bool Remove(T item)
         {
-            throw new NotImplementedException();
+            if (!Contains(item))
+            {
+                return false;
+            }
+
+            DNode<T> nodeToBeRemoved = FindDnode(item);
+
+            nodeToBeRemoved.Previous.Next = nodeToBeRemoved.Next;
+            nodeToBeRemoved.Next.Previous = nodeToBeRemoved.Previous;
+
+            return true;
         }
 
         public IEnumerator<T> GetEnumerator()
@@ -131,6 +141,19 @@ namespace Lesson6LinkedList
             {
                 yield return i;
             }
+        }
+
+        private DNode<T> FindDnode(T item)
+        {
+            foreach (DNode<T> node in GetNodesAtStart())
+            {
+                if (node.Data.CompareTo(item) == 0)
+                {
+                    return node;
+                }
+            }
+
+            return sentinel;
         }
     }
 }
