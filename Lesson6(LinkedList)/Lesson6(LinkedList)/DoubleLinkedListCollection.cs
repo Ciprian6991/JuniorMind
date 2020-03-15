@@ -71,9 +71,11 @@ namespace Lesson6LinkedList
 
         public IEnumerator<T> GetEnumerator()
         {
-            for (DNode<T> i = sentinel.Next; i != sentinel; i = i.Next)
+            DNode<T> curentNode = sentinel;
+            for (int i = 0; i < Count; i++)
             {
-                yield return i.Data;
+                curentNode = curentNode.Next;
+                yield return curentNode.Data;
             }
         }
 
