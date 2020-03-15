@@ -137,6 +137,38 @@ namespace LinkedList.Tests
 
         }
 
+        [Fact]
+        public void Test_RemoveFirst()
+        {
+            DoubleLinkedListCollection<int> dlList = new DoubleLinkedListCollection<int>
+            {
+                1,
+                2,
+                3,
+                4
+            };
+
+            Assert.True(dlList.Remove(1));
+            Assert.DoesNotContain(1, dlList);
+
+        }
+
+        [Fact]
+        public void Test_RemoveLast()
+        {
+            DoubleLinkedListCollection<int> dlList = new DoubleLinkedListCollection<int>
+            {
+                1,
+                2,
+                3,
+                4
+            };
+
+            Assert.True(dlList.Remove(4));
+            Assert.DoesNotContain(4, dlList);
+
+        }
+
 
 
     }

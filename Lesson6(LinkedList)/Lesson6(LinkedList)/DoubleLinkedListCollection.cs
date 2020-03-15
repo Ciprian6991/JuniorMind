@@ -46,15 +46,7 @@ namespace Lesson6LinkedList
 
         public bool Contains(T item)
         {
-            foreach (DNode<T> node in GetNodesAtStart())
-            {
-                if (node.Data.CompareTo(item) == 0)
-                {
-                    return true;
-                }
-            }
-
-            return false;
+            return FindDnode(item) != sentinel;
         }
 
         public void CopyTo(T[] array, int arrayIndex)
