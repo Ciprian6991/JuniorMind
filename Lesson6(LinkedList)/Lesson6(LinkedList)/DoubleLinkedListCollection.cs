@@ -68,10 +68,10 @@ namespace Lesson6LinkedList
         }
 
         public bool Remove(T item)
-        {
+            {
             if (!Contains(item))
             {
-                throw InvalidValueException();
+                return false;
             }
 
             DNode<T> nodeToBeRemoved = FindDnode(item, GetNodesAtStart());
@@ -228,11 +228,6 @@ namespace Lesson6LinkedList
             curentNode.Next = newNode;
             curentNode.Next.Previous = newNode;
             Count++;
-        }
-
-        private Exception InvalidValueException()
-        {
-            throw new InvalidOperationException("Invalid Value!");
         }
 
         private Exception InvalidIndexException()
