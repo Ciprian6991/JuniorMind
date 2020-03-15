@@ -19,7 +19,7 @@ namespace Lesson6LinkedList
 
         public int Count { get; private set; }
 
-        public bool IsReadOnly { get; }
+        public bool IsReadOnly => false;
 
         public void AddAtFront(T data)
         {
@@ -93,6 +93,11 @@ namespace Lesson6LinkedList
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
+        }
+
+        public ReadOnlyDLListCollection<T> AsReadOnly()
+        {
+            return new ReadOnlyDLListCollection<T>(this);
         }
 
         private void AddFirst(DNode<T> node)

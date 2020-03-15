@@ -206,8 +206,5 @@ namespace LinkedList.Tests
             Assert.False(enumerator.MoveNext());
 
         }
-
-
-
     }
 }
