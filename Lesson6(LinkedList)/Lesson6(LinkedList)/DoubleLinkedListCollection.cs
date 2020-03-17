@@ -23,19 +23,17 @@ namespace Lesson6LinkedList
 
         public void AddAtFront(T data)
         {
-            DNode<T> node = new DNode<T>(data);
-            AddFirst(node);
+            InsertNodeBetween(sentinel, new DNode<T>(data), sentinel.Next);
         }
 
         public void AddAtFront(DNode<T> node)
         {
-            AddFirst(node);
+            InsertNodeBetween(sentinel, node, sentinel.Next);
         }
 
         public void Add(T item)
         {
-            DNode<T> node = new DNode<T>(item);
-            AddLast(node);
+            InsertNodeBetween(sentinel.Previous, new DNode<T>(item), sentinel);
         }
 
         public void Clear()
@@ -62,7 +60,7 @@ namespace Lesson6LinkedList
 
             foreach (T item in array)
             {
-                InsertDNodeAfter(curentNode, item);
+                InsertNodeBetween(curentNode, new DNode<T>(item), curentNode.Next);
                 curentNode = curentNode.Next;
             }
         }
@@ -140,53 +138,17 @@ namespace Lesson6LinkedList
             }
         }
 
-        private void AddFirst(DNode<T> node)
+        private void InsertNodeBetween(DNode<T> node1, DNode<T> insertNode, DNode<T> node2)
         {
-            if (node == null)
+            if (insertNode == null)
             {
                 throw NullNodeException();
             }
 
-            if (IsListEmpty())
-            {
-                LinkToSentinel(node);
-            }
-            else
-            {
-                sentinel.Next.Previous = node;
-                node.Next = sentinel.Next;
-                sentinel.Next = node;
-            }
-
+            node1.LinkTo(node1.Previous, insertNode);
+            insertNode.LinkTo(node1, node2);
+            node2.LinkTo(insertNode, node2.Next);
             Count++;
-        }
-
-        private void AddLast(DNode<T> node)
-        {
-            if (IsListEmpty() && node != null)
-            {
-                LinkToSentinel(node);
-            }
-            else
-            if (node != null)
-            {
-                node.LinkTo(sentinel.Previous, sentinel);
-                sentinel.Previous.Next = node;
-                sentinel.Previous = node;
-            }
-
-            Count++;
-        }
-
-        private bool IsListEmpty()
-        {
-            return Count == 0;
-        }
-
-        private void LinkToSentinel(DNode<T> node)
-        {
-            sentinel.LinkTo(node, node);
-            node.LinkTo(sentinel, sentinel);
         }
 
         private DNode<T> FindDnode(T item, IEnumerable<DNode<T>> nodes)
@@ -222,16 +184,6 @@ namespace Lesson6LinkedList
             }
 
             throw NotFoundNodeException();
-        }
-
-        private void InsertDNodeAfter(DNode<T> curentNode, T item)
-        {
-            DNode<T> newNode = new DNode<T>(item);
-
-            newNode.LinkTo(curentNode, curentNode.Next);
-            curentNode.Next = newNode;
-            curentNode.Next.Previous = newNode;
-            Count++;
         }
 
         private Exception InvalidIndexException()

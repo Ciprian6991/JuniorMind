@@ -19,18 +19,9 @@ namespace Lesson6LinkedList
 
         public DNode<T> Previous { get; set; }
 
-        public void LinkTo(DNode<T> prev = null, DNode<T> next = null)
+        public void LinkTo(DNode<T> prev, DNode<T> next)
         {
-            if (prev != null)
-            {
-                Previous = prev;
-            }
-
-            if (next == null)
-            {
-                return;
-            }
-
+            Previous = prev;
             Next = next;
         }
     }
