@@ -50,6 +50,16 @@ namespace Lesson6LinkedList
             InsertNodeBetween(existingNode.Previous, nodeToBeInserted, existingNode);
         }
 
+        public void AddBefore(DNode<T> existingNode, T newNodeData)
+        {
+            if (existingNode == null)
+            {
+                throw NullNodeException();
+            }
+
+            InsertNodeBetween(existingNode.Previous, new DNode<T>(newNodeData), existingNode);
+        }
+
         public void AddAtFront(T data)
         {
             InsertNodeBetween(sentinel, new DNode<T>(data), sentinel.Next);
