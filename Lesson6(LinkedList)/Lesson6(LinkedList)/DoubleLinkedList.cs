@@ -19,6 +19,8 @@ namespace Lesson6LinkedList
 
         public int Count { get; private set; }
 
+        public DNode<T> First => sentinel.Next;
+
         public bool IsReadOnly => false;
 
         public void AddAtFront(T data)

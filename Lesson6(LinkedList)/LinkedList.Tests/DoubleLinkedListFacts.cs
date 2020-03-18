@@ -344,5 +344,18 @@ namespace LinkedList.Tests
 
             Assert.False(enumerator.MoveNext());
         }
+
+        [Fact]
+        public void Test_FirstProperty()
+        {
+            DoubleLinkedList<int> dlList = new DoubleLinkedList<int>()
+            {
+                1,
+                2,
+                3
+            };
+
+            Assert.Equal(1, dlList.First.Data);
+        }
     }
 }
