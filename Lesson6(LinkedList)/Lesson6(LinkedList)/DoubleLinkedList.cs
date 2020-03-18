@@ -66,12 +66,7 @@ namespace Lesson6LinkedList
         }
 
         public bool Remove(T item)
-            {
-            if (!Contains(item))
-            {
-                return false;
-            }
-
+        {
             DNode<T> nodeToBeRemoved = FindNode(item, GetNodesAtStart());
 
             nodeToBeRemoved.Previous.Next = nodeToBeRemoved.Next;
