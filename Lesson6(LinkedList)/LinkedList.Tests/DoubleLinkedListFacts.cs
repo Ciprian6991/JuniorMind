@@ -13,9 +13,9 @@ namespace LinkedList.Tests
         {
             DoubleLinkedList<int> dlList = new DoubleLinkedList<int>();
 
-            dlList.AddAtFront(1);
-            dlList.AddAtFront(2);
-            dlList.AddAtFront(3);
+            dlList.AddFirst(1);
+            dlList.AddFirst(2);
+            dlList.AddFirst(3);
 
             var enumerator = dlList.GetEnumerator();
 
@@ -36,13 +36,13 @@ namespace LinkedList.Tests
         {
             DoubleLinkedList<int> dlList = new DoubleLinkedList<int>();
 
-            dlList.AddAtFront(1);
-            dlList.AddAtFront(2);
-            dlList.AddAtFront(3);
+            dlList.AddFirst(1);
+            dlList.AddFirst(2);
+            dlList.AddFirst(3);
 
             DNode<int> node = new DNode<int>(4);
 
-            dlList.AddAtFront(node);
+            dlList.AddFirst(node);
 
             var enumerator = dlList.GetEnumerator();
 
@@ -327,7 +327,7 @@ namespace LinkedList.Tests
 
             DNode<int> node = null;
 
-            var checkGet = Assert.Throws<InvalidOperationException>(() => dlList.AddAtFront(node));
+            var checkGet = Assert.Throws<InvalidOperationException>(() => dlList.AddFirst(node));
 
             Assert.Equal("Null Node!", checkGet.Message);
 
