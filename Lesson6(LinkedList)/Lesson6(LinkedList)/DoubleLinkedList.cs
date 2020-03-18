@@ -25,6 +25,16 @@ namespace Lesson6LinkedList
 
         public bool IsReadOnly => false;
 
+        public void AddAfter(DNode<T> existingNode, DNode<T> nodeToBeInserted)
+        {
+            if (existingNode == null)
+            {
+                throw NullNodeException();
+            }
+
+            InsertNodeBetween(existingNode, nodeToBeInserted, existingNode.Next);
+        }
+
         public void AddAtFront(T data)
         {
             InsertNodeBetween(sentinel, new DNode<T>(data), sentinel.Next);
@@ -139,7 +149,7 @@ namespace Lesson6LinkedList
 
         private void InsertNodeBetween(DNode<T> node1, DNode<T> insertNode, DNode<T> node2)
         {
-            if (insertNode == null)
+            if (insertNode == null || node1 == null || node2 == null)
             {
                 throw NullNodeException();
             }

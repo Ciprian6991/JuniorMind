@@ -370,5 +370,28 @@ namespace LinkedList.Tests
 
             Assert.Equal(3, dlList.Last.Data);
         }
+
+        [Fact]
+        public void Test_AddAfter_Node_Node()
+        {
+            DoubleLinkedList<int> dlList = new DoubleLinkedList<int>()
+            {
+                1,
+                2,
+                3
+            };
+
+            dlList.AddAfter(dlList.First, new DNode<int>(5));
+
+            Assert.Equal(1, dlList.First.Data);
+            Assert.Equal(5, dlList.First.Next.Data);
+            Assert.Equal(2, dlList.First.Next.Next.Data);
+
+            DNode<int> node = new DNode<int>(10);
+
+            var checkGet = Assert.Throws<InvalidOperationException>(() => dlList.AddAfter(node, new DNode<int>(12)));
+
+            Assert.Equal("Null Node!", checkGet.Message);
+        }
     }
 }
