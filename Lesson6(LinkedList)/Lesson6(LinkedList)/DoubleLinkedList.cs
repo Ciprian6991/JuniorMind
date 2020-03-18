@@ -21,6 +21,8 @@ namespace Lesson6LinkedList
 
         public DNode<T> First => sentinel.Next;
 
+        public DNode<T> Last => sentinel.Previous;
+
         public bool IsReadOnly => false;
 
         public void AddAtFront(T data)

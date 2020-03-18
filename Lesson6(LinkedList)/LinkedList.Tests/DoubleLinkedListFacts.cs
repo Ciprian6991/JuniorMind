@@ -357,5 +357,18 @@ namespace LinkedList.Tests
 
             Assert.Equal(1, dlList.First.Data);
         }
+
+        [Fact]
+        public void Test_LastProperty()
+        {
+            DoubleLinkedList<int> dlList = new DoubleLinkedList<int>()
+            {
+                1,
+                2,
+                3
+            };
+
+            Assert.Equal(3, dlList.Last.Data);
+        }
     }
 }
