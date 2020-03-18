@@ -75,6 +75,11 @@ namespace Lesson6LinkedList
             InsertNodeBetween(sentinel.Previous, new DNode<T>(item), sentinel);
         }
 
+        public void Add(DNode<T> node)
+        {
+            InsertNodeBetween(sentinel.Previous, node, sentinel);
+        }
+
         public void Clear()
         {
             sentinel.LinkTo(sentinel, sentinel);

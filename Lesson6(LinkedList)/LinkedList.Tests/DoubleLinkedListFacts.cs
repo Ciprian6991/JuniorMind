@@ -462,5 +462,22 @@ namespace LinkedList.Tests
 
             Assert.Equal("Null Node!", checkGet.Message);
         }
+
+        [Fact]
+        public void Test_Add_Node()
+        {
+            DoubleLinkedList<int> dlList = new DoubleLinkedList<int>()
+            {
+                1,
+                2,
+                3
+            };
+
+            DNode<int> node = new DNode<int>(10);
+
+            dlList.Add(node);
+
+            Assert.Equal(10, dlList.Last.Data);
+        }
     }
 }
