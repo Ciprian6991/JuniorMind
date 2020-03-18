@@ -40,6 +40,16 @@ namespace Lesson6LinkedList
             AddAfter(existingNode, new DNode<T>(newNodeData));
         }
 
+        public void AddBefore(DNode<T> existingNode, DNode<T> nodeToBeInserted)
+        {
+            if (existingNode == null)
+            {
+                throw NullNodeException();
+            }
+
+            InsertNodeBetween(existingNode.Previous, nodeToBeInserted, existingNode);
+        }
+
         public void AddAtFront(T data)
         {
             InsertNodeBetween(sentinel, new DNode<T>(data), sentinel.Next);
