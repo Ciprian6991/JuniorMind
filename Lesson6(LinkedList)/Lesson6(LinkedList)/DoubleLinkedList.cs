@@ -88,7 +88,7 @@ namespace Lesson6LinkedList
 
         public bool Contains(T item)
         {
-            DNode<T> nodeToFind = FindNode(item, GetNodesAtStart());
+            DNode<T> nodeToFind = Find(item, GetNodesAtStart());
 
             return true;
         }
@@ -111,7 +111,7 @@ namespace Lesson6LinkedList
 
         public bool Remove(T item)
         {
-            DNode<T> nodeToBeRemoved = FindNode(item, GetNodesAtStart());
+            DNode<T> nodeToBeRemoved = Find(item, GetNodesAtStart());
 
             nodeToBeRemoved.Previous.Next = nodeToBeRemoved.Next;
             nodeToBeRemoved.Next.Previous = nodeToBeRemoved.Previous;
@@ -119,11 +119,11 @@ namespace Lesson6LinkedList
             return true;
         }
 
-        public DNode<T> FindAtEnd(T value)
+        public DNode<T> FindLast(T value)
         {
             try
             {
-                return FindNode(value, GetNodesAtEnd());
+                return Find(value, GetNodesAtEnd());
             }
             catch (InvalidOperationException)
             {
@@ -190,7 +190,7 @@ namespace Lesson6LinkedList
             Count++;
         }
 
-        private DNode<T> FindNode(T item, IEnumerable<DNode<T>> nodes)
+        private DNode<T> Find(T item, IEnumerable<DNode<T>> nodes)
         {
             foreach (DNode<T> node in nodes)
             {

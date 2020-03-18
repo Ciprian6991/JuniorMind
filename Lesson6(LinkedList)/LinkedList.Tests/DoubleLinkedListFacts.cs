@@ -285,7 +285,7 @@ namespace LinkedList.Tests
 
             //Find at End
 
-            DNode<int> nodeAtEnd = dlList.FindAtEnd(3);
+            DNode<int> nodeAtEnd = dlList.FindLast(3);
 
             Assert.Equal(4, nodeAtEnd.Previous.Data);
             Assert.Equal(5, nodeAtEnd.Next.Data);
