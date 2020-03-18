@@ -119,6 +119,11 @@ namespace Lesson6LinkedList
             return true;
         }
 
+        public void RemoveFirst()
+        {
+            Remove(First.Data);
+        }
+
         public DNode<T> FindLast(T value)
         {
             try
