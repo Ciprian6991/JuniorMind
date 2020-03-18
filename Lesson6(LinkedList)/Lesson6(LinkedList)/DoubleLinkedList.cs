@@ -5,12 +5,12 @@ using System.Text;
 
 namespace Lesson6LinkedList
 {
-    public class DoubleLinkedListCollection<T> : ICollection<T>
+    public class DoubleLinkedList<T> : ICollection<T>
         where T : IComparable<T>
     {
         private readonly DNode<T> sentinel;
 
-        public DoubleLinkedListCollection()
+        public DoubleLinkedList()
         {
             Count = 0;
             sentinel = new DNode<T>(default);
@@ -44,7 +44,7 @@ namespace Lesson6LinkedList
 
         public bool Contains(T item)
         {
-            DNode<T> nodeToFind = FindDnode(item, GetNodesAtStart());
+            DNode<T> nodeToFind = FindNode(item, GetNodesAtStart());
 
             return true;
         }
@@ -56,7 +56,7 @@ namespace Lesson6LinkedList
                 throw NullArrayException();
             }
 
-            DNode<T> curentNode = GetDnodeAtIndex(arrayIndex);
+            DNode<T> curentNode = GetNodeAtIndex(arrayIndex);
 
             foreach (T item in array)
             {
@@ -72,7 +72,7 @@ namespace Lesson6LinkedList
                 return false;
             }
 
-            DNode<T> nodeToBeRemoved = FindDnode(item, GetNodesAtStart());
+            DNode<T> nodeToBeRemoved = FindNode(item, GetNodesAtStart());
 
             nodeToBeRemoved.Previous.Next = nodeToBeRemoved.Next;
             nodeToBeRemoved.Next.Previous = nodeToBeRemoved.Previous;
@@ -84,7 +84,7 @@ namespace Lesson6LinkedList
         {
             try
             {
-                return FindDnode(value, GetNodesAtEnd());
+                return FindNode(value, GetNodesAtEnd());
             }
             catch (InvalidOperationException)
             {
@@ -92,9 +92,9 @@ namespace Lesson6LinkedList
             }
         }
 
-        public ReadOnlyDLListCollection<T> AsReadOnly()
+        public ReadOnlyDoubleLinkedList<T> AsReadOnly()
         {
-            return new ReadOnlyDLListCollection<T>(this);
+            return new ReadOnlyDoubleLinkedList<T>(this);
         }
 
         public IEnumerator<T> GetEnumerator()
@@ -151,7 +151,7 @@ namespace Lesson6LinkedList
             Count++;
         }
 
-        private DNode<T> FindDnode(T item, IEnumerable<DNode<T>> nodes)
+        private DNode<T> FindNode(T item, IEnumerable<DNode<T>> nodes)
         {
             foreach (DNode<T> node in nodes)
             {
@@ -164,7 +164,7 @@ namespace Lesson6LinkedList
             throw NotFoundNodeException();
         }
 
-        private DNode<T> GetDnodeAtIndex(int arrayIndex)
+        private DNode<T> GetNodeAtIndex(int arrayIndex)
         {
             if (arrayIndex < 0 || arrayIndex > Count)
             {

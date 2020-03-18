@@ -5,11 +5,11 @@ using System.Text;
 
 namespace Lesson6LinkedList
 {
-    public class ReadOnlyDLListCollection<T> : ICollection<T>
+    public class ReadOnlyDoubleLinkedList<T> : ICollection<T>
     {
         private readonly ICollection<T> dlinkedList;
 
-        public ReadOnlyDLListCollection(ICollection<T> dllist)
+        public ReadOnlyDoubleLinkedList(ICollection<T> dllist)
         {
             dlinkedList = dllist;
         }

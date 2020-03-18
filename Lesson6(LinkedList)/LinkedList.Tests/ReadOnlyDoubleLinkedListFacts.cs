@@ -6,12 +6,12 @@ using Xunit;
 
 namespace LinkedList.Tests
 {
-    public class ReadOnlyDLListCollection
+    public class ReadOnlyDoubleLinkedListFacts
     {
         [Fact]
         public void Test_Add()
         {
-            DoubleLinkedListCollection<int> dlList = new DoubleLinkedListCollection<int>
+            DoubleLinkedList<int> dlList = new DoubleLinkedList<int>
             {
                 1,
                 2,
@@ -28,7 +28,7 @@ namespace LinkedList.Tests
         [Fact]
         public void Test_Count()
         {
-            DoubleLinkedListCollection<int> dlList = new DoubleLinkedListCollection<int>
+            DoubleLinkedList<int> dlList = new DoubleLinkedList<int>
             {
                 1,
                 2,
@@ -43,7 +43,7 @@ namespace LinkedList.Tests
         [Fact]
         public void Test_IsReadOnly()
         {
-            DoubleLinkedListCollection<int> dlList = new DoubleLinkedListCollection<int>
+            DoubleLinkedList<int> dlList = new DoubleLinkedList<int>
             {
                 1,
                 2,
@@ -58,7 +58,7 @@ namespace LinkedList.Tests
         [Fact]
         public void Test_Clear()
         {
-            DoubleLinkedListCollection<int> dlList = new DoubleLinkedListCollection<int>
+            DoubleLinkedList<int> dlList = new DoubleLinkedList<int>
             {
                 1,
                 2,
@@ -75,7 +75,7 @@ namespace LinkedList.Tests
         [Fact]
         public void Test_Contains()
         {
-            DoubleLinkedListCollection<int> dlList = new DoubleLinkedListCollection<int>
+            DoubleLinkedList<int> dlList = new DoubleLinkedList<int>
             {
                 1,
                 2,
@@ -90,7 +90,7 @@ namespace LinkedList.Tests
         [Fact]
         public void Test_CopyTo()
         {
-            DoubleLinkedListCollection<int> dlList = new DoubleLinkedListCollection<int>
+            DoubleLinkedList<int> dlList = new DoubleLinkedList<int>
             {
                 1,
                 2,
@@ -109,7 +109,7 @@ namespace LinkedList.Tests
         [Fact]
         public void Test_Remove()
         {
-            DoubleLinkedListCollection<int> dlList = new DoubleLinkedListCollection<int>
+            DoubleLinkedList<int> dlList = new DoubleLinkedList<int>
             {
                 1,
                 2,
@@ -126,7 +126,7 @@ namespace LinkedList.Tests
         [Fact]
         public void Test_Eumerator()
         {
-            DoubleLinkedListCollection<int> dlList = new DoubleLinkedListCollection<int>
+            DoubleLinkedList<int> dlList = new DoubleLinkedList<int>
             {
                 1,
                 2,

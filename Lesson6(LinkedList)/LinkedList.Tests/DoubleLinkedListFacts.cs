@@ -6,12 +6,12 @@ using Xunit;
 
 namespace LinkedList.Tests
 {
-    public class DoubleLinkedListCollectionFacts
+    public class DoubleLinkedListFacts
     {
         [Fact]
         public void Test_AddNodesInEmptyList()
         {
-            DoubleLinkedListCollection<int> dlList = new DoubleLinkedListCollection<int>();
+            DoubleLinkedList<int> dlList = new DoubleLinkedList<int>();
 
             dlList.AddAtFront(1);
             dlList.AddAtFront(2);
@@ -34,7 +34,7 @@ namespace LinkedList.Tests
         [Fact]
         public void Test_AddAtFrontAsNode()
         {
-            DoubleLinkedListCollection<int> dlList = new DoubleLinkedListCollection<int>();
+            DoubleLinkedList<int> dlList = new DoubleLinkedList<int>();
 
             dlList.AddAtFront(1);
             dlList.AddAtFront(2);
@@ -64,7 +64,7 @@ namespace LinkedList.Tests
         [Fact]
         public void Test_Add()
         {
-            DoubleLinkedListCollection<int> dlList = new DoubleLinkedListCollection<int>
+            DoubleLinkedList<int> dlList = new DoubleLinkedList<int>
             {
                 1,
                 2,
@@ -88,7 +88,7 @@ namespace LinkedList.Tests
         [Fact]
         public void Test_Clear()
         {
-            DoubleLinkedListCollection<int> dlList = new DoubleLinkedListCollection<int>
+            DoubleLinkedList<int> dlList = new DoubleLinkedList<int>
             {
                 1,
                 2,
@@ -106,7 +106,7 @@ namespace LinkedList.Tests
         [Fact]
         public void Test_Contains()
         {
-            DoubleLinkedListCollection<int> dlList = new DoubleLinkedListCollection<int>
+            DoubleLinkedList<int> dlList = new DoubleLinkedList<int>
             {
                 1,
                 2,
@@ -127,7 +127,7 @@ namespace LinkedList.Tests
         [Fact]
         public void Test_RemoveInsideList()
         {
-            DoubleLinkedListCollection<int> dlList = new DoubleLinkedListCollection<int>
+            DoubleLinkedList<int> dlList = new DoubleLinkedList<int>
             {
                 1,
                 2,
@@ -145,7 +145,7 @@ namespace LinkedList.Tests
         [Fact]
         public void Test_RemoveFirst()
         {
-            DoubleLinkedListCollection<int> dlList = new DoubleLinkedListCollection<int>
+            DoubleLinkedList<int> dlList = new DoubleLinkedList<int>
             {
                 1,
                 2,
@@ -164,7 +164,7 @@ namespace LinkedList.Tests
         [Fact]
         public void Test_RemoveLast()
         {
-            DoubleLinkedListCollection<int> dlList = new DoubleLinkedListCollection<int>
+            DoubleLinkedList<int> dlList = new DoubleLinkedList<int>
             {
                 1,
                 2,
@@ -182,7 +182,7 @@ namespace LinkedList.Tests
         [Fact]
         public void Test_CopyTo()
         {
-            DoubleLinkedListCollection<int> dlList = new DoubleLinkedListCollection<int>
+            DoubleLinkedList<int> dlList = new DoubleLinkedList<int>
             {
                 1,
                 2,
@@ -220,7 +220,7 @@ namespace LinkedList.Tests
         [Fact]
         public void Test_ExceptionRemoveInvalidValue()
         {
-            DoubleLinkedListCollection<int> dlList = new DoubleLinkedListCollection<int>
+            DoubleLinkedList<int> dlList = new DoubleLinkedList<int>
             {
                 1,
                 2,
@@ -236,7 +236,7 @@ namespace LinkedList.Tests
         [Fact]
         public void Test_ExceptionCopyToInvalidIndex()
         {
-            DoubleLinkedListCollection<int> dlList = new DoubleLinkedListCollection<int>
+            DoubleLinkedList<int> dlList = new DoubleLinkedList<int>
             {
                 1,
                 2,
@@ -255,7 +255,7 @@ namespace LinkedList.Tests
         [Fact]
         public void Test_ExceptionCopyToNullArray()
         {
-            DoubleLinkedListCollection<int> dlList = new DoubleLinkedListCollection<int>
+            DoubleLinkedList<int> dlList = new DoubleLinkedList<int>
             {
                 1,
                 2,
@@ -273,7 +273,7 @@ namespace LinkedList.Tests
         [Fact]
         public void Test_NumeratorAtEnd_AndFindAtEnd()
         {
-            DoubleLinkedListCollection<int> dlList = new DoubleLinkedListCollection<int>()
+            DoubleLinkedList<int> dlList = new DoubleLinkedList<int>()
             {
                 1,
                 2,
@@ -318,7 +318,7 @@ namespace LinkedList.Tests
         [Fact]
         public void Test_AddAtFrontNull()
         {
-            DoubleLinkedListCollection<int> dlList = new DoubleLinkedListCollection<int>()
+            DoubleLinkedList<int> dlList = new DoubleLinkedList<int>()
             {
                 1,
                 2,
