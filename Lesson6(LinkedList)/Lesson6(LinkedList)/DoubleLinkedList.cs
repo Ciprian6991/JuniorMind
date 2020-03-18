@@ -124,6 +124,11 @@ namespace Lesson6LinkedList
             Remove(First.Data);
         }
 
+        public void RemoveLast()
+        {
+            Remove(Last.Data);
+        }
+
         public DNode<T> FindLast(T value)
         {
             try

@@ -494,5 +494,20 @@ namespace LinkedList.Tests
 
             Assert.Equal(2, dlList.First.Data);
         }
+
+        [Fact]
+        public void Test_RemoveLast1()
+        {
+            DoubleLinkedList<int> dlList = new DoubleLinkedList<int>()
+            {
+                1,
+                2,
+                3
+            };
+
+            dlList.RemoveLast();
+
+            Assert.Equal(2, dlList.Last.Data);
+        }
     }
 }
