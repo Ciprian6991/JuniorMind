@@ -27,7 +27,7 @@ namespace Lesson6LinkedList
 
         public void AddAfter(DNode<T> existingNode, DNode<T> nodeToBeInserted)
         {
-            if (existingNode == null)
+            if (existingNode == null || !Contains(existingNode.Data))
             {
                 throw NullNodeException();
             }
@@ -42,7 +42,7 @@ namespace Lesson6LinkedList
 
         public void AddBefore(DNode<T> existingNode, DNode<T> nodeToBeInserted)
         {
-            if (existingNode == null)
+            if (existingNode == null || !Contains(existingNode.Data))
             {
                 throw NullNodeException();
             }
@@ -52,7 +52,7 @@ namespace Lesson6LinkedList
 
         public void AddBefore(DNode<T> existingNode, T newNodeData)
         {
-            if (existingNode == null)
+            if (existingNode == null || !Contains(existingNode.Data))
             {
                 throw NullNodeException();
             }

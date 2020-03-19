@@ -391,7 +391,7 @@ namespace LinkedList.Tests
 
             var checkGet = Assert.Throws<InvalidOperationException>(() => dlList.AddAfter(node, new DNode<int>(12)));
 
-            Assert.Equal("Null Node!", checkGet.Message);
+            Assert.Equal("Node does not exists!", checkGet.Message);
         }
 
         [Fact]
@@ -414,7 +414,7 @@ namespace LinkedList.Tests
 
             var checkGet = Assert.Throws<InvalidOperationException>(() => dlList.AddAfter(node, 12));
 
-            Assert.Equal("Null Node!", checkGet.Message);
+            Assert.Equal("Node does not exists!", checkGet.Message);
         }
 
         [Fact]
@@ -437,7 +437,7 @@ namespace LinkedList.Tests
 
             var checkGet = Assert.Throws<InvalidOperationException>(() => dlList.AddBefore(node, new DNode<int>(12)));
 
-            Assert.Equal("Null Node!", checkGet.Message);
+            Assert.Equal("Node does not exists!", checkGet.Message);
         }
 
         [Fact]
@@ -460,7 +460,7 @@ namespace LinkedList.Tests
 
             var checkGet = Assert.Throws<InvalidOperationException>(() => dlList.AddBefore(node, 12));
 
-            Assert.Equal("Null Node!", checkGet.Message);
+            Assert.Equal("Node does not exists!", checkGet.Message);
         }
 
         [Fact]
@@ -520,6 +520,29 @@ namespace LinkedList.Tests
 
             Assert.Equal("Null Node!", checkGet1.Message);
             Assert.Equal("Null Node!", checkGet2.Message);
+        }
+
+        [Fact]
+        public void Test_AddBefore_NotExistingNode_Node()
+        {
+            DoubleLinkedList<int> dlList = new DoubleLinkedList<int>()
+            {
+                1,
+                2,
+                3
+            };
+
+            dlList.AddBefore(dlList.First, new DNode<int>(5));
+
+            Assert.Equal(5, dlList.First.Data);
+            Assert.Equal(1, dlList.First.Next.Data);
+            Assert.Equal(2, dlList.First.Next.Next.Data);
+
+            DNode<int> node = new DNode<int>(10);
+
+            var checkGet = Assert.Throws<InvalidOperationException>(() => dlList.AddBefore(node, new DNode<int>(12)));
+
+            Assert.Equal("Node does not exists!", checkGet.Message);
         }
     }
 }
