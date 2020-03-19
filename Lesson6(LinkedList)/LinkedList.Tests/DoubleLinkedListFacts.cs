@@ -509,5 +509,17 @@ namespace LinkedList.Tests
 
             Assert.Equal(2, dlList.Last.Data);
         }
+
+        [Fact]
+        public void Test_FirstLastOnEmptyList()
+        {
+            DoubleLinkedList<int> dlList = new DoubleLinkedList<int>();
+
+            var checkGet1 = Assert.Throws<InvalidOperationException>(() => dlList.First);
+            var checkGet2 = Assert.Throws<InvalidOperationException>(() => dlList.Last);
+
+            Assert.Equal("Null Node!", checkGet1.Message);
+            Assert.Equal("Null Node!", checkGet2.Message);
+        }
     }
 }

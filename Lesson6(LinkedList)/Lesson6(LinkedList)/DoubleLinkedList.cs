@@ -19,9 +19,9 @@ namespace Lesson6LinkedList
 
         public int Count { get; private set; }
 
-        public DNode<T> First => sentinel.Next;
+        public DNode<T> First => Count != 0 ? sentinel.Next : throw NullNodeException();
 
-        public DNode<T> Last => sentinel.Previous;
+        public DNode<T> Last => Count != 0 ? sentinel.Previous : throw NullNodeException();
 
         public bool IsReadOnly => false;
 
