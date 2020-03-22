@@ -15,5 +15,26 @@ namespace Lesson7Dictionary.Tests
             };
             Assert.True(dic.ContainsKey(1));
         }
+
+        [Fact]
+        public void Test_ContainsNot()
+        {
+            var dic = new Dictionary<int, string>(5)
+            {
+                { 1, "a" }
+            };
+            Assert.False(dic.ContainsKey(2));
+        }
+
+        [Fact]
+        public void Test_EnumeratorReturnsFalseWhenEmptyDictionary()
+        {
+        var dictionary = new Dictionary<int, int>();
+
+        var enumerator = dictionary.GetEnumerator();
+
+        Assert.False(enumerator.MoveNext());
+        Assert.Empty(dictionary);
+        }
     }
 }

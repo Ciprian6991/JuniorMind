@@ -128,7 +128,7 @@ namespace Lesson7Dictionary
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            throw new NotImplementedException();
+            return GetEnumerator();
         }
 
         private void AddElement(ref Element element, TKey key, TValue value)
