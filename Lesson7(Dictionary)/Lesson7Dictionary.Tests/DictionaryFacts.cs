@@ -141,7 +141,7 @@ namespace Lesson7Dictionary.Tests
             var dictionary = new Dictionary<int, string>
             {
                 { 11, "1" },
-                new KeyValuePair<int, string>(11, "Ana")
+                new KeyValuePair<int, string>(1, "Ana")
             };
             var enumerator = dictionary.GetEnumerator();
 
@@ -149,8 +149,86 @@ namespace Lesson7Dictionary.Tests
             Assert.True(enumerator.MoveNext());
             Assert.Equal(new KeyValuePair<int, string>(11, "1"), enumerator.Current);
             Assert.True(enumerator.MoveNext());
-            Assert.Equal(new KeyValuePair<int, string>(11, "Ana"), enumerator.Current);
+            Assert.Equal(new KeyValuePair<int, string>(1, "Ana"), enumerator.Current);
             Assert.False(enumerator.MoveNext());
+        }
+
+        [Fact]
+        public void Test_KeysProperty()
+        {
+
+            var dictionary = new Dictionary<string, string>
+            {
+                { "Ana", "Andra" },
+                { "Vlad", string.Empty },
+                { "12", "2" }
+            };
+
+            Assert.Equal(new List<string> { "Ana", "Vlad", "12" }, dictionary.Keys);
+        }
+
+        [Fact]
+        public void Test_KeysPropertyEmptyDictionary()
+        {
+            var dictionary = new Dictionary<string, string>();
+
+            Assert.Equal(new List<string>(), dictionary.Keys);
+        }
+
+        [Fact]
+        public void Test_ValuesProperty()
+        {
+
+            var dictionary = new Dictionary<string, string>()
+            {
+                { "Ana", "Andra"},
+                { "Vlad", string.Empty},
+                { "12", "2" }
+            };
+            Assert.Equal(new List<string> { "Andra", string.Empty, "2" }, dictionary.Values);
+        }
+
+        [Fact]
+        public void Test_ValuesPropertyEmptyDictionary()
+        {
+
+            var dictionary = new Dictionary<string, string>();
+
+            Assert.Equal(new List<string>(), dictionary.Values);
+        }
+
+        [Fact]
+        public void Test_ContainsKeyReturnTrue1Element()
+        {
+
+            var dictionary = new Dictionary<string, string>
+            {
+                { "Ana", "1" }
+            };
+
+            Assert.Single(dictionary);
+            Assert.True(dictionary.ContainsKey("Ana"));
+        }
+
+        [Fact]
+        public void Test_ContainsKeyConflicts()
+        {
+
+            var dictionary = new Dictionary<int, string>();
+
+            dictionary.Add(1, "Ana");
+            dictionary.Add(6, "Maria");
+            dictionary.Add(11, "Ana");
+            dictionary.Add(16, "GTA");
+
+            Assert.Equal(4, dictionary.Count);
+            Assert.True(dictionary.ContainsKey(1));
+            Assert.True(dictionary.ContainsKey(6));
+            Assert.True(dictionary.ContainsKey(11));
+            Assert.True(dictionary.ContainsKey(16));
+            Assert.False(dictionary.ContainsKey(21));
+            Assert.False(dictionary.ContainsKey(7));
+            Assert.False(dictionary.ContainsKey(0));
         }
     }
 }
