@@ -123,7 +123,17 @@ namespace Lesson7Dictionary
 
         public bool TryGetValue(TKey key, out TValue value)
         {
-            throw new NotImplementedException();
+            for (int i = buckets[Math.Abs(key.GetHashCode()) % buckets.Length]; i != -1; i = elements[i].Next)
+            {
+                if (elements[i].Key.Equals(key))
+                {
+                    value = elements[i].Value;
+                    return true;
+                }
+            }
+
+            value = default;
+            return false;
         }
 
         IEnumerator IEnumerable.GetEnumerator()

@@ -246,5 +246,24 @@ namespace Lesson7Dictionary.Tests
 
             Assert.Equal(0, dic.Count);
         }
+
+
+        [Fact]
+        public void Test_TryGetValue()
+        {
+
+            var dictionary = new Dictionary<string, string>
+            {
+                { "Ana", "Andra" },
+                { "Vlad", string.Empty },
+                { "12", "2" },
+                { "asd", "dsa" },
+            };
+
+            string value;
+
+            Assert.True(dictionary.TryGetValue("12", out value));
+            Assert.Equal("2", value);
+        }
     }
 }
