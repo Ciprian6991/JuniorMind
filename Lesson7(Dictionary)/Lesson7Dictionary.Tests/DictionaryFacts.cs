@@ -230,5 +230,21 @@ namespace Lesson7Dictionary.Tests
             Assert.False(dictionary.ContainsKey(7));
             Assert.False(dictionary.ContainsKey(0));
         }
+
+        [Fact]
+        public void Test_Clear()
+        {
+            var dic = new Dictionary<int, int>()
+            {
+                {123, 123},
+                {456, 456}
+            };
+
+            Assert.Equal(2, dic.Count);
+
+            dic.Clear();
+
+            Assert.Equal(0, dic.Count);
+        }
     }
 }

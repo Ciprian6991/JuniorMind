@@ -77,7 +77,7 @@ namespace Lesson7Dictionary
 
         public void Clear()
         {
-            throw new NotImplementedException();
+            Count = 0;
         }
 
         public bool Contains(KeyValuePair<TKey, TValue> item)
