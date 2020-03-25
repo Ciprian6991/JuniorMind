@@ -87,15 +87,7 @@ namespace Lesson7Dictionary
 
         public bool ContainsKey(TKey key)
         {
-            for (int i = buckets[GetBucketIndex(key)]; i != -1; i = elements[i].Next)
-            {
-                if (elements[i].Key.Equals(key))
-                {
-                    return true;
-                }
-            }
-
-            return false;
+            return TryGetValue(key, out TValue value);
         }
 
         public void CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex)
