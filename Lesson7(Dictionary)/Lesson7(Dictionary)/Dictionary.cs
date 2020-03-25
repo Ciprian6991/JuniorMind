@@ -60,7 +60,7 @@ namespace Lesson7Dictionary
         {
             AddElement(ref elements[Count], key, value);
 
-            int bucketIndex = Math.Abs(key.GetHashCode()) % buckets.Length;
+            int bucketIndex = GetBucketIndex(key);
             if (buckets[bucketIndex] != -1)
             {
                 elements[Count].Next = buckets[bucketIndex];
@@ -87,7 +87,7 @@ namespace Lesson7Dictionary
 
         public bool ContainsKey(TKey key)
         {
-            for (int i = buckets[Math.Abs(key.GetHashCode()) % buckets.Length]; i != -1; i = elements[i].Next)
+            for (int i = buckets[GetBucketIndex(key)]; i != -1; i = elements[i].Next)
             {
                 if (elements[i].Key.Equals(key))
                 {
@@ -123,7 +123,7 @@ namespace Lesson7Dictionary
 
         public bool TryGetValue(TKey key, out TValue value)
         {
-            for (int i = buckets[Math.Abs(key.GetHashCode()) % buckets.Length]; i != -1; i = elements[i].Next)
+            for (int i = buckets[GetBucketIndex(key)]; i != -1; i = elements[i].Next)
             {
                 if (elements[i].Key.Equals(key))
                 {
@@ -151,6 +151,11 @@ namespace Lesson7Dictionary
         private KeyValuePair<TKey, TValue> GetBucket(Element element)
         {
             return KeyValuePair.Create(element.Key, element.Value);
+        }
+
+        private int GetBucketIndex(TKey key)
+        {
+            return Math.Abs(key.GetHashCode()) % buckets.Length;
         }
 
         struct Element
