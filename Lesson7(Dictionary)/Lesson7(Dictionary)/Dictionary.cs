@@ -78,6 +78,7 @@ namespace Lesson7Dictionary
         public void Clear()
         {
             Count = 0;
+            Array.Fill(buckets, -1);
         }
 
         public bool Contains(KeyValuePair<TKey, TValue> item)
