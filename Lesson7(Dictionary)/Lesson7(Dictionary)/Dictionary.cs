@@ -88,7 +88,7 @@ namespace Lesson7Dictionary
 
         public bool ContainsKey(TKey key)
         {
-            return TryGetValue(key, out TValue value);
+            return GetBucketPositionByKeyOrKeyValuePair(key) != -1;
         }
 
         public void CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex)
