@@ -265,5 +265,21 @@ namespace Lesson7Dictionary.Tests
             Assert.True(dictionary.TryGetValue("12", out value));
             Assert.Equal("2", value);
         }
+
+        [Fact]
+        public void Test_ContainsSameHashCode()
+        {
+
+            var dictionary = new Dictionary<int, string>()
+            {
+                { 1, "a" },
+                { 6, "b" },
+                { 11, "c" },
+                { 16, "d" }
+            };
+
+            Assert.Contains(new KeyValuePair<int, string>(11, "c"), dictionary);
+            Assert.DoesNotContain(new KeyValuePair<int, string>(11, "d"), dictionary);
+        }
     }
 }

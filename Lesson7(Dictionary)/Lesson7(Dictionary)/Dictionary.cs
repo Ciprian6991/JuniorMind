@@ -83,7 +83,7 @@ namespace Lesson7Dictionary
 
         public bool Contains(KeyValuePair<TKey, TValue> item)
         {
-            throw new NotImplementedException();
+            return GetBucketPositionByKeyOrKeyValuePair(item.Key, item.Value) != -1;
         }
 
         public bool ContainsKey(TKey key)
