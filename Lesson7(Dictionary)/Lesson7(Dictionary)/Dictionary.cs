@@ -116,13 +116,11 @@ namespace Lesson7Dictionary
 
         public bool TryGetValue(TKey key, out TValue value)
         {
-            for (int i = buckets[GetBucketIndex(key)]; i != -1; i = elements[i].Next)
+            int searchedPosition = GetBucketPositionByKeyOrKeyValuePair(key);
+            if (searchedPosition != -1)
             {
-                if (elements[i].Key.Equals(key))
-                {
-                    value = elements[i].Value;
-                    return true;
-                }
+                value = elements[searchedPosition].Value;
+                return true;
             }
 
             value = default;
@@ -132,6 +130,20 @@ namespace Lesson7Dictionary
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
+        }
+
+        private int GetBucketPositionByKeyOrKeyValuePair(TKey key, TValue value = default)
+        {
+            for (int i = buckets[GetBucketIndex(key)]; i != -1; i = elements[i].Next)
+            {
+                if ((value == default && elements[i].Key.Equals(key))
+                    || (elements[i].Key.Equals(key) && elements[i].Value.Equals(value)))
+                {
+                    return i;
+                }
+            }
+
+            return -1;
         }
 
         private void AddElement(ref Element element, TKey key, TValue value)
