@@ -105,10 +105,23 @@ namespace Lesson7Dictionary
         }
 
         public bool Remove(TKey key)
-        {
+            {
             int position = GetPositionByKeyOrKeyValuePair(key);
 
-            return position != -1;
+            if (position == -1)
+            {
+                return false;
+            }
+
+            if (!elements[position].Key.Equals(key))
+            {
+                return false;
+            }
+
+            Count--;
+            buckets[elements[position].Next] = elements[position].Next;
+
+            return true;
         }
 
         public bool Remove(KeyValuePair<TKey, TValue> item)

@@ -296,5 +296,36 @@ namespace Lesson7Dictionary.Tests
 
             Assert.False(dictionary.Remove(2));
         }
+
+        [Fact]
+        public void Test_RemoveReturnsTrueAndRemovesTheFirstKeyInTheBucket()
+        {
+
+            var dictionary = new Dictionary<int, string>()
+            {
+                { 1, "a" },
+                { 2, "b" },
+                { 10, "c" },
+                { 7, "d" },
+                { 12, "e" }
+            };
+
+            Assert.Equal(5, dictionary.Count);
+
+            Assert.True(dictionary.Remove(12));
+
+            Assert.Equal(4, dictionary.Count);
+            var enumerator = dictionary.GetEnumerator();
+
+            Assert.True(enumerator.MoveNext());
+            Assert.Equal(new KeyValuePair<int, string>(1, "a"), enumerator.Current);
+            Assert.True(enumerator.MoveNext());
+            Assert.Equal(new KeyValuePair<int, string>(2, "b"), enumerator.Current);
+            Assert.True(enumerator.MoveNext());
+            Assert.Equal(new KeyValuePair<int, string>(10, "c"), enumerator.Current);
+            Assert.True(enumerator.MoveNext());
+            Assert.Equal(new KeyValuePair<int, string>(7, "d"), enumerator.Current);
+            Assert.False(enumerator.MoveNext());
+        }
     }
 }
