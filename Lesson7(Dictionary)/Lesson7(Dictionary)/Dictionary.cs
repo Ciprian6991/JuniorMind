@@ -83,12 +83,12 @@ namespace Lesson7Dictionary
 
         public bool Contains(KeyValuePair<TKey, TValue> item)
         {
-            return GetBucketPositionByKeyOrKeyValuePair(item.Key, item.Value) != -1;
+            return GetPositionByKeyOrKeyValuePair(item.Key, item.Value) != -1;
         }
 
         public bool ContainsKey(TKey key)
         {
-            return GetBucketPositionByKeyOrKeyValuePair(key) != -1;
+            return GetPositionByKeyOrKeyValuePair(key) != -1;
         }
 
         public void CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex)
@@ -106,7 +106,9 @@ namespace Lesson7Dictionary
 
         public bool Remove(TKey key)
         {
-            throw new NotImplementedException();
+            int position = GetPositionByKeyOrKeyValuePair(key);
+
+            return position != -1;
         }
 
         public bool Remove(KeyValuePair<TKey, TValue> item)
@@ -116,7 +118,7 @@ namespace Lesson7Dictionary
 
         public bool TryGetValue(TKey key, out TValue value)
         {
-            int searchedPosition = GetBucketPositionByKeyOrKeyValuePair(key);
+            int searchedPosition = GetPositionByKeyOrKeyValuePair(key);
             if (searchedPosition != -1)
             {
                 value = elements[searchedPosition].Value;
@@ -132,7 +134,7 @@ namespace Lesson7Dictionary
             return GetEnumerator();
         }
 
-        private int GetBucketPositionByKeyOrKeyValuePair(TKey key, TValue value = default)
+        private int GetPositionByKeyOrKeyValuePair(TKey key, TValue value = default)
         {
             for (int i = buckets[GetBucketIndex(key)]; i != -1; i = elements[i].Next)
             {

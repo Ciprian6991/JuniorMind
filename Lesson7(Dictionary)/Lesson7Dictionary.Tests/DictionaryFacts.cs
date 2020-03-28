@@ -281,5 +281,20 @@ namespace Lesson7Dictionary.Tests
             Assert.Contains(new KeyValuePair<int, string>(11, "c"), dictionary);
             Assert.DoesNotContain(new KeyValuePair<int, string>(11, "d"), dictionary);
         }
+
+        [Fact]
+        public void Test_RemoveReturnsFalseForNotExistingKey()
+        {
+
+            var dictionary = new Dictionary<int, string>()
+            {
+                { 1, "a" },
+                { 6, "b" },
+                { 11, "c" },
+                { 16, "d" }
+            };
+
+            Assert.False(dictionary.Remove(2));
+        }
     }
 }
