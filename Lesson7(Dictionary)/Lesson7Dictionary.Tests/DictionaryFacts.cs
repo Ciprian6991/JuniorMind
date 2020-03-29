@@ -346,5 +346,26 @@ namespace Lesson7Dictionary.Tests
             Assert.True(dictionary.ContainsKey(2));
             Assert.Equal(6, dictionary.Count);
         }
+
+
+        [Fact]
+        public void Test_SetGetForValidElements()
+        {
+
+            var dictionary = new Dictionary<int, string>()
+            {
+                { 1, "a" },
+                { 2, "b" },
+                { 10, "c" },
+                { 7, "d" },
+                { 12, "e" }
+            };
+
+            Assert.Equal("e", dictionary[12]);
+
+            dictionary[12] = "f";
+
+            Assert.Equal("f", dictionary[12]);
+        }
     }
 }

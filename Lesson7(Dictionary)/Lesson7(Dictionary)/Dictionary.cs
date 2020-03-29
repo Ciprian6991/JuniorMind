@@ -60,7 +60,18 @@ namespace Lesson7Dictionary
 
         public bool IsReadOnly => false;
 
-        public TValue this[TKey key] { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public TValue this[TKey key]
+        {
+            get
+            {
+                return elements[SearchPosition(SearchOption.ByKey, key)].Value;
+            }
+
+            set
+            {
+                elements[SearchPosition(SearchOption.ByKey, key)].Value = value;
+            }
+        }
 
         public void Add(TKey key, TValue value)
         {
