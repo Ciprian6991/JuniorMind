@@ -8,7 +8,7 @@ namespace Lesson7Dictionary
     public class Dictionary<TKey, TValue> : IDictionary<TKey, TValue>
     {
         private readonly int[] buckets;
-        private readonly Element[] elements;
+        private Element[] elements;
 
         public Dictionary(int size = 5)
         {
@@ -18,6 +18,12 @@ namespace Lesson7Dictionary
             elements = new Element[size];
 
             Count = 0;
+        }
+
+        enum SearchOption
+        {
+            ByKey,
+            ByKeyValue,
         }
 
         public ICollection<TKey> Keys
@@ -58,6 +64,7 @@ namespace Lesson7Dictionary
 
         public void Add(TKey key, TValue value)
         {
+            EnsureCapacity();
             AddElement(ref elements[Count], key, value);
 
             int bucketIndex = GetBucketIndex(key);
@@ -83,12 +90,12 @@ namespace Lesson7Dictionary
 
         public bool Contains(KeyValuePair<TKey, TValue> item)
         {
-            return GetPositionByKeyOrKeyValuePair(item.Key, item.Value) != -1;
+            return SearchPosition(SearchOption.ByKeyValue, item.Key, item.Value) != -1;
         }
 
         public bool ContainsKey(TKey key)
         {
-            return GetPositionByKeyOrKeyValuePair(key) != -1;
+            return SearchPosition(SearchOption.ByKey, key) != -1;
         }
 
         public void CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex)
@@ -106,7 +113,7 @@ namespace Lesson7Dictionary
 
         public bool Remove(TKey key)
             {
-            int position = GetPositionByKeyOrKeyValuePair(key);
+            int position = SearchPosition(SearchOption.ByKey, key);
 
             if (position == -1)
             {
@@ -131,7 +138,7 @@ namespace Lesson7Dictionary
 
         public bool TryGetValue(TKey key, out TValue value)
         {
-            int searchedPosition = GetPositionByKeyOrKeyValuePair(key);
+            int searchedPosition = SearchPosition(SearchOption.ByKey, key);
             if (searchedPosition != -1)
             {
                 value = elements[searchedPosition].Value;
@@ -147,12 +154,13 @@ namespace Lesson7Dictionary
             return GetEnumerator();
         }
 
-        private int GetPositionByKeyOrKeyValuePair(TKey key, TValue value = default)
+        private int SearchPosition(SearchOption option, TKey key, TValue value = default)
         {
             for (int i = buckets[GetBucketIndex(key)]; i != -1; i = elements[i].Next)
             {
-                if ((value == default && elements[i].Key.Equals(key))
-                    || (elements[i].Key.Equals(key) && elements[i].Value.Equals(value)))
+                if (elements[i].Key.Equals(key) && (option == SearchOption.ByKey
+                                                    || (option == SearchOption.ByKeyValue
+                                                        && elements[i].Value.Equals(value))))
                 {
                     return i;
                 }
@@ -176,6 +184,17 @@ namespace Lesson7Dictionary
         private int GetBucketIndex(TKey key)
         {
             return Math.Abs(key.GetHashCode()) % buckets.Length;
+        }
+
+        private void EnsureCapacity()
+        {
+            if (Count != elements.Length)
+            {
+                return;
+            }
+
+            int doubleLength = elements.Length * 2;
+            Array.Resize(ref elements, doubleLength);
         }
 
         struct Element

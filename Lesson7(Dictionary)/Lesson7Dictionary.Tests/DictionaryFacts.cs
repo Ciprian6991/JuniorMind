@@ -327,5 +327,24 @@ namespace Lesson7Dictionary.Tests
             Assert.Equal(new KeyValuePair<int, string>(7, "d"), enumerator.Current);
             Assert.False(enumerator.MoveNext());
         }
+
+        [Fact]
+        public void Test_AddMethodShouldResizeWhenDictionaryIsFull()
+        {
+            var dictionary = new Dictionary<int, int>()
+            {
+                {0, 100},
+                {1, 100 },
+                {3, 100 },
+                {5, 100 },
+                {16, 100 }
+            };
+
+            dictionary.Add(2, 100);
+
+            Assert.True(dictionary.ContainsKey(0));
+            Assert.True(dictionary.ContainsKey(2));
+            Assert.Equal(6, dictionary.Count);
+        }
     }
 }
