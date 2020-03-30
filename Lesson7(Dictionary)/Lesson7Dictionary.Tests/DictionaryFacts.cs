@@ -430,5 +430,73 @@ namespace Lesson7Dictionary.Tests
             Assert.Equal(new KeyValuePair<int, string>(12, "e"), enumerator.Current);
             Assert.False(enumerator.MoveNext());
         }
+
+        [Fact]
+        public void Test_RemoveKeyValuePairReturnsFalse()
+        {
+            var pair = new KeyValuePair<int, string>(11, "c");
+
+            var dictionary = new Dictionary<int, string>()
+            {
+                { 1, "a" },
+                { 2, "b" },
+                { 10, "c" },
+                { 7, "d" },
+                { 12, "e" }
+            };
+
+            Assert.Equal(5, dictionary.Count);
+
+            Assert.False(dictionary.Remove(pair));
+
+            Assert.Equal(5, dictionary.Count);
+            var enumerator = dictionary.GetEnumerator();
+
+            Assert.True(enumerator.MoveNext());
+            Assert.Equal(new KeyValuePair<int, string>(1, "a"), enumerator.Current);
+            Assert.True(enumerator.MoveNext());
+            Assert.Equal(new KeyValuePair<int, string>(2, "b"), enumerator.Current);
+            Assert.True(enumerator.MoveNext());
+            Assert.Equal(new KeyValuePair<int, string>(10, "c"), enumerator.Current);
+            Assert.True(enumerator.MoveNext());
+            Assert.Equal(new KeyValuePair<int, string>(7, "d"), enumerator.Current);
+            Assert.True(enumerator.MoveNext());
+            Assert.Equal(new KeyValuePair<int, string>(12, "e"), enumerator.Current);
+            Assert.False(enumerator.MoveNext());
+        }
+
+        [Fact]
+        public void Test_RemoveAndAddOnFreePositions()
+        {
+
+            var dictionary = new Dictionary<int, string>()
+            {
+                { 1, "a" },
+                { 2, "b" },
+                { 10, "c" },
+                { 7, "d" },
+                { 12, "e" }
+            };
+
+            Assert.Equal(5, dictionary.Count);
+
+            Assert.True(dictionary.Remove(7));
+            Assert.True(dictionary.Remove(1));
+
+            dictionary.Add(17, "f");
+
+            Assert.Equal(4, dictionary.Count);
+            var enumerator = dictionary.GetEnumerator();
+
+            Assert.True(enumerator.MoveNext());
+            Assert.Equal(new KeyValuePair<int, string>(17, "f"), enumerator.Current);
+            Assert.True(enumerator.MoveNext());
+            Assert.Equal(new KeyValuePair<int, string>(2, "b"), enumerator.Current);
+            Assert.True(enumerator.MoveNext());
+            Assert.Equal(new KeyValuePair<int, string>(10, "c"), enumerator.Current);
+            Assert.True(enumerator.MoveNext());
+            Assert.Equal(new KeyValuePair<int, string>(12, "e"), enumerator.Current);
+            Assert.False(enumerator.MoveNext());
+        }
     }
 }

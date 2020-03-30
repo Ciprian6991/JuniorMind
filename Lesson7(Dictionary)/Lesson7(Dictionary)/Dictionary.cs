@@ -78,15 +78,17 @@ namespace Lesson7Dictionary
         public void Add(TKey key, TValue value)
         {
             EnsureCapacity();
-            AddElement(ref elements[Count], key, value);
-
+            int index = FindNewEmptyPosition();
             int bucketIndex = GetBucketIndex(key);
+
+            AddElement(ref elements[index], key, value, buckets[bucketIndex]);
+
             if (buckets[bucketIndex] != -1)
             {
-                elements[Count].Next = buckets[bucketIndex];
+                elements[index].Next = buckets[bucketIndex];
             }
 
-            buckets[bucketIndex] = Count;
+            buckets[bucketIndex] = index;
             Count++;
         }
 
@@ -215,11 +217,24 @@ namespace Lesson7Dictionary
             return freeIndexList;
         }
 
-        private void AddElement(ref Element element, TKey key, TValue value)
+        private int FindNewEmptyPosition()
+        {
+            List<int> freeIndexList = GetFreeIndexList();
+
+            if (freeIndexList.Count == 0)
+            {
+                return Count;
+            }
+
+            freeIndex = elements[freeIndex].Next;
+            return freeIndexList[0];
+        }
+
+        private void AddElement(ref Element element, TKey key, TValue value, int next = -1)
         {
             element.Key = key;
             element.Value = value;
-            element.Next = -1;
+            element.Next = next;
         }
 
         private int GetBucketIndex(TKey key)
