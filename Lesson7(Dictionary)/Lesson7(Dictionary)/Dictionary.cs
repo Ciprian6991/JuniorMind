@@ -191,6 +191,11 @@ namespace Lesson7Dictionary
             return false;
         }
 
+        public ReadOnlyDictionary<TKey, TValue> AsReadOnly()
+        {
+            return new ReadOnlyDictionary<TKey, TValue>(this);
+        }
+
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();

@@ -519,5 +519,29 @@ namespace Lesson7Dictionary.Tests
 
         }
 
+
+        [Fact]
+        public void Test_ReadOnly()
+        {
+            var pair = new KeyValuePair<int, string>(10, "c");
+
+            var dictionary = new Dictionary<int, string>()
+            {
+                { 1, "a" },
+                { 2, "b" },
+                { 10, "c" },
+                { 7, "d" },
+                { 12, "e" }
+            };
+
+            var dictionary2 = dictionary.AsReadOnly();
+
+            Assert.Equal(5, dictionary2.Count);
+
+            var check = Assert.Throws<NotSupportedException>(() => dictionary2.Remove(pair));
+
+            Assert.Equal("Dictionary is read only!", check.Message);
+        }
+
     }
 }
