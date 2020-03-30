@@ -154,7 +154,14 @@ namespace Lesson7Dictionary
 
         public bool Remove(KeyValuePair<TKey, TValue> item)
         {
-            throw new NotImplementedException();
+            if (SearchPosition(SearchOption.ByKeyValue, item.Key, out int notUsedVariable, item.Value) == -1)
+            {
+                {
+                    return false;
+                }
+            }
+
+            return Remove(item.Key);
         }
 
         public bool TryGetValue(TKey key, out TValue value)
