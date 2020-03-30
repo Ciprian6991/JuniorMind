@@ -114,8 +114,20 @@ namespace Lesson7Dictionary
         }
 
         public void CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex)
-        {
-            throw new NotImplementedException();
+            {
+            if (array == null)
+            {
+                return;
+            }
+
+            var enumerator = GetEnumerator();
+            for (int i = arrayIndex; i < Count + arrayIndex; i++)
+            {
+                {
+                    enumerator.MoveNext();
+                    array[i] = enumerator.Current;
+                }
+            }
         }
 
         public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator()

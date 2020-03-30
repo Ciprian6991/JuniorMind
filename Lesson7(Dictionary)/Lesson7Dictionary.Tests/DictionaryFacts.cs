@@ -498,5 +498,26 @@ namespace Lesson7Dictionary.Tests
             Assert.Equal(new KeyValuePair<int, string>(12, "e"), enumerator.Current);
             Assert.False(enumerator.MoveNext());
         }
+
+        [Fact]
+        public void Test_CopyMethodArrayHasEnoughCapacity()
+        {
+            var dictionary = new Dictionary<int, int>();
+            KeyValuePair<int, int>[] array = new KeyValuePair<int, int>[6];
+
+            dictionary.Add(11, 1);
+            dictionary.Add(2, 3);
+            dictionary.Add(3, 4);
+            dictionary.CopyTo(array, 2);
+
+            Assert.Equal(3, dictionary.Count);
+            Assert.NotEqual(1, array[5].Value);
+            Assert.Equal(3, array[4].Key);
+            Assert.Equal(4, array[4].Value);
+            Assert.NotEqual(11, array[0].Key);
+            Assert.NotEqual(4, array[5].Value);
+
+        }
+
     }
 }
