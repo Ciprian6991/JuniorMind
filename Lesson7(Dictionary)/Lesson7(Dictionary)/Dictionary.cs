@@ -126,11 +126,16 @@ namespace Lesson7Dictionary
 
         public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator()
         {
-            List<int> freeIndexList = GetFreeIndexList();
-            for (int i = 0; i < Count + freeIndexList.Count; i++)
+            int curentCounter = Count;
+            for (int i = 0; i < curentCounter; i++)
             {
-                if (!freeIndexList.Contains(i))
                 {
+                    if (!ContainsKey(elements[i].Key))
+                    {
+                        curentCounter++;
+                        continue;
+                    }
+
                     yield return KeyValuePair.Create(elements[i].Key, elements[i].Value);
                 }
             }
@@ -209,21 +214,6 @@ namespace Lesson7Dictionary
             }
 
             return -1;
-        }
-
-        private List<int> GetFreeIndexList()
-        {
-            List<int> freeIndexList = new List<int>();
-
-            if (freeIndex != -1)
-            {
-                for (int curentIndex = freeIndex; curentIndex != -1; curentIndex = elements[curentIndex].Next)
-                {
-                    freeIndexList.Add(curentIndex);
-                }
-            }
-
-            return freeIndexList;
         }
 
         private int FindNewEmptyPosition()
