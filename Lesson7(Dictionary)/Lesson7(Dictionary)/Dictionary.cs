@@ -228,15 +228,14 @@ namespace Lesson7Dictionary
 
         private int FindNewEmptyPosition()
         {
-            List<int> freeIndexList = GetFreeIndexList();
-
-            if (freeIndexList.Count == 0)
+            if (freeIndex == -1)
             {
                 return Count;
             }
 
+            int usedIndex = freeIndex;
             freeIndex = elements[freeIndex].Next;
-            return freeIndexList[0];
+            return usedIndex;
         }
 
         private void AddElement(ref Element element, TKey key, TValue value, int next = -1)
