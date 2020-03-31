@@ -22,12 +22,6 @@ namespace Lesson7Dictionary
             Count = 0;
         }
 
-        enum SearchOption
-        {
-            ByKey,
-            ByKeyValue,
-        }
-
         public ICollection<TKey> Keys
         {
             get
@@ -66,12 +60,12 @@ namespace Lesson7Dictionary
         {
             get
             {
-                return elements[SearchPosition(SearchOption.ByKey, key, out int previousNotUsed)].Value;
+                return elements[SearchPosition(key, out int previousNotUsed)].Value;
             }
 
             set
             {
-                elements[SearchPosition(SearchOption.ByKey, key, out int previousNotUsed)].Value = value;
+                elements[SearchPosition(key, out int previousNotUsed)].Value = value;
             }
         }
 
@@ -105,12 +99,12 @@ namespace Lesson7Dictionary
 
         public bool Contains(KeyValuePair<TKey, TValue> item)
         {
-            return SearchPosition(SearchOption.ByKeyValue, item.Key, out int previousNotUsed, item.Value) != -1;
+            return SearchPosition(item.Key, out int previousNotUsed) != -1;
         }
 
         public bool ContainsKey(TKey key)
         {
-            return SearchPosition(SearchOption.ByKey, key, out int previousNotUsed) != -1;
+            return SearchPosition(key, out int previousNotUsed) != -1;
         }
 
         public void CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex)
@@ -144,7 +138,7 @@ namespace Lesson7Dictionary
 
         public bool Remove(TKey key)
         {
-            int position = SearchPosition(SearchOption.ByKey, key, out int previous);
+            int position = SearchPosition(key, out int previous);
 
             if (position == -1)
             {
@@ -168,7 +162,7 @@ namespace Lesson7Dictionary
 
         public bool Remove(KeyValuePair<TKey, TValue> item)
         {
-            if (SearchPosition(SearchOption.ByKeyValue, item.Key, out int notUsedVariable, item.Value) == -1)
+            if (SearchPosition(item.Key, out int notUsedVariable) == -1)
             {
                 {
                     return false;
@@ -180,7 +174,7 @@ namespace Lesson7Dictionary
 
         public bool TryGetValue(TKey key, out TValue value)
         {
-            int searchedPosition = SearchPosition(SearchOption.ByKey, key, out int previousNotUsed);
+            int searchedPosition = SearchPosition(key, out int previousNotUsed);
             if (searchedPosition != -1)
             {
                 value = elements[searchedPosition].Value;
@@ -201,14 +195,12 @@ namespace Lesson7Dictionary
             return GetEnumerator();
         }
 
-        private int SearchPosition(SearchOption option, TKey key, out int previous, TValue value = default)
+        private int SearchPosition(TKey key, out int previous)
         {
             previous = -1;
             for (int i = buckets[GetBucketIndex(key)]; i != -1; i = elements[i].Next)
             {
-                if (elements[i].Key.Equals(key) && (option == SearchOption.ByKey
-                                                    || (option == SearchOption.ByKeyValue
-                                                        && elements[i].Value.Equals(value))))
+                if (elements[i].Key.Equals(key))
                 {
                     return i;
                 }
