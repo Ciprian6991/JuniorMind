@@ -566,5 +566,21 @@ namespace Lesson7Dictionary.Tests
             Assert.Equal("key", exception1.ParamName);
             Assert.Equal("key", exception2.ParamName);
         }
+
+        [Fact]
+        public void Test_ExceptionWhenKeyNOTfound()
+        {
+            var dictionary = new Dictionary<int, string>()
+            {
+                { 1, "a" },
+            };
+
+            var exception1 = Assert.Throws<KeyNotFoundException>(() => dictionary[100]);
+            var exception2 = Assert.Throws<KeyNotFoundException>(() => dictionary[100] = "10");
+
+            Assert.Equal("Key 100 not found in dictionary!", exception1.Message);
+            Assert.Equal("Key 100 not found in dictionary!", exception2.Message);
+
+        }
     }
 }

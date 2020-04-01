@@ -61,12 +61,14 @@ namespace Lesson7Dictionary
             get
             {
                 ThrowArgumentIsNull(key);
+                ThrowKeyNotFound(key);
                 return elements[SearchPosition(key, out int previousNotUsed)].Value;
             }
 
             set
             {
                 ThrowArgumentIsNull(key);
+                ThrowKeyNotFound(key);
                 elements[SearchPosition(key, out int previousNotUsed)].Value = value;
             }
         }
@@ -272,6 +274,16 @@ namespace Lesson7Dictionary
             }
 
             throw new ArgumentNullException(paramName: nameof(key));
+        }
+
+        private void ThrowKeyNotFound(TKey key)
+        {
+            if (ContainsKey(key))
+            {
+                return;
+            }
+
+            throw new KeyNotFoundException($"Key {key} not found in dictionary!");
         }
 
         struct Element
