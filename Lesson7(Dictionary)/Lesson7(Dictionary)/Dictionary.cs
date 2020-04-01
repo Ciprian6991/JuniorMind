@@ -60,11 +60,13 @@ namespace Lesson7Dictionary
         {
             get
             {
+                ThrowArgumentIsNull(key);
                 return elements[SearchPosition(key, out int previousNotUsed)].Value;
             }
 
             set
             {
+                ThrowArgumentIsNull(key);
                 elements[SearchPosition(key, out int previousNotUsed)].Value = value;
             }
         }
@@ -260,6 +262,16 @@ namespace Lesson7Dictionary
             }
 
             throw new ArgumentException($"Key {key} already exists in dictionary!");
+        }
+
+        private void ThrowArgumentIsNull(TKey key)
+        {
+            if (key != null)
+            {
+                return;
+            }
+
+            throw new ArgumentNullException(paramName: nameof(key));
         }
 
         struct Element

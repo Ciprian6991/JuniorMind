@@ -548,5 +548,23 @@ namespace Lesson7Dictionary.Tests
 
             Assert.Equal("Key 1 already exists in dictionary!", check.Message);
         }
+
+        [Fact]
+        public void Test_ExceptionGetSetIndexerShouldThrowExceptionWhenKeyIsNull()
+        {
+            var dictionary = new Dictionary<string, string>()
+            {
+                { "asd", "a" },
+            };
+
+            Assert.Equal("a", dictionary["asd"]);
+            dictionary["asd"] = "abc";
+
+            var exception1 = Assert.Throws<ArgumentNullException>(() => dictionary[null]);
+            var exception2 = Assert.Throws<ArgumentNullException>(() => dictionary[null] = "m");
+
+            Assert.Equal("key", exception1.ParamName);
+            Assert.Equal("key", exception2.ParamName);
+        }
     }
 }
