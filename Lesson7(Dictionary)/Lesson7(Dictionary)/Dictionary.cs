@@ -71,6 +71,7 @@ namespace Lesson7Dictionary
 
         public void Add(TKey key, TValue value)
         {
+            ThrowInvalidKey(key);
             EnsureCapacity();
             int index = FindNewEmptyPosition();
             int bucketIndex = GetBucketIndex(key);
@@ -249,6 +250,16 @@ namespace Lesson7Dictionary
 
             int doubleLength = elements.Length * 2;
             Array.Resize(ref elements, doubleLength);
+        }
+
+        private void ThrowInvalidKey(TKey key)
+        {
+            if (!ContainsKey(key))
+            {
+                return;
+            }
+
+            throw new ArgumentException($"Key {key} already exists in dictionary!");
         }
 
         struct Element

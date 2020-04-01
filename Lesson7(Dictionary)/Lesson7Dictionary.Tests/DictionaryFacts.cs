@@ -527,5 +527,26 @@ namespace Lesson7Dictionary.Tests
             Assert.Equal("Dictionary is read only!", check.Message);
         }
 
+
+        [Fact]
+        public void Test_ExceptionAddMethodShouldNotAddSameKeyTwice()
+        {
+            var dictionary = new Dictionary<int, string>()
+            {
+                { 1, "a" },
+            };
+
+            var check = Assert.Throws<ArgumentException>(() => dictionary.Add(1, "b"));
+
+            var enumerator = dictionary.GetEnumerator();
+            enumerator.MoveNext();
+
+            Assert.Single(dictionary);
+            Assert.Equal(new KeyValuePair<int, string>(1, "a"), enumerator.Current);
+            Assert.False(enumerator.MoveNext());
+            
+
+            Assert.Equal("Key 1 already exists in dictionary!", check.Message);
+        }
     }
 }
