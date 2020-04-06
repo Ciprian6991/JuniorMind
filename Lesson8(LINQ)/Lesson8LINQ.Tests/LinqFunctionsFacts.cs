@@ -58,5 +58,17 @@ namespace Lesson8LINQ.Tests
 
             Assert.Equal(4, result);
         }
+
+        [Fact]
+        public void TestFirstWhenDoesntExists()
+        {
+            var array = new int[] { 2, 5, 3 };
+
+            Func<int, bool> myFunc = (x) => { return x == 4; };
+
+             var msg = Assert.Throws<InvalidOperationException>(() => LinqFunctions.First(array, p => myFunc(p)));
+
+            Assert.Equal("No element has been found", msg.Message);
+        }
     }
 }
