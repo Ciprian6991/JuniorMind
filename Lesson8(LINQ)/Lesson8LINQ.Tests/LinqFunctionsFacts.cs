@@ -36,5 +36,27 @@ namespace Lesson8LINQ.Tests
 
             Assert.True(LinqFunctions.Any(array, p => myFunc(p)));
         }
+
+        [Fact]
+        public void TestAnyWhenFalse()
+        {
+            var array = new int[] { 1, 2, 3, 4, 5 };
+
+            Func<int, bool> myFunc = (x) => { return x >= 10; };
+
+            Assert.False(LinqFunctions.Any(array, p => myFunc(p)));
+        }
+
+        [Fact]
+        public void TestFirstWhenExists()
+        {
+            var array = new int[] { 1, 2, 3, 4, 5 };
+
+            Func<int, bool> myFunc = (x) => { return x == 4; };
+
+            var result = LinqFunctions.First(array, p => myFunc(p));
+
+            Assert.Equal(4, result);
+        }
     }
 }

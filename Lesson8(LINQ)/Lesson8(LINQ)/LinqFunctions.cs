@@ -41,5 +41,23 @@ namespace Lesson8LINQ
 
             return false;
         }
+
+        public static TSource First<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate)
+        {
+            if (source == null)
+            {
+                throw new InvalidOperationException("Source is null");
+            }
+
+            foreach (var element in source)
+            {
+                if (predicate(element))
+                {
+                    return element;
+                }
+            }
+
+            throw new InvalidOperationException("No element has been found");
+        }
     }
 }
