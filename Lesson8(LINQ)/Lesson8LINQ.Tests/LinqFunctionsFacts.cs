@@ -106,5 +106,33 @@ namespace Lesson8LINQ.Tests
 
             Assert.Equal("Value cannot be null.\r\nParameter name: source", msg.Message);
         }
+
+
+        [Fact]
+        public void TestSelectWhenExists()
+        {
+            string[] strings =
+                { "Ana",
+                  "Andrei",
+                  "Sabin",
+                  "Alin",
+                  "Mihai"};
+
+            Func<string, bool> myFunc = (x) => x.StartsWith("an", StringComparison.InvariantCultureIgnoreCase) ? true : false;
+
+            var results = LinqFunctions.Select(strings, p => myFunc(p));
+
+            var matches = 0;
+
+            foreach(var result in results)
+            {
+                if (result)
+                {
+                    matches++;
+                }
+            }
+
+            Assert.Equal(2, matches);
+        }
     }
 }

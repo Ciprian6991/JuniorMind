@@ -51,8 +51,29 @@ namespace Lesson8LINQ
             throw new InvalidOperationException("No element has been found");
         }
 
-        private static void ThrowIfNullSource<TSource>(IEnumerable<TSource> source)
+        public static IEnumerable<TResult> Select<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, TResult> selector)
+        {
+            ThrowIfNullSource(source);
+            ThrowIfNullSelector(selector);
+
+            foreach (var element in source)
             {
+                yield return selector(element);
+            }
+        }
+
+        private static void ThrowIfNullSelector<TSource, TResult>(Func<TSource, TResult> selector)
+        {
+            if (selector != null)
+            {
+                return;
+            }
+
+            throw new ArgumentNullException(nameof(selector));
+        }
+
+        private static void ThrowIfNullSource<TSource>(IEnumerable<TSource> source)
+        {
             if (source != null)
             {
                 return;
