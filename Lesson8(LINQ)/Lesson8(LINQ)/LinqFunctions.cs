@@ -8,10 +8,7 @@ namespace Lesson8LINQ
     {
         public static bool All<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate)
         {
-            if (source == null)
-            {
-                return false;
-            }
+            ThrowIfNullSource(source);
 
             foreach (var element in source)
             {
@@ -26,10 +23,7 @@ namespace Lesson8LINQ
 
         public static bool Any<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate)
         {
-            if (source == null)
-            {
-                return false;
-            }
+            ThrowIfNullSource(source);
 
             foreach (var element in source)
             {
@@ -44,10 +38,7 @@ namespace Lesson8LINQ
 
         public static TSource First<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate)
         {
-            if (source == null)
-            {
-                throw new InvalidOperationException("Source is null");
-            }
+            ThrowIfNullSource(source);
 
             foreach (var element in source)
             {
@@ -58,6 +49,16 @@ namespace Lesson8LINQ
             }
 
             throw new InvalidOperationException("No element has been found");
+        }
+
+        private static void ThrowIfNullSource<TSource>(IEnumerable<TSource> source)
+            {
+            if (source != null)
+            {
+                return;
+            }
+
+            throw new ArgumentNullException(nameof(source));
         }
     }
 }

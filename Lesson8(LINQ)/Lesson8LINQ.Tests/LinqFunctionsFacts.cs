@@ -28,6 +28,18 @@ namespace Lesson8LINQ.Tests
         }
 
         [Fact]
+        public void TestAllWhenSourceIsNull()
+        {
+            int[] array = null;
+
+            Func<int, bool> myFunc = (x) => { return x == 4; };
+
+            var msg = Assert.Throws<ArgumentNullException>(() => LinqFunctions.All(array, p => myFunc(p)));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: source", msg.Message);
+        }
+
+        [Fact]
         public void TestAnyWhenTrue()
         {
             var array = new int[] { 1, 2, 3, 4, 5, 15};
@@ -45,6 +57,18 @@ namespace Lesson8LINQ.Tests
             Func<int, bool> myFunc = (x) => { return x >= 10; };
 
             Assert.False(LinqFunctions.Any(array, p => myFunc(p)));
+        }
+
+        [Fact]
+        public void TestAnyWhenSourceIsNull()
+        {
+            int[] array = null;
+
+            Func<int, bool> myFunc = (x) => { return x == 4; };
+
+            var msg = Assert.Throws<ArgumentNullException>(() => LinqFunctions.Any(array, p => myFunc(p)));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: source", msg.Message);
         }
 
         [Fact]
@@ -69,6 +93,18 @@ namespace Lesson8LINQ.Tests
              var msg = Assert.Throws<InvalidOperationException>(() => LinqFunctions.First(array, p => myFunc(p)));
 
             Assert.Equal("No element has been found", msg.Message);
+        }
+
+        [Fact]
+        public void TestFirstWhenSourceIsNull()
+        {
+            int[] array = null;
+
+            Func<int, bool> myFunc = (x) => { return x == 4; };
+
+            var msg = Assert.Throws<ArgumentNullException>(() => LinqFunctions.First(array, p => myFunc(p)));
+
+            Assert.Equal("Value cannot be null.\r\nParameter name: source", msg.Message);
         }
     }
 }
