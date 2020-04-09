@@ -76,6 +76,20 @@ namespace Lesson8LINQ
             }
         }
 
+        public static IEnumerable<TSource> Where<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate)
+        {
+            ThrowIfNullSource(source);
+            ThrowIfNullSelector(predicate);
+
+            foreach (var element in source)
+            {
+                if (predicate(element))
+                {
+                    yield return element;
+                }
+            }
+        }
+
         private static void ThrowIfNullSelector<TSource, TResult>(Func<TSource, TResult> selector)
         {
             if (selector != null)

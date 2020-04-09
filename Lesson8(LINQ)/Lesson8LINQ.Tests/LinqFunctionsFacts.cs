@@ -39,7 +39,7 @@ namespace Lesson8LINQ.Tests
 
                 new Product {Name = "Sapun",
                     Price= 10,
-                    Ingredients = new List<Ingredient> { new Ingredient { Name = "Portocala" }, new Ingredient {Name = "Parfum2" } } },
+                    Ingredients = new List<Ingredient> { new Ingredient { Name = "Portocala" }, new Ingredient { Name = "Menta" }, new Ingredient {Name = "Parfum2" } } },
 
                 new Product {Name = "Sampon",
                     Price= 10,
@@ -265,7 +265,29 @@ namespace Lesson8LINQ.Tests
                 counter++;
             }
 
-            Assert.Equal(6, counter);
+            Assert.Equal(7, counter);
+
+        }
+
+        [Fact]
+        public void TestWhereWhenExists()
+        {
+            var productList = new ProductsList().GetProducts();
+
+            Func<ProductsList.Product, bool> MyFunc = x => x.Ingredients.Contains(new ProductsList.Ingredient { Name = "Menta" });
+
+            var selectedIngredients = LinqFunctions.Where(productList, MyFunc);
+
+            var enumerator = selectedIngredients.GetEnumerator();
+
+            int counter = 0;
+
+            while (enumerator.MoveNext())
+            {
+                counter++;
+            }
+
+            Assert.Equal(2, counter);
 
         }
     }
