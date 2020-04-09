@@ -62,6 +62,20 @@ namespace Lesson8LINQ
             }
         }
 
+        public static IEnumerable<TResult> SelectMany<TSource, TResult>(this IEnumerable<TSource> source, Func<TSource, IEnumerable<TResult>> selector)
+        {
+            ThrowIfNullSource(source);
+            ThrowIfNullSelector(selector);
+
+            foreach (var root in source)
+            {
+                foreach (var child in selector(root))
+                {
+                    yield return child;
+                }
+            }
+        }
+
         private static void ThrowIfNullSelector<TSource, TResult>(Func<TSource, TResult> selector)
         {
             if (selector != null)
