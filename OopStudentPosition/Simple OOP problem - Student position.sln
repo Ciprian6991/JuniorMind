@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.779
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OopStudentPosition", "OopStudentPosition\OopStudentPosition.csproj", "{98A49873-2D70-4260-AF62-702A829E4EFC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentPosition", "OopStudentPosition\StudentPosition.csproj", "{98A49873-2D70-4260-AF62-702A829E4EFC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OopStudentPosition.Facts", "OopStudentPosition.Facts\OopStudentPosition.Facts.csproj", "{7C575C82-E9A4-42D1-9ED7-FC356F91992B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StudentPosition.Facts", "OopStudentPosition.Facts\StudentPosition.Facts.csproj", "{7C575C82-E9A4-42D1-9ED7-FC356F91992B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

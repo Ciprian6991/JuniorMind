@@ -4,6 +4,8 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
 
     <IsPackable>false</IsPackable>
+
+    <LangVersion>7.1</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\OopStudentPosition\OopStudentPosition.csproj" />
+    <ProjectReference Include="..\Lesson7(Dictionary)\Dictionary.csproj" />
   </ItemGroup>
 
 </Project>

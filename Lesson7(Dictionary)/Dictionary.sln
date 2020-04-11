@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.779
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lesson7Dictionary", "Lesson7(Dictionary)\Lesson7Dictionary.csproj", "{29FDD85E-12D2-458B-BC98-C4D0C3FEDB61}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dictionary", "Lesson7(Dictionary)\Dictionary.csproj", "{29FDD85E-12D2-458B-BC98-C4D0C3FEDB61}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lesson7Dictionary.Tests", "Lesson7Dictionary.Tests\Lesson7Dictionary.Tests.csproj", "{7AC8972F-AE87-48B3-89C3-3D00B32F5E61}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dictionary.Tests", "Lesson7Dictionary.Tests\Dictionary.Tests.csproj", "{7AC8972F-AE87-48B3-89C3-3D00B32F5E61}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
