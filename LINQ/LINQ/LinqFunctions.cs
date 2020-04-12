@@ -90,6 +90,22 @@ namespace LINQ
             }
         }
 
+        public static Dictionary<TKey, TElement> ToDictionary<TSource, TKey, TElement>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector, Func<TSource, TElement> elementSelector)
+        {
+            ThrowIfNullSource(source);
+            ThrowIfNullSelector(keySelector);
+            ThrowIfNullSelector(elementSelector);
+
+            Dictionary<TKey, TElement> dictionar = new Dictionary<TKey, TElement>();
+
+            foreach (var element in source)
+            {
+                dictionar.Add(keySelector(element), elementSelector(element));
+            }
+
+            return dictionar;
+        }
+
         private static void ThrowIfNullSelector<TSource, TResult>(Func<TSource, TResult> selector)
         {
             if (selector != null)

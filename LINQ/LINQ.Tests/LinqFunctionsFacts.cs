@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Xunit;
 using LINQ;
+using System.Linq;
 
 namespace LINQ.Tests
 {
@@ -17,6 +18,7 @@ namespace LINQ.Tests
 
             public struct Product
             {
+                public int ID { set; get; }
                 public string Name { set; get; }
                 public int Price { set; get; }
                 public List<Ingredient> Ingredients { set; get; }
@@ -34,15 +36,18 @@ namespace LINQ.Tests
             {
                 return new List<Product>()
                 {
-                new Product {Name = "Detergent",
+                new Product {ID = 2,
+                    Name = "Detergent",
                     Price= 10,
                     Ingredients = new List<Ingredient> { new Ingredient { Name = "Lamaie" }, new Ingredient {Name = "Parfum1" } } },
 
-                new Product {Name = "Sapun",
+                new Product {ID = 3,
+                    Name = "Sapun",
                     Price= 10,
                     Ingredients = new List<Ingredient> { new Ingredient { Name = "Portocala" }, new Ingredient { Name = "Menta" }, new Ingredient {Name = "Parfum2" } } },
 
-                new Product {Name = "Sampon",
+                new Product {ID = 6,
+                    Name = "Sampon",
                     Price= 10,
                     Ingredients = new List<Ingredient> { new Ingredient { Name = "Menta" }, new Ingredient {Name = "Parfum3" } } },
                 };
@@ -290,6 +295,30 @@ namespace LINQ.Tests
 
             Assert.Equal(2, counter);
 
+        }
+
+
+
+        [Fact]
+        public void TestToDictionaryWhenExists()
+        {
+            var productList = new ProductsList().GetProducts();
+
+            Func<ProductsList.Product, int> myKeyFunc = (x) => x.ID;
+            Func<ProductsList.Product, string> myElementFunc = (x) => x.Name;
+
+            var dictionary = LinqFunctions.ToDictionary(productList, p => myKeyFunc(p), z => myElementFunc(z));
+
+            var test1 = new KeyValuePair<int, string>(2, "Detergent");
+            var test2 = new KeyValuePair<int, string>(3, "Sapun");
+            var test3 = new KeyValuePair<int, string>(6, "Sampon");
+            var test4 = new KeyValuePair<int, string>(10, "Biocid");
+
+
+            Assert.Contains(test1, dictionary);
+            Assert.Contains(test2, dictionary);
+            Assert.Contains(test3, dictionary);
+            Assert.DoesNotContain(test4, dictionary);
         }
     }
 }
