@@ -320,5 +320,28 @@ namespace LINQ.Tests
             Assert.Contains(test3, dictionary);
             Assert.DoesNotContain(test4, dictionary);
         }
+
+        [Fact]
+        public void TestToDictionaryWhenDuplicateKeysException()
+        {
+            var productList = new ProductsList().GetProducts();
+
+            var prodToAdd = new ProductsList.Product
+            {
+                ID = 6,
+                Name = "Deodorant",
+                Price = 6,
+                Ingredients = new List<ProductsList.Ingredient> { new ProductsList.Ingredient { Name = "Fresh" }, new ProductsList.Ingredient { Name = "Parfum4" } }
+            };
+
+            productList.Add(prodToAdd);
+
+            Func<ProductsList.Product, int> myKeyFunc = (x) => x.ID;
+            Func<ProductsList.Product, string> myElementFunc = (x) => x.Name;
+
+            var dictionary = Assert.Throws<ArgumentNullException>(() => LinqFunctions.ToDictionary(productList, p => myKeyFunc(p), z => myElementFunc(z)));
+
+            Assert.Equal("duplicate key for ID value 6", dictionary.ParamName);
+        }
     }
 }
