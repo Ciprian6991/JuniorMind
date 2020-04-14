@@ -100,16 +100,6 @@ namespace LINQ
 
             foreach (var element in source)
             {
-                if (keySelector(element) == null)
-                {
-                    throw ArgumentNullException("current keySelector");
-                }
-
-                if (dictionar.ContainsKey(keySelector(element)))
-                {
-                    throw ArgumentNullException($"duplicate key for ID value {keySelector(element)}");
-                }
-
                 dictionar.Add(keySelector(element), elementSelector(element));
             }
 

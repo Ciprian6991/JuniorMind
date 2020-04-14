@@ -339,9 +339,9 @@ namespace LINQ.Tests
             Func<ProductsList.Product, int> myKeyFunc = (x) => x.ID;
             Func<ProductsList.Product, string> myElementFunc = (x) => x.Name;
 
-            var dictionary = Assert.Throws<ArgumentNullException>(() => LinqFunctions.ToDictionary(productList, p => myKeyFunc(p), z => myElementFunc(z)));
+            var dictionary = Assert.Throws<ArgumentException>(() => LinqFunctions.ToDictionary(productList, p => myKeyFunc(p), z => myElementFunc(z)));
 
-            Assert.Equal("duplicate key for ID value 6", dictionary.ParamName);
+            Assert.Equal("An item with the same key has already been added. Key: 6", dictionary.Message);
         }
     }
 }
