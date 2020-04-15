@@ -109,6 +109,9 @@ namespace LINQ
 
         public static IEnumerable<TResult> Zip<TFirst, TSecond, TResult>(this IEnumerable<TFirst> first, IEnumerable<TSecond> second, Func<TFirst, TSecond, TResult> resultSelector)
         {
+            ThrowIfNullSource(first);
+            ThrowIfNullSource(second);
+
             var shortestLength = first.Count() < second.Count() ? first.Count() : second.Count();
 
             for (int i = 0; i < shortestLength; i++)

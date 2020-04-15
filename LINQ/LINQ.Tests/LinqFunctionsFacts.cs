@@ -354,5 +354,20 @@ namespace LINQ.Tests
 
             Assert.True(result.Contains("3 three"));
         }
+
+        [Fact]
+        public void TestZipExceptions()
+        {
+            int[] numbers = null;
+            string[] words = { "one", "two", "three", "nine", "six" };
+
+            var result = LinqFunctions.Zip(numbers, words, (first, second) => first + " " + second);
+
+            var exception = Assert.Throws<ArgumentNullException>(() => result.Count());
+
+            Assert.Equal("source", exception.ParamName);
+
+            
+        }
     }
 }
