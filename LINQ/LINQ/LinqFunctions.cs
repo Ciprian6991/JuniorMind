@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace LINQ
@@ -104,6 +105,16 @@ namespace LINQ
             }
 
             return dictionar;
+        }
+
+        public static IEnumerable<TResult> Zip<TFirst, TSecond, TResult>(this IEnumerable<TFirst> first, IEnumerable<TSecond> second, Func<TFirst, TSecond, TResult> resultSelector)
+        {
+            var shortestLength = first.Count() < second.Count() ? first.Count() : second.Count();
+
+            for (int i = 0; i < shortestLength; i++)
+            {
+                yield return resultSelector(first.ElementAt(i), second.ElementAt(i));
+            }
         }
 
         private static Exception ArgumentNullException(string msg)

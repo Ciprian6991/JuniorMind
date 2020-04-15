@@ -343,5 +343,16 @@ namespace LINQ.Tests
 
             Assert.Equal("An item with the same key has already been added. Key: 6", dictionary.Message);
         }
+
+        [Fact]
+        public void TestZipWhenValid()
+        {
+            int[] numbers = { 1, 2, 3, 4 };
+            string[] words = { "one", "two", "three", "nine", "six" };
+
+            var result = LinqFunctions.Zip(numbers, words, (first, second) => first + " " + second);
+
+            Assert.True(result.Contains("3 three"));
+        }
     }
 }
