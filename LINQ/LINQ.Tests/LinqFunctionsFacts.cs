@@ -369,5 +369,18 @@ namespace LINQ.Tests
 
             
         }
+
+
+        [Fact]
+        public void TestAggregateWhenValid()
+        {
+            int[] array = { 1, 2, 4, 5 };
+
+            Func<int, int, int> myFunc = (x, z) => x * z;
+
+            var result = LinqFunctions.Aggregate(array, 5, (a, b) => myFunc(a, b));
+
+            Assert.Equal(200, result);
+        }
     }
 }

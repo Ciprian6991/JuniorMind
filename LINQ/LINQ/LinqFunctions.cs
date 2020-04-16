@@ -120,6 +120,20 @@ namespace LINQ
             }
         }
 
+        public static TAccumulate Aggregate<TSource, TAccumulate>(this IEnumerable<TSource> source, TAccumulate seed, Func<TAccumulate, TSource, TAccumulate> func)
+        {
+            ThrowIfNullSource(source);
+
+            TAccumulate result = seed;
+
+            foreach (var element in source)
+            {
+                result = func(result, element);
+            }
+
+            return result;
+        }
+
         private static Exception ArgumentNullException(string msg)
         {
             throw new ArgumentNullException(msg);
