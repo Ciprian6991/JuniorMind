@@ -134,6 +134,43 @@ namespace LINQ
             return result;
         }
 
+        public static IEnumerable<TResult> Join<TOuter, TInner, TKey, TResult>(
+                                                                                this IEnumerable<TOuter> outer,
+                                                                                IEnumerable<TInner> inner,
+                                                                                Func<TOuter, TKey> outerKeySelector,
+                                                                                Func<TInner, TKey> innerKeySelector,
+                                                                                Func<TOuter, TInner, TResult> resultSelector)
+        {
+            ThrowIfNullSource(outer);
+            ThrowIfNullSource(inner);
+            ThrowIfNullSelector(outerKeySelector);
+            ThrowIfNullSelector(innerKeySelector);
+
+            if (resultSelector == null)
+            {
+                throw ArgumentNullException(nameof(resultSelector));
+            }
+
+            var shortestLength = Math.Min(outer.Count(), inner.Count());
+
+            IEnumerator<TOuter> outerEnumerator = outer.GetEnumerator();
+            IEnumerator<TInner> innerEnumerator = inner.GetEnumerator();
+
+            for (int i = 0; i < shortestLength; i++)
+            {
+                while (outerEnumerator.MoveNext() && innerEnumerator.MoveNext())
+                {
+                    var firstKey = outerKeySelector(outerEnumerator.Current);
+                    var secondKey = innerKeySelector(innerEnumerator.Current);
+
+                    if (firstKey.Equals(secondKey))
+                    {
+                        yield return resultSelector(outerEnumerator.Current, innerEnumerator.Current);
+                    }
+                }
+            }
+        }
+
         private static Exception ArgumentNullException(string msg)
         {
             throw new ArgumentNullException(msg);

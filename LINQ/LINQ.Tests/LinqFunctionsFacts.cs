@@ -14,6 +14,8 @@ namespace LINQ.Tests
             public struct Ingredient
             {
                 public string Name { set; get; }
+
+                public int IngredientID { get; set; }
             }
 
             public struct Product
@@ -381,6 +383,56 @@ namespace LINQ.Tests
             var result = LinqFunctions.Aggregate(array, 5, (a, b) => myFunc(a, b));
 
             Assert.Equal(200, result);
+        }
+
+        [Fact]
+        public void TestAggregateExceptions()
+        {
+            int[] array = null;
+            Func<int, int, int> myFunc = (x, z) => x * z;
+
+            Assert.Throws<ArgumentNullException>(() => LinqFunctions.Aggregate(array, 5, (a, b) => myFunc(a, b)));
+        }
+
+
+        [Fact]
+        public void TestJoin()
+        {
+            var products = new ProductsList().GetProducts();
+
+            var newIngredients = new List<ProductsList.Ingredient>()
+            {
+                new ProductsList.Ingredient
+                { IngredientID = 2, Name = "Rose1" },
+
+                new ProductsList.Ingredient
+                { IngredientID = 3, Name = "Rose2" },
+
+                new ProductsList.Ingredient
+                { IngredientID = 6, Name = "Rose3" },
+            };
+
+            Func<ProductsList.Product, int> outerFunc = (product) => product.ID;
+            Func<ProductsList.Ingredient, int> innerFunc = (ingredient) => ingredient.IngredientID;
+            Func<ProductsList.Product, ProductsList.Ingredient, KeyValuePair<string, string>> selector = (product, ingredient) =>
+            {
+                {
+                    return new KeyValuePair<string, string>(product.Name, ingredient.Name);
+                }
+            };
+
+            var result = LinqFunctions.Join(products, newIngredients,
+                                        product => outerFunc(product), newIngredient => innerFunc(newIngredient),
+                                        (product, newIngredient) =>
+                                        selector(product, newIngredient));
+
+            var cont1 = new KeyValuePair<string, string>("Detergent", "Rose1");
+            var cont2 = new KeyValuePair<string, string>("Sapun", "Rose2");
+            var notCont = new KeyValuePair<string, string>("Sapun", "Rose3");
+
+            Assert.Contains(cont1, result);
+            Assert.Contains(cont2, result);
+            Assert.DoesNotContain(notCont, result);
         }
     }
 }
