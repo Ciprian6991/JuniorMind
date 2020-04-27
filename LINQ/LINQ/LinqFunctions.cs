@@ -151,21 +151,17 @@ namespace LINQ
                 throw ArgumentNullException(nameof(resultSelector));
             }
 
-            var shortestLength = Math.Min(outer.Count(), inner.Count());
-
-            IEnumerator<TOuter> outerEnumerator = outer.GetEnumerator();
-            IEnumerator<TInner> innerEnumerator = inner.GetEnumerator();
-
-            for (int i = 0; i < shortestLength; i++)
+            foreach (var outerVar in outer)
             {
-                while (outerEnumerator.MoveNext() && innerEnumerator.MoveNext())
-                {
-                    var firstKey = outerKeySelector(outerEnumerator.Current);
-                    var secondKey = innerKeySelector(innerEnumerator.Current);
+                var outerKey = outerKeySelector(outerVar);
 
-                    if (firstKey.Equals(secondKey))
+                foreach (var innerVar in inner)
+                {
+                    var innerKey = innerKeySelector(innerVar);
+
+                    if (innerKey.Equals(outerKey))
                     {
-                        yield return resultSelector(outerEnumerator.Current, innerEnumerator.Current);
+                        yield return resultSelector(outerVar, innerVar);
                     }
                 }
             }
