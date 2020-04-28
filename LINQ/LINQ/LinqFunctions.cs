@@ -174,6 +174,21 @@ namespace LINQ
             return new HashSet<TSource>(source, comparer);
         }
 
+        public static IEnumerable<TSource> Union<TSource>(
+                                                            this IEnumerable<TSource> first,
+                                                            IEnumerable<TSource> second,
+                                                            IEqualityComparer<TSource> comparer)
+        {
+            ThrowIfNullSource(first);
+            ThrowIfNullSource(second);
+
+            var result = new HashSet<TSource>(first, comparer);
+
+            result.UnionWith(second);
+
+            return result;
+        }
+
         private static Exception ArgumentNullException(string msg)
         {
             throw new ArgumentNullException(msg);
