@@ -78,9 +78,31 @@ namespace LINQ.Tests
 
                 int hashProductPrice = product.Price.GetHashCode();
 
-                int hashProductIngredients = product.Ingredients.GetHashCode();
+                int hashProductIngredients = GetIngredientsHashCode(product.Ingredients);
 
-                return hashProductName ^ hashProductID ^ hashProductPrice ^ hashProductIngredients ^ hashProductPrice;
+                return hashProductName ^ hashProductID ^ hashProductPrice ^ hashProductIngredients;
+            }
+
+            private int GetIngredientHashCode(ProductsList.Ingredient ingredient)
+            {
+                if (Object.ReferenceEquals(ingredient, null)) return 0;
+
+                int hashIngredientName = ingredient.Name == null ? 0 : ingredient.Name.GetHashCode(System.StringComparison.CurrentCulture);
+
+                int hashIngredientID = ingredient.IngredientID.GetHashCode();
+
+                return hashIngredientName ^ hashIngredientID;
+            }
+
+            private int GetIngredientsHashCode(List<ProductsList.Ingredient> ingredients)
+            {
+                int hash = 1;
+                foreach( var ingredient in ingredients)
+                {
+                    hash = hash ^ GetIngredientHashCode(ingredient);
+                }
+
+                return hash;
             }
         }
 

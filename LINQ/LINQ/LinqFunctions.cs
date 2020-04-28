@@ -171,34 +171,7 @@ namespace LINQ
         {
             ThrowIfNullSource(source);
 
-            List<TSource> result = new List<TSource>();
-            var firstEnumerator = source.GetEnumerator();
-            int skips = 1;
-
-            while (firstEnumerator.MoveNext())
-            {
-                bool isDuplicate = false;
-
-                var secondEnumerator = source.Skip(skips++).GetEnumerator();
-
-                while (secondEnumerator.MoveNext())
-                {
-                    if (comparer?.Equals(firstEnumerator.Current, secondEnumerator.Current) == true)
-                    {
-                        isDuplicate = true;
-                    }
-                }
-
-                if (!isDuplicate)
-                {
-                    result.Add(firstEnumerator.Current);
-                }
-            }
-
-            foreach (TSource element in result)
-            {
-                yield return element;
-            }
+            return new HashSet<TSource>(source, comparer);
         }
 
         private static Exception ArgumentNullException(string msg)
