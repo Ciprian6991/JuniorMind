@@ -189,6 +189,21 @@ namespace LINQ
             return result;
         }
 
+        public static IEnumerable<TSource> Intersect<TSource>(
+                                                                this IEnumerable<TSource> first,
+                                                                IEnumerable<TSource> second,
+                                                                IEqualityComparer<TSource> comparer)
+        {
+            ThrowIfNullSource(first);
+            ThrowIfNullSource(second);
+
+            var result = new HashSet<TSource>(first, comparer);
+
+            result.IntersectWith(second);
+
+            return result;
+        }
+
         private static Exception ArgumentNullException(string msg)
         {
             throw new ArgumentNullException(msg);

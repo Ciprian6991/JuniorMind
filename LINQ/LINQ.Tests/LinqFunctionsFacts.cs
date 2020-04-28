@@ -617,5 +617,66 @@ namespace LINQ.Tests
 
             Assert.Equal(5, union.Count());
         }
+
+        [Fact]
+        public void TestUnionExceptions()
+        {
+            var products1 = new ProductsList().GetProducts();
+
+            List<ProductsList.Product> products2 = null;
+
+            var distinctComparer = new ProductListComparer();
+
+            var exception = Assert.Throws<ArgumentNullException>(() => LinqFunctions.Union(products1, products2, distinctComparer));
+
+            Assert.Equal("source", exception.ParamName);
+        }
+
+        [Fact]
+        public void TestIntersect()
+        {
+            var products1 = new List<ProductsList.Product>()
+            {
+                new ProductsList.Product//default
+                {
+                    ID = 2,
+                    Name = "Dero",
+                    Price = 10,
+                    Ingredients = new List<ProductsList.Ingredient> { new ProductsList.Ingredient { Name = "Lamaie" }, new ProductsList.Ingredient { Name = "Parfum1" } }
+                },
+
+                new ProductsList.Product//same as default
+                {
+                    ID = 2,
+                    Name = "Dero",
+                    Price = 10,
+                    Ingredients = new List<ProductsList.Ingredient> { new ProductsList.Ingredient { Name = "Lamaie" }, new ProductsList.Ingredient { Name = "Parfum1" } }
+                },
+
+                new ProductsList.Product//totally different
+                {
+                    ID = 6,
+                    Name = "Sampon",
+                    Price = 10,
+                    Ingredients = new List<ProductsList.Ingredient> { new ProductsList.Ingredient { Name = "Menta" }, new ProductsList.Ingredient { Name = "Parfum3" } }
+                },
+
+                new ProductsList.Product//different price
+                {
+                    ID = 2,
+                    Name = "Detergent",
+                    Price = 11,
+                    Ingredients = new List<ProductsList.Ingredient> { new ProductsList.Ingredient { Name = "Lamaie" }, new ProductsList.Ingredient { Name = "Parfum1" } }
+                },
+            };
+
+            var products2 = new ProductsList().GetProducts();
+
+            var comparer = new ProductListComparer();
+
+            var intersect = LinqFunctions.Intersect(products1, products2, comparer);
+
+            Assert.Single(intersect);
+        }
     }
 }
