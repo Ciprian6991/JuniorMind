@@ -167,6 +167,40 @@ namespace LINQ
             }
         }
 
+        public static IEnumerable<TSource> Distinct<TSource>(this IEnumerable<TSource> source, IEqualityComparer<TSource> comparer)
+        {
+            ThrowIfNullSource(source);
+
+            List<TSource> result = new List<TSource>();
+            var firstEnumerator = source.GetEnumerator();
+            int skips = 1;
+
+            while (firstEnumerator.MoveNext())
+            {
+                bool isDuplicate = false;
+
+                var secondEnumerator = source.Skip(skips++).GetEnumerator();
+
+                while (secondEnumerator.MoveNext())
+                {
+                    if (comparer?.Equals(firstEnumerator.Current, secondEnumerator.Current) == true)
+                    {
+                        isDuplicate = true;
+                    }
+                }
+
+                if (!isDuplicate)
+                {
+                    result.Add(firstEnumerator.Current);
+                }
+            }
+
+            foreach (TSource element in result)
+            {
+                yield return element;
+            }
+        }
+
         private static Exception ArgumentNullException(string msg)
         {
             throw new ArgumentNullException(msg);

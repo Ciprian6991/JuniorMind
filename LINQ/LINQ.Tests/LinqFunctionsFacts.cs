@@ -56,6 +56,34 @@ namespace LINQ.Tests
             }
         }
 
+        class ProductListComparer : IEqualityComparer<ProductsList.Product>
+        {
+            public bool Equals(ProductsList.Product x, ProductsList.Product y)
+            {
+                if (Object.ReferenceEquals(x, y)) return true;
+
+                if (Object.ReferenceEquals(x, null) || Object.ReferenceEquals(y, null))
+                    return false;
+
+                return x.ID == y.ID && x.Name == y.Name && x.Name == y.Name && x.Ingredients == x.Ingredients && x.Price == y.Price;
+            }
+
+            public int GetHashCode(ProductsList.Product product)
+            {
+                if (Object.ReferenceEquals(product, null)) return 0;
+
+                int hashProductName = product.Name == null ? 0 : product.Name.GetHashCode(System.StringComparison.CurrentCulture);
+
+                int hashProductID = product.ID.GetHashCode();
+
+                int hashProductPrice = product.Price.GetHashCode();
+
+                int hashProductIngredients = product.Ingredients.GetHashCode();
+
+                return hashProductName ^ hashProductID ^ hashProductPrice ^ hashProductIngredients ^ hashProductPrice;
+            }
+        }
+
 
         [Fact]
         public void TestAllWhenTrue()
@@ -433,6 +461,80 @@ namespace LINQ.Tests
             Assert.Contains(cont1, result);
             Assert.Contains(cont2, result);
             Assert.DoesNotContain(notCont, result);
+        }
+
+        [Fact]
+        public void TestJoinExceptions()
+        {
+            var products = new ProductsList().GetProducts();
+
+            List<ProductsList.Ingredient> newIngredients = null;
+
+            Func<ProductsList.Product, int> outerFunc = (product) => product.ID;
+            Func<ProductsList.Ingredient, int> innerFunc = (ingredient) => ingredient.IngredientID;
+            Func<ProductsList.Product, ProductsList.Ingredient, KeyValuePair<string, string>> selector = (product, ingredient) =>
+            {
+                {
+                    return new KeyValuePair<string, string>(product.Name, ingredient.Name);
+                }
+            };
+
+            var result = LinqFunctions.Join(products, newIngredients,
+                                        product => outerFunc(product), newIngredient => innerFunc(newIngredient),
+                                        (product, newIngredient) =>
+                                        selector(product, newIngredient));
+
+            var numerator = result.GetEnumerator();
+
+            var exception = Assert.Throws<ArgumentNullException>(() => numerator.MoveNext());
+
+            Assert.Equal("source", exception.ParamName);
+        }
+
+        [Fact]
+        public void TestDistinct()
+        {
+            var products = new List<ProductsList.Product>()
+            {
+                new ProductsList.Product//default
+                {
+                    ID = 2,
+                    Name = "Detergent",
+                    Price = 10,
+                    Ingredients = new List<ProductsList.Ingredient> { new ProductsList.Ingredient { Name = "Lamaie" }, new ProductsList.Ingredient { Name = "Parfum1" } }
+                },
+
+                new ProductsList.Product//same as default
+                {
+                    ID = 2,
+                    Name = "Detergent",
+                    Price = 10,
+                    Ingredients = new List<ProductsList.Ingredient> { new ProductsList.Ingredient { Name = "Lamaie" }, new ProductsList.Ingredient { Name = "Parfum1" } }
+                },
+
+                new ProductsList.Product//totally different
+                {
+                    ID = 6,
+                    Name = "Sampon",
+                    Price = 10,
+                    Ingredients = new List<ProductsList.Ingredient> { new ProductsList.Ingredient { Name = "Menta" }, new ProductsList.Ingredient { Name = "Parfum3" } }
+                },
+
+                new ProductsList.Product//different price
+                {
+                    ID = 2,
+                    Name = "Detergent",
+                    Price = 11, 
+                    Ingredients = new List<ProductsList.Ingredient> { new ProductsList.Ingredient { Name = "Lamaie" }, new ProductsList.Ingredient { Name = "Parfum1" } }
+                },
+            };
+
+            var distinctEqualityComparer = new ProductListComparer();
+
+            var result = LinqFunctions.Distinct(products, distinctEqualityComparer);
+
+            Assert.Equal(3, result.Count());
+
         }
     }
 }
