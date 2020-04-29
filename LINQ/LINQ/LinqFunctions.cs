@@ -204,6 +204,23 @@ namespace LINQ
             return result;
         }
 
+        public static IEnumerable<TSource> Except<TSource>(
+                                                            this IEnumerable<TSource> first,
+                                                            IEnumerable<TSource> second,
+                                                            IEqualityComparer<TSource> comparer)
+        {
+            ThrowIfNullSource(first);
+            ThrowIfNullSource(second);
+
+            var result = new HashSet<TSource>(first, comparer);
+
+            var intersect = Intersect(first, second, comparer);
+
+            result.ExceptWith(intersect);
+
+            return result;
+        }
+
         private static Exception ArgumentNullException(string msg)
         {
             throw new ArgumentNullException(msg);
