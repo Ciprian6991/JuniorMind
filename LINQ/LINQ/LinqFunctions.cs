@@ -221,6 +221,41 @@ namespace LINQ
             return result;
         }
 
+        public static IEnumerable<TResult> GroupBy<TSource, TKey, TElement, TResult>(
+                                                                                    this IEnumerable<TSource> source,
+                                                                                    Func<TSource, TKey> keySelector,
+                                                                                    Func<TSource, TElement> elementSelector,
+                                                                                    Func<TKey, IEnumerable<TElement>, TResult> resultSelector,
+                                                                                    IEqualityComparer<TKey> comparer)
+        {
+            ThrowIfNullSource(source);
+            ThrowIfNullSelector(keySelector);
+            ThrowIfNullSelector(elementSelector);
+
+            var dictionary = new Dictionary<TKey, HashSet<TElement>>(comparer);
+
+            foreach (var current in source)
+            {
+                var element = elementSelector(current);
+                var key = keySelector(current);
+
+                if (dictionary.ContainsKey(key))
+                {
+                    dictionary[key].Add(element);
+                }
+                else
+                {
+                    var newHashSet = new HashSet<TElement> { element };
+                    dictionary.Add(key, newHashSet);
+                }
+            }
+
+            foreach (var current in dictionary)
+            {
+                yield return resultSelector(current.Key, current.Value);
+            }
+    }
+
         private static Exception ArgumentNullException(string msg)
         {
             throw new ArgumentNullException(msg);

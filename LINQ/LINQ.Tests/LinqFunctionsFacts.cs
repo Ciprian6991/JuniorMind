@@ -97,12 +97,32 @@ namespace LINQ.Tests
             private int GetIngredientsHashCode(List<ProductsList.Ingredient> ingredients)
             {
                 int hash = 1;
-                foreach( var ingredient in ingredients)
+                foreach (var ingredient in ingredients)
                 {
                     hash = hash ^ GetIngredientHashCode(ingredient);
                 }
 
                 return hash;
+            }
+        }
+
+        class IntEqualityComparer : IEqualityComparer<int>
+        {
+            public bool Equals(int var1, int var2)
+            {
+                if (var2 == null && var1 == null)
+                    return true;
+                else if (var1 == null || var2 == null)
+                    return false;
+                else if (var1 == var2)
+                    return true;
+                else return false;
+            }
+
+            public int GetHashCode(int var)
+            {
+                int hCode = var;
+                return hCode.GetHashCode();
             }
         }
 
@@ -739,6 +759,93 @@ namespace LINQ.Tests
             var intersect = LinqFunctions.Except(products1, products2, comparer);
 
             Assert.Equal(2, intersect.Count());
+        }
+
+        [Fact]
+        public void TestExceptExceptions()
+        {
+            var products1 = new ProductsList().GetProducts();
+
+            List<ProductsList.Product> products2 = null;
+
+            var distinctComparer = new ProductListComparer();
+
+            var exception = Assert.Throws<ArgumentNullException>(() => LinqFunctions.Except(products1, products2, distinctComparer));
+
+            Assert.Equal("source", exception.ParamName);
+        }
+
+        [Fact]
+        public void TestGroupBy()
+        {
+            var products = new List<ProductsList.Product>()
+            {
+                new ProductsList.Product//2 ingredients
+                {
+                    ID = 2,
+                    Name = "Dero1",
+                    Price = 10,
+                    Ingredients = new List<ProductsList.Ingredient> { new ProductsList.Ingredient { Name = "Lamaie" }, new ProductsList.Ingredient { Name = "Parfum1" } }
+                },
+
+                new ProductsList.Product//2 ingredients
+                {
+                    ID = 2,
+                    Name = "Dero2",
+                    Price = 10,
+                    Ingredients = new List<ProductsList.Ingredient> { new ProductsList.Ingredient { Name = "Lamaie" }, new ProductsList.Ingredient { Name = "Parfum5" } }
+                },
+
+                new ProductsList.Product//1 ingredient
+                {
+                    ID = 6,
+                    Name = "Sampon",
+                    Price = 10,
+                    Ingredients = new List<ProductsList.Ingredient> { new ProductsList.Ingredient { Name = "Menta" }}
+                },
+
+                new ProductsList.Product//3 ingredients
+                {
+                    ID = 2,
+                    Name = "Detergent",
+                    Price = 11,
+                    Ingredients = new List<ProductsList.Ingredient> { new ProductsList.Ingredient { Name = "Lamaie" }, new ProductsList.Ingredient { Name = "Parfum1" }, new ProductsList.Ingredient { Name = "Parfum5" } }
+                },
+            };
+
+            Func<ProductsList.Product, string> elementSelector = x => x.Name;
+
+            Func<ProductsList.Product, int> keySelector = x => x.Ingredients.Count;
+
+            Func<int, IEnumerable<string>, KeyValuePair<int, IEnumerable<string>>> resultSelector = (IngredientsCount, ProductNames) =>
+            {
+
+                return new KeyValuePair<int, IEnumerable<string>>(IngredientsCount, ProductNames);
+            };
+
+            var comparer = new IntEqualityComparer();
+
+            var result = LinqFunctions.GroupBy(products,
+                                                x => keySelector(x),
+                                                y => elementSelector(y),
+                                                (IngredientCount, ProductNames) => resultSelector(IngredientCount, ProductNames),
+                                                comparer
+                                                );
+
+            var numerator = result.GetEnumerator();
+
+            numerator.MoveNext();
+
+            Assert.Equal( new string[] { "Dero1", "Dero2"}, numerator.Current.Value.ToArray());
+            Assert.Equal("2", numerator.Current.Key.ToString());
+            Assert.True(numerator.MoveNext());
+            Assert.Equal(new string[] { "Sampon" }, numerator.Current.Value.ToArray());
+            Assert.Equal("1", numerator.Current.Key.ToString());
+            Assert.True(numerator.MoveNext());
+            Assert.Equal(new string[] { "Detergent"}, numerator.Current.Value.ToArray());
+            Assert.Equal("3", numerator.Current.Key.ToString());
+            Assert.False(numerator.MoveNext());
+
         }
     }
 }
