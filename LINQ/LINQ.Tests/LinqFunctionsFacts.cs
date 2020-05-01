@@ -106,27 +106,6 @@ namespace LINQ.Tests
             }
         }
 
-        class IntEqualityComparer : IEqualityComparer<int>
-        {
-            public bool Equals(int var1, int var2)
-            {
-                if (var2 == null && var1 == null)
-                    return true;
-                else if (var1 == null || var2 == null)
-                    return false;
-                else if (var1 == var2)
-                    return true;
-                else return false;
-            }
-
-            public int GetHashCode(int var)
-            {
-                int hCode = var;
-                return hCode.GetHashCode();
-            }
-        }
-
-
         [Fact]
         public void TestAllWhenTrue()
         {
@@ -783,7 +762,7 @@ namespace LINQ.Tests
                 new ProductsList.Product//2 ingredients
                 {
                     ID = 2,
-                    Name = "Dero1",
+                    Name = "Dero",
                     Price = 10,
                     Ingredients = new List<ProductsList.Ingredient> { new ProductsList.Ingredient { Name = "Lamaie" }, new ProductsList.Ingredient { Name = "Parfum1" } }
                 },
@@ -791,7 +770,7 @@ namespace LINQ.Tests
                 new ProductsList.Product//2 ingredients
                 {
                     ID = 2,
-                    Name = "Dero2",
+                    Name = "Dero",
                     Price = 10,
                     Ingredients = new List<ProductsList.Ingredient> { new ProductsList.Ingredient { Name = "Lamaie" }, new ProductsList.Ingredient { Name = "Parfum5" } }
                 },
@@ -823,20 +802,18 @@ namespace LINQ.Tests
                 return new KeyValuePair<int, IEnumerable<string>>(IngredientsCount, ProductNames);
             };
 
-            var comparer = new IntEqualityComparer();
-
             var result = LinqFunctions.GroupBy(products,
                                                 x => keySelector(x),
                                                 y => elementSelector(y),
                                                 (IngredientCount, ProductNames) => resultSelector(IngredientCount, ProductNames),
-                                                comparer
+                                                EqualityComparer<int>.Default
                                                 );
 
             var numerator = result.GetEnumerator();
 
             numerator.MoveNext();
 
-            Assert.Equal( new string[] { "Dero1", "Dero2"}, numerator.Current.Value.ToArray());
+            Assert.Equal( new string[] { "Dero", "Dero"}, numerator.Current.Value.ToArray());
             Assert.Equal("2", numerator.Current.Key.ToString());
             Assert.True(numerator.MoveNext());
             Assert.Equal(new string[] { "Sampon" }, numerator.Current.Value.ToArray());
@@ -846,6 +823,34 @@ namespace LINQ.Tests
             Assert.Equal("3", numerator.Current.Key.ToString());
             Assert.False(numerator.MoveNext());
 
+        }
+
+        [Fact]
+        public void TestGroupByExceptions()
+        {
+            List<ProductsList.Product> products1 = null;
+
+            Func<ProductsList.Product, string> elementSelector = x => x.Name;
+
+            Func<ProductsList.Product, int> keySelector = x => x.Ingredients.Count;
+
+            Func<int, IEnumerable<string>, KeyValuePair<int, IEnumerable<string>>> resultSelector = (IngredientsCount, ProductNames) =>
+            {
+
+                return new KeyValuePair<int, IEnumerable<string>>(IngredientsCount, ProductNames);
+            };
+
+            var result = LinqFunctions.GroupBy(products1,
+                                                        x => keySelector(x),
+                                                        y => elementSelector(y),
+                                                        (IngredientCount, ProductNames) => resultSelector(IngredientCount, ProductNames),
+                                                        EqualityComparer<int>.Default
+                                                        );
+            var numerator = result.GetEnumerator();
+
+            var exception = Assert.Throws<ArgumentNullException>(() => numerator.MoveNext());
+
+            Assert.Equal("source", exception.ParamName);
         }
     }
 }

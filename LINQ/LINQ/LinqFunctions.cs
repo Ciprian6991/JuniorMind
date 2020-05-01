@@ -232,7 +232,7 @@ namespace LINQ
             ThrowIfNullSelector(keySelector);
             ThrowIfNullSelector(elementSelector);
 
-            var dictionary = new Dictionary<TKey, HashSet<TElement>>(comparer);
+            var dictionary = new Dictionary<TKey, List<TElement>>(comparer);
 
             foreach (var current in source)
             {
@@ -245,8 +245,8 @@ namespace LINQ
                 }
                 else
                 {
-                    var newHashSet = new HashSet<TElement> { element };
-                    dictionary.Add(key, newHashSet);
+                    var newList = new List<TElement> { element };
+                    dictionary.Add(key, newList);
                 }
             }
 
