@@ -304,7 +304,7 @@ namespace LINQ
                 this.source = source;
             }
 
-            public MyOrderedEnumerable(List<TSource> resultList, bool descending)
+            private MyOrderedEnumerable(List<TSource> resultList, bool descending)
             {
                 this.resultList = resultList;
                 this.descending = descending;

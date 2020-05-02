@@ -918,7 +918,29 @@ namespace LINQ.Tests
             Assert.Equal(2, numerator.Current.ID);
             Assert.True(numerator.MoveNext());
             Assert.Equal(4, numerator.Current.ID);
+        }
 
+        [Fact]
+        public void TestOrderByExceptions()
+        {
+            List<ProductsList.Product> products1 = null;
+
+            Func<ProductsList.Product, string> elementSelector = x => x.Name;
+
+            Func<ProductsList.Product, int> keySelector = x => x.Ingredients.Count;
+
+            Func<int, IEnumerable<string>, KeyValuePair<int, IEnumerable<string>>> resultSelector = (IngredientsCount, ProductNames) =>
+            {
+
+                return new KeyValuePair<int, IEnumerable<string>>(IngredientsCount, ProductNames);
+            };
+
+            var exception = Assert.Throws<ArgumentNullException>(() => LinqFunctions.OrderBy(products1,
+                                                        x => keySelector(x),
+                                                        Comparer<int>.Default
+                                                        ));
+
+            Assert.Equal("source", exception.ParamName);
         }
     }
 }
