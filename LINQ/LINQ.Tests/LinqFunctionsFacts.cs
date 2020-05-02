@@ -852,5 +852,73 @@ namespace LINQ.Tests
 
             Assert.Equal("source", exception.ParamName);
         }
+
+
+
+        [Fact]
+        public void TestOrderBy()
+        {
+            var products = new List<ProductsList.Product>()
+            {
+                new ProductsList.Product//2 ingredients
+                {
+                    ID = 1,
+                    Name = "Dero",
+                    Price = 10,
+                    Ingredients = new List<ProductsList.Ingredient> { new ProductsList.Ingredient { Name = "Lamaie" }, new ProductsList.Ingredient { Name = "Parfum1" } }
+                },
+
+                new ProductsList.Product//2 ingredients
+                {
+                    ID = 2,
+                    Name = "Dero",
+                    Price = 10,
+                    Ingredients = new List<ProductsList.Ingredient> { new ProductsList.Ingredient { Name = "Lamaie" }, new ProductsList.Ingredient { Name = "Parfum5" } }
+                },
+
+                new ProductsList.Product//1 ingredient
+                {
+                    ID = 3,
+                    Name = "Sampon",
+                    Price = 10,
+                    Ingredients = new List<ProductsList.Ingredient> { new ProductsList.Ingredient { Name = "Menta" }}
+                },
+
+                new ProductsList.Product//3 ingredients
+                {
+                    ID = 4,
+                    Name = "Detergent",
+                    Price = 11,
+                    Ingredients = new List<ProductsList.Ingredient> { new ProductsList.Ingredient { Name = "Lamaie" }, new ProductsList.Ingredient { Name = "Parfum1" }, new ProductsList.Ingredient { Name = "Parfum5" } }
+                },
+            };
+
+            Func<ProductsList.Product, string> elementSelector = x => x.Name;
+
+            Func<ProductsList.Product, int> keySelector = x => x.Ingredients.Count;
+
+            Func<int, IEnumerable<string>, KeyValuePair<int, IEnumerable<string>>> resultSelector = (IngredientsCount, ProductNames) =>
+            {
+
+                return new KeyValuePair<int, IEnumerable<string>>(IngredientsCount, ProductNames);
+            };
+
+            var result = LinqFunctions.OrderBy(products,
+                                                x => keySelector(x),
+                                                Comparer<int>.Default
+                                                );
+
+            var numerator = result.GetEnumerator();
+
+            Assert.True(numerator.MoveNext());
+            Assert.Equal(3, numerator.Current.ID);
+            Assert.True(numerator.MoveNext());
+            Assert.Equal(1, numerator.Current.ID);
+            Assert.True(numerator.MoveNext());
+            Assert.Equal(2, numerator.Current.ID);
+            Assert.True(numerator.MoveNext());
+            Assert.Equal(4, numerator.Current.ID);
+
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -254,7 +255,18 @@ namespace LINQ
             {
                 yield return resultSelector(current.Key, current.Value);
             }
-    }
+        }
+
+        public static IOrderedEnumerable<TSource> OrderBy<TSource, TKey>(
+                                                                        this IEnumerable<TSource> source,
+                                                                        Func<TSource, TKey> keySelector,
+                                                                        IComparer<TKey> comparer)
+        {
+            ThrowIfNullSource(source);
+            ThrowIfNullSelector(keySelector);
+
+            return new MyOrderedEnumerable<TSource, TKey>(source).CreateOrderedEnumerable(keySelector, comparer, true);
+        }
 
         private static Exception ArgumentNullException(string msg)
         {
@@ -279,6 +291,74 @@ namespace LINQ
             }
 
             throw new ArgumentNullException(nameof(source));
+        }
+
+        private class MyOrderedEnumerable<TSource, TKey> : IOrderedEnumerable<TSource>
+        {
+            private readonly IEnumerable<TSource> source;
+            private readonly List<TSource> resultList;
+            private readonly bool descending;
+
+            public MyOrderedEnumerable(IEnumerable<TSource> source)
+            {
+                this.source = source;
+            }
+
+            public MyOrderedEnumerable(List<TSource> resultList, bool descending)
+            {
+                this.resultList = resultList;
+                this.descending = descending;
+            }
+
+            public IOrderedEnumerable<TSource> CreateOrderedEnumerable<TKey>(Func<TSource, TKey> keySelector, IComparer<TKey> comparer, bool descending)
+            {
+                var sortedDictionary = new SortedDictionary<TKey, List<TSource>>(comparer);
+
+                foreach (var element in source)
+                {
+                    var usedKey = keySelector(element);
+
+                    if (sortedDictionary.ContainsKey(usedKey))
+                    {
+                        sortedDictionary[usedKey].Add(element);
+                    }
+                    else
+                    {
+                        var newList = new List<TSource>() { element };
+                        sortedDictionary.Add(usedKey, newList);
+                    }
+                }
+
+                var result = new List<TSource>();
+
+                foreach (var element in sortedDictionary)
+                {
+                    foreach (var value in element.Value)
+                    {
+                        result.Add(value);
+                    }
+                }
+
+                return new MyOrderedEnumerable<TSource, TKey>(result, descending);
+            }
+
+            public IEnumerator<TSource> GetEnumerator()
+            {
+                if (!descending)
+                {
+                    resultList.Reverse();
+                }
+
+                foreach (var element in resultList)
+                {
+                    yield return element;
+                }
+            }
+
+            IEnumerator IEnumerable.GetEnumerator()
+            {
+                return GetEnumerator();
+            }
         }
     }
 }
