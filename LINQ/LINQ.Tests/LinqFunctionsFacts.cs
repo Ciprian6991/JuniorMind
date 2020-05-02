@@ -942,5 +942,70 @@ namespace LINQ.Tests
 
             Assert.Equal("source", exception.ParamName);
         }
+
+
+        [Fact]
+        public void TestThenBy()
+        {
+            var products = new List<ProductsList.Product>()
+            {
+                new ProductsList.Product//2 ingredients
+                {
+                    ID = 1,
+                    Name = "Dero1",
+                    Price = 10,
+                    Ingredients = new List<ProductsList.Ingredient> { new ProductsList.Ingredient { Name = "Lamaie" }, new ProductsList.Ingredient { Name = "Parfum1" } }
+                },
+
+                new ProductsList.Product//2 ingredients
+                {
+                    ID = 2,
+                    Name = "Dero2",
+                    Price = 10,
+                    Ingredients = new List<ProductsList.Ingredient> { new ProductsList.Ingredient { Name = "Lamaie" }, new ProductsList.Ingredient { Name = "Parfum5" } }
+                },
+
+                new ProductsList.Product//1 ingredient
+                {
+                    ID = 3,
+                    Name = "Sampon",
+                    Price = 10,
+                    Ingredients = new List<ProductsList.Ingredient> { new ProductsList.Ingredient { Name = "Menta" }}
+                },
+
+                new ProductsList.Product//3 ingredients
+                {
+                    ID = 4,
+                    Name = "Detergent",
+                    Price = 11,
+                    Ingredients = new List<ProductsList.Ingredient> { new ProductsList.Ingredient { Name = "Lamaie" }, new ProductsList.Ingredient { Name = "Parfum1" }, new ProductsList.Ingredient { Name = "Parfum5" } }
+                },
+            };
+
+            Func<ProductsList.Product, int> keySelector1 = x => x.Ingredients.Count;
+
+            Func<ProductsList.Product, int> keySelector2 = x => x.Name.Length;
+
+            var result1 = LinqFunctions.OrderBy(products,
+                                                x => keySelector1(x),
+                                                Comparer<int>.Default
+                                                );
+
+            var result2 = LinqFunctions.ThenBy(result1,
+                                                x => keySelector2(x),
+                                                Comparer<int>.Default
+                                                );
+
+            var numerator = result2.GetEnumerator();
+
+            Assert.True(numerator.MoveNext());
+            Assert.Equal("Dero1", numerator.Current.Name);
+            Assert.True(numerator.MoveNext());
+            Assert.Equal("Dero2", numerator.Current.Name);
+            Assert.True(numerator.MoveNext());
+            Assert.Equal("Sampon", numerator.Current.Name);
+            Assert.True(numerator.MoveNext());
+            Assert.Equal("Detergent", numerator.Current.Name);
+        }
     }
 }

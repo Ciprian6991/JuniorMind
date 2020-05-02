@@ -268,6 +268,17 @@ namespace LINQ
             return new MyOrderedEnumerable<TSource, TKey>(source).CreateOrderedEnumerable(keySelector, comparer, true);
         }
 
+        public static IOrderedEnumerable<TSource> ThenBy<TSource, TKey>(
+                                                                        this IOrderedEnumerable<TSource> source,
+                                                                        Func<TSource, TKey> keySelector,
+                                                                        IComparer<TKey> comparer)
+        {
+            ThrowIfNullSource(source);
+            ThrowIfNullSelector(keySelector);
+
+            return new MyOrderedEnumerable<TSource, TKey>(source).CreateOrderedEnumerable(keySelector, comparer, true);
+        }
+
         private static Exception ArgumentNullException(string msg)
         {
             throw new ArgumentNullException(msg);
