@@ -20,5 +20,21 @@ namespace LINQ.Tests
                 Assert.Equal(110, stock.GetTotalQuantity());
             }
         }
+
+        [Fact]
+        public void Test_Buy_GetProductQuantity()
+        {
+            {
+                var prod1 = new Product(1, "prod1", 10);
+                var prod2 = new Product(2, "prod2", 100);
+                var stock = new Stock();
+
+                stock.AddProducts(prod1, prod2);
+
+                stock.Buy(prod2, 20);
+
+                Assert.Equal(80, stock.GetProductQuantity(prod2));
+            }
+        }
     }
 }

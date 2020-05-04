@@ -29,6 +29,20 @@ namespace LINQ
             return products.Aggregate(0, (totalQuantity, product) => totalQuantity + product.Quantity);
         }
 
+        public void Buy(Product product, int quantity)
+        {
+            ThrowIfNullProduct(product);
+
+            products.First((prod) => prod.Equals(product)).Subtract(quantity);
+        }
+
+        public int GetProductQuantity(Product product)
+        {
+            ThrowIfNullProduct(product);
+
+            return products.First(prod => prod.Equals(product))?.Quantity ?? 0;
+        }
+
         private void ThrowIfNullProduct(params Product[] products)
         {
             if (!products.Contains(null) && products != null)

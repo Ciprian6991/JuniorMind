@@ -28,5 +28,20 @@ namespace LINQ
         {
             Quantity -= productNumbers;
         }
+
+        public bool Equals(Product productToCompare)
+        {
+            if (object.ReferenceEquals(this, productToCompare))
+            {
+                return true;
+            }
+
+            if (ReferenceEquals(productToCompare, null))
+            {
+                return false;
+            }
+
+            return this.ID == productToCompare.ID && this.Name == productToCompare.Name && this.Quantity == productToCompare.Quantity;
+        }
     }
 }
