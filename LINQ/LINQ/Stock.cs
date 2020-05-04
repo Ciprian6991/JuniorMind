@@ -24,9 +24,9 @@ namespace LINQ
             }
         }
 
-        public int GetTotalQuantity()
+        public void Refill(Product product, int quantity)
         {
-            return products.Aggregate(0, (totalQuantity, product) => totalQuantity + product.Quantity);
+            products.First((prod) => prod.Equals(product)).Add(quantity);
         }
 
         public void Buy(Product product, int quantity)
@@ -46,6 +46,11 @@ namespace LINQ
             ThrowIfNullProduct(product);
 
             return products.First(prod => prod.Equals(product))?.Quantity ?? 0;
+        }
+
+        public int GetTotalQuantity()
+        {
+            return products.Aggregate(0, (totalQuantity, product) => totalQuantity + product.Quantity);
         }
 
         private void ThrowIfNullProduct(params Product[] products)
