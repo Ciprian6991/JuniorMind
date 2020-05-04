@@ -33,6 +33,11 @@ namespace LINQ
         {
             ThrowIfNullProduct(product);
 
+            if (GetProductQuantity(product) < quantity)
+            {
+                throw new ArgumentOutOfRangeException("Quantity must be equal or less than" + $" {GetProductQuantity(product)}");
+            }
+
             products.First((prod) => prod.Equals(product)).Subtract(quantity);
         }
 
