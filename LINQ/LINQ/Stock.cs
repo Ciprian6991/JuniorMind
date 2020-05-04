@@ -28,7 +28,7 @@ namespace LINQ
         {
             ThrowIfNullProduct(product);
 
-            products.First((prod) => prod.Equals(product)).Add(quantity);
+            products.Single((prod) => prod.Equals(product)).Add(quantity);
         }
 
         public void Buy(Product product, int quantity)
@@ -40,7 +40,7 @@ namespace LINQ
                 throw new ArgumentOutOfRangeException("Quantity must be equal or less than" + $" {GetProductQuantity(product)}");
             }
 
-            products.First((prod) => prod.Equals(product)).Subtract(quantity);
+            products.Single((prod) => prod.Equals(product)).Subtract(quantity);
         }
 
         public void RemoveProduct(Product product)
@@ -54,7 +54,7 @@ namespace LINQ
         {
             ThrowIfNullProduct(product);
 
-            return products.First(prod => prod.Equals(product))?.Quantity ?? 0;
+            return products.Single(prod => prod.Equals(product))?.Quantity ?? 0;
         }
 
         public int GetTotalQuantity()

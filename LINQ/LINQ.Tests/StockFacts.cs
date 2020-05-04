@@ -49,7 +49,7 @@ namespace LINQ.Tests
 
                 var exception = Assert.Throws<InvalidOperationException>(() => stock.GetProductQuantity(prod2));
 
-                Assert.Equal("No element has been found", exception.Message);
+                Assert.Equal("Sequence contains no matching element", exception.Message);
             }
         }
 
@@ -65,7 +65,7 @@ namespace LINQ.Tests
 
                 var exception = Assert.Throws<InvalidOperationException>(() => stock.Buy(prod2, 10));
 
-                Assert.Equal("No element has been found", exception.Message);
+                Assert.Equal("Sequence contains no matching element", exception.Message);
             }
         }
 
