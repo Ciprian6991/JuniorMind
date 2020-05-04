@@ -100,5 +100,21 @@ namespace LINQ.Tests
                 Assert.Equal(120, stock.GetProductQuantity(prod2));
             }
         }
+
+        [Fact]
+        public void Test_ExceptionRefillNullProduct()
+        {
+            {
+                var prod1 = new Product(1, "prod1", 10);
+                Product prod2 = null;
+                var stock = new Stock();
+
+                stock.AddProducts(prod1);
+
+                var exception = Assert.Throws<ArgumentNullException>(() => stock.Refill(prod2, 20));
+
+                Assert.Equal("products", exception.ParamName);
+            }
+        }
     }
 }

@@ -26,6 +26,8 @@ namespace LINQ
 
         public void Refill(Product product, int quantity)
         {
+            ThrowIfNullProduct(product);
+
             products.First((prod) => prod.Equals(product)).Add(quantity);
         }
 
