@@ -116,5 +116,22 @@ namespace LINQ.Tests
                 Assert.Equal("products", exception.ParamName);
             }
         }
+
+        public void Test_RemoveProduct()
+        {
+            {
+                var prod1 = new Product(1, "prod1", 10);
+                var prod2 = new Product(2, "prod2", 100);
+                var stock = new Stock();
+
+                stock.AddProducts(prod1, prod2);
+
+                Assert.Equal(110, stock.GetTotalQuantity());
+
+                stock.RemoveProduct(prod2);
+
+                Assert.Equal(10, stock.GetTotalQuantity());
+            }
+        }
     }
 }

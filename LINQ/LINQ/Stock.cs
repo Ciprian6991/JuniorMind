@@ -43,6 +43,13 @@ namespace LINQ
             products.First((prod) => prod.Equals(product)).Subtract(quantity);
         }
 
+        public void RemoveProduct(Product product)
+        {
+            ThrowIfNullProduct(product);
+
+            products = products.Where(prod => !prod.Equals(product));
+        }
+
         public int GetProductQuantity(Product product)
         {
             ThrowIfNullProduct(product);
