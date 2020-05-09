@@ -155,5 +155,48 @@ namespace LINQ.Tests
 
             Assert.Equal("prod1 has only 9 pieces left.", testString);
         }
+
+        [Fact]
+        public void Test_CallBack_MultipleBuysOnlyOneCallback()
+        {
+
+            var prod1 = new Product(1, "prod1", 10);
+            var stock = new Stock();
+            string testString = "";
+
+            stock.AddProducts(prod1);
+
+            void TestMethod(Product product, int quantity)
+            {
+                testString = $"{product.Name} has only " + $"{quantity} pieces left.";
+            }
+
+            stock.AddCallbackAction(TestMethod);
+
+            stock.Buy(prod1, 1);
+
+            Assert.Equal("prod1 has only 9 pieces left.", testString);
+            Assert.Equal(9, stock.GetProductQuantity(prod1));
+
+            stock.Buy(prod1, 2);
+
+            Assert.Equal(7, stock.GetProductQuantity(prod1));
+            Assert.Equal("prod1 has only 9 pieces left.", testString);
+
+            stock.Buy(prod1, 2);
+
+            Assert.Equal(5, stock.GetProductQuantity(prod1));
+            Assert.Equal("prod1 has only 9 pieces left.", testString);
+
+            stock.Buy(prod1, 2);
+
+            Assert.Equal(3, stock.GetProductQuantity(prod1));
+            Assert.Equal("prod1 has only 3 pieces left.", testString);
+
+            stock.Buy(prod1, 2);
+
+            Assert.Equal(1, stock.GetProductQuantity(prod1));
+            Assert.Equal("prod1 has only 1 pieces left.", testString);
+        }
     }
 }

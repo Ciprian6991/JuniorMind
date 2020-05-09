@@ -74,12 +74,21 @@ namespace LINQ
         }
 
         private void CallBackProduct(Product curentProductValues, int oldQuantity)
-        {
+            {
             List<int> callbackLimitValues = new List<int> { 10, 5, 2 };
 
-            if (this.callback == null ||
-                !callbackLimitValues.Contains(oldQuantity) ||
-                curentProductValues.Quantity >= oldQuantity)
+            int curentLimit;
+
+            try
+            {
+                curentLimit = callbackLimitValues.Single(x => x > curentProductValues.Quantity && x <= oldQuantity);
+            }
+            catch (InvalidOperationException)
+            {
+                curentLimit = -1;
+            }
+
+            if (this.callback == null || curentLimit == -1)
             {
                 return;
             }
