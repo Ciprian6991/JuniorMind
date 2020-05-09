@@ -8,16 +8,15 @@ namespace LINQ
 {
     public class StringOperations
     {
-        public static int CountVocals(string word)
-        {
-            return word.Aggregate(0, (vocalsNumber, curentChar) => "aeiouAEIOU".Contains(curentChar) ? vocalsNumber + 1 : vocalsNumber);
-        }
-
-        public static int CountConsonants(string word)
+        public static (int vocals, int consonants) CountVocalsConsonants(string word)
         {
             ThrowNullParameter(word);
 
-            return Regex.Replace(word, "\\s", "").Length - CountVocals(word);
+            var operatingString = word.Replace(" ", "", StringComparison.CurrentCulture);
+
+            return operatingString.Aggregate((0, 0), (resultTuple, curentChar) => "aeiouAEIOU".Contains(curentChar) ?
+                                                                                        (resultTuple.Item1 + 1, resultTuple.Item2) :
+                                                                                        (resultTuple.Item1, resultTuple.Item2 + 1));
         }
 
         private static void ThrowNullParameter(string word)

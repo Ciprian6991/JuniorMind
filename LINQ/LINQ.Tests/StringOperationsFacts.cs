@@ -10,17 +10,17 @@ namespace LINQ.Tests
         [Fact]
         public void Test_CountVocals()
         {
-            int count = StringOperations.CountVocals("Four Words Seven Vocals");
+            (int, int) count = StringOperations.CountVocalsConsonants("Four Words Seven Vocals");
 
-            Assert.Equal(7, count);
+            Assert.Equal(7, count.Item1);
         }
 
         [Fact]
         public void Test_CountConsonants()
         {
-            int count = StringOperations.CountConsonants("Four Words Seventeen Consonant");
+            (int, int) count = StringOperations.CountVocalsConsonants("Four Words Seventeen Consonant");
 
-            Assert.Equal(17, count);
+            Assert.Equal(17, count.Item2);
         }
     }
 }
