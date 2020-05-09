@@ -14,5 +14,13 @@ namespace LINQ.Tests
 
             Assert.Equal(7, count);
         }
+
+        [Fact]
+        public void Test_CountConsonants()
+        {
+            int count = StringOperations.CountConsonants("Four Words Seventeen Consonant");
+
+            Assert.Equal(17, count);
+        }
     }
 }
