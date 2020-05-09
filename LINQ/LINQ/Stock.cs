@@ -9,9 +9,16 @@ namespace LINQ
     {
         private IEnumerable<Product> products;
 
+        private Action<Product, int> callback;
+
         public Stock(params Product[] setProducts)
         {
             products = setProducts;
+        }
+
+        public void AddCallbackAction(Action<Product, int> callback)
+        {
+            this.callback = callback;
         }
 
         public void AddProducts(params Product[] productsToAdd)
@@ -41,6 +48,10 @@ namespace LINQ
             }
 
             products.Single((prod) => prod.Equals(product)).Subtract(quantity);
+
+            var curentProductValues = products.Single((prod) => prod.Equals(product));
+
+            CallBackProduct(curentProductValues, curentProductValues.Quantity + quantity);
         }
 
         public void RemoveProduct(Product product)
@@ -60,6 +71,20 @@ namespace LINQ
         public int GetTotalQuantity()
         {
             return products.Aggregate(0, (totalQuantity, product) => totalQuantity + product.Quantity);
+        }
+
+        private void CallBackProduct(Product curentProductValues, int oldQuantity)
+        {
+            List<int> callbackLimitValues = new List<int> { 10, 5, 2 };
+
+            if (this.callback == null ||
+                !callbackLimitValues.Contains(oldQuantity) ||
+                curentProductValues.Quantity >= oldQuantity)
+            {
+                return;
+            }
+
+            callback(curentProductValues, curentProductValues.Quantity);
         }
 
         private void ThrowIfNullProduct(params Product[] products)

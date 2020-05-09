@@ -133,5 +133,27 @@ namespace LINQ.Tests
                 Assert.Equal(10, stock.GetTotalQuantity());
             }
         }
+
+        [Fact]
+        public void Test_CallBack()
+        {
+
+            var prod1 = new Product(1, "prod1", 10);
+            var stock = new Stock();
+            string testString = "";
+
+            stock.AddProducts(prod1);
+
+            void TestMethod(Product product, int quantity)
+            {
+                testString = $"{product.Name} has only " + $"{quantity} pieces left.";
+            }
+
+            stock.AddCallbackAction(TestMethod);
+
+            stock.Buy(prod1, 1);
+
+            Assert.Equal("prod1 has only 9 pieces left.", testString);
+        }
     }
 }
