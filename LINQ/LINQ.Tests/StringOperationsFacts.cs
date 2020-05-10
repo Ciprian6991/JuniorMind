@@ -31,5 +31,13 @@ namespace LINQ.Tests
             Assert.Equal(17, count.Item2);
             Assert.Equal(10, count.Item1);
         }
+
+        [Fact]
+        public void Test_FirstUniqueCharacter()
+        {
+            var ch = StringOperations.FirstUniqueCharacter("abcdabcdD");
+
+            Assert.Equal('D', ch);
+        }
     }
 }

@@ -20,6 +20,13 @@ namespace LINQ
                                                                                         (resultTuple.Item1, resultTuple.Item2 + 1));
         }
 
+        public static char FirstUniqueCharacter(string word)
+        {
+            ThrowNullParameter(word);
+
+            return word.FirstOrDefault((c) => word.IndexOf(c) == word.LastIndexOf(c));
+        }
+
         private static void ThrowNullParameter(string word)
         {
             if (word != null)
