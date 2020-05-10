@@ -43,6 +43,18 @@ namespace LINQ
             return word.OrderByDescending(ch => word.Count(c => c.Equals(ch))).First();
         }
 
+        public static IEnumerable<string> GetPalindromPartitions(string word)
+        {
+            ThrowNullParameter(word);
+
+            throw new NotImplementedException();
+        }
+
+        public static bool IsPalindrom(string word)
+        {
+            return word.SequenceEqual(word.Reverse());
+        }
+
         private static void ThrowNullParameter(string word)
         {
             if (word != null)

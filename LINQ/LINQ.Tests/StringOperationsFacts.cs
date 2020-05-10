@@ -56,5 +56,17 @@ namespace LINQ.Tests
             Assert.Equal('d', letter);
         }
 
+        [Fact]
+        public void Test_IsPalindrom()
+        {
+            bool isPalindrom = StringOperations.IsPalindrom("abba");
+
+            bool notPalindrom = StringOperations.IsPalindrom("abbc");
+
+            Assert.True(isPalindrom);
+            Assert.False(notPalindrom);
+        }
+
+
     }
 }
