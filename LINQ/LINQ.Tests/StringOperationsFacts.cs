@@ -22,5 +22,14 @@ namespace LINQ.Tests
 
             Assert.Equal(17, count.Item2);
         }
+
+        [Fact]
+        public void Test_CountVocalsConsonants_WhenStringContainsDigits()
+        {
+            (int, int) count = StringOperations.CountVocalsConsonants("Four Words Seventeen Consonant 0123");
+
+            Assert.Equal(17, count.Item2);
+            Assert.Equal(10, count.Item1);
+        }
     }
 }
