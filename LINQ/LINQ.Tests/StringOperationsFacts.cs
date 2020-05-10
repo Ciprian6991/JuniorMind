@@ -67,6 +67,16 @@ namespace LINQ.Tests
             Assert.False(notPalindrom);
         }
 
+        [Fact]
+        public void Test_GetPalindromPartitions()
+        {
+            IEnumerable<string> enumerable = new[] { "a","b", "c", "aa","aaa", "aaaa", "aba", "aabaa" };
+
+            var palindroms = StringOperations.GetPalindromPartitions("aabaac").Distinct(EqualityComparer<string>.Default);
+
+            Assert.Empty(palindroms.Except(enumerable, EqualityComparer<string>.Default));
+        }
+
 
     }
 }

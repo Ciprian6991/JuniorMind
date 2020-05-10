@@ -47,8 +47,11 @@ namespace LINQ
         {
             ThrowNullParameter(word);
 
-            throw new NotImplementedException();
-        }
+            return word.SelectMany((ch1, firstIndex) =>
+                                        word.Substring(firstIndex).Select((ch2, secondIndex) =>
+                                                        word.Substring(firstIndex, word.Length - firstIndex - secondIndex)))
+                                   .Where(element => IsPalindrom(element));
+}
 
         public static bool IsPalindrom(string word)
         {
