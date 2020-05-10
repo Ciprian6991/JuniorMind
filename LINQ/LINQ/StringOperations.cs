@@ -36,6 +36,13 @@ namespace LINQ
             return word.Aggregate(0, (number, ch) => char.IsDigit(ch) ? number * multiplyByTen + int.Parse(ch.ToString()) : number);
         }
 
+        public static char MostAparitionsChar(string word)
+        {
+            ThrowNullParameter(word);
+
+            return word.OrderByDescending(ch => word.Count(c => c.Equals(ch))).First();
+        }
+
         private static void ThrowNullParameter(string word)
         {
             if (word != null)

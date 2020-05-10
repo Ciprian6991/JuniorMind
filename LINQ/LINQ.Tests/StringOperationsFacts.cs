@@ -47,5 +47,14 @@ namespace LINQ.Tests
 
             Assert.Equal(1234560, integer);
         }
+
+        [Fact]
+        public void Test_MostAparitionsChar()
+        {
+            char letter = StringOperations.MostAparitionsChar("dbbdcdada");
+
+            Assert.Equal('d', letter);
+        }
+
     }
 }
