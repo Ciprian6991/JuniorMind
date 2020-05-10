@@ -39,5 +39,13 @@ namespace LINQ.Tests
 
             Assert.Equal('D', ch);
         }
+
+        [Fact]
+        public void Test_ConvertToInt()
+        {
+            var integer = StringOperations.ConvertToInt("1234560");
+
+            Assert.Equal(1234560, integer);
+        }
     }
 }

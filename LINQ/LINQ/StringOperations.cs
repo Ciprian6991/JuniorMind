@@ -27,6 +27,15 @@ namespace LINQ
             return word.FirstOrDefault((c) => word.IndexOf(c) == word.LastIndexOf(c));
         }
 
+        public static int ConvertToInt(string word)
+        {
+            ThrowNullParameter(word);
+
+            const int multiplyByTen = 10;
+
+            return word.Aggregate(0, (number, ch) => char.IsDigit(ch) ? number * multiplyByTen + int.Parse(ch.ToString()) : number);
+        }
+
         private static void ThrowNullParameter(string word)
         {
             if (word != null)
