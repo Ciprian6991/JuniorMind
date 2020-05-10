@@ -49,6 +49,14 @@ namespace LINQ.Tests
         }
 
         [Fact]
+        public void Test_ConvertToIntNegative()
+        {
+            var integer = StringOperations.ConvertToInt("-1234560");
+
+            Assert.Equal(-1234560, integer);
+        }
+
+        [Fact]
         public void Test_MostAparitionsChar()
         {
             char letter = StringOperations.MostAparitionsChar("dbbdcdada");

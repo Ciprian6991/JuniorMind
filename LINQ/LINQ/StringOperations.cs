@@ -33,7 +33,9 @@ namespace LINQ
 
             const int multiplyByTen = 10;
 
-            return word.Aggregate(0, (number, ch) => char.IsDigit(ch) ? number * multiplyByTen + int.Parse(ch.ToString()) : number);
+            int minusSignIfNegative = word[0].Equals('-') ? -1 : 1;
+
+            return word.Aggregate(0, (number, ch) => char.IsDigit(ch) ? number * multiplyByTen + int.Parse(ch.ToString()) : number) * minusSignIfNegative;
         }
 
         public static char MostAparitionsChar(string word)
