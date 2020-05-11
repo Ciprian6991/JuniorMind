@@ -265,7 +265,7 @@ namespace LINQ
             ThrowIfNullSource(source);
             ThrowIfNullSelector(keySelector);
 
-            return new MyOrderedEnumerable<TSource, TKey>(source).CreateOrderedEnumerable(keySelector, comparer, true);
+            return new MyOrderedEnumerable<TSource, TKey>(source, keySelector, comparer, true);
         }
 
         public static IOrderedEnumerable<TSource> ThenBy<TSource, TKey>(
@@ -276,7 +276,7 @@ namespace LINQ
             ThrowIfNullSource(source);
             ThrowIfNullSelector(keySelector);
 
-            return new MyOrderedEnumerable<TSource, TKey>(source).CreateOrderedEnumerable(keySelector, comparer, true);
+            return source.CreateOrderedEnumerable(keySelector, comparer, true);
         }
 
         private static Exception ArgumentNullException(string msg)
@@ -307,21 +307,24 @@ namespace LINQ
         private class MyOrderedEnumerable<TSource, TKey> : IOrderedEnumerable<TSource>
         {
             private readonly IEnumerable<TSource> source;
-            private readonly List<TSource> resultList;
+            private readonly Func<TSource, TKey> keySelector;
+            private readonly IComparer<TKey> comparer;
             private readonly bool descending;
 
-            public MyOrderedEnumerable(IEnumerable<TSource> source)
+            public MyOrderedEnumerable(IEnumerable<TSource> source, Func<TSource, TKey> keySelector, IComparer<TKey> comparer, bool descending)
             {
                 this.source = source;
-            }
-
-            private MyOrderedEnumerable(List<TSource> resultList, bool descending)
-            {
-                this.resultList = resultList;
+                this.keySelector = keySelector;
+                this.comparer = comparer;
                 this.descending = descending;
             }
 
             public IOrderedEnumerable<TSource> CreateOrderedEnumerable<TKey>(Func<TSource, TKey> keySelector, IComparer<TKey> comparer, bool descending)
+            {
+                return new MyOrderedEnumerable<TSource, TKey>(this.source, keySelector, comparer, descending);
+            }
+
+            public IEnumerator<TSource> GetEnumerator()
             {
                 var sortedDictionary = new SortedDictionary<TKey, List<TSource>>(comparer);
 
@@ -340,21 +343,16 @@ namespace LINQ
                     }
                 }
 
-                var result = new List<TSource>();
+                var resultList = new List<TSource>();
 
                 foreach (var element in sortedDictionary)
                 {
                     foreach (var value in element.Value)
                     {
-                        result.Add(value);
+                        resultList.Add(value);
                     }
                 }
 
-                return new MyOrderedEnumerable<TSource, TKey>(result, descending);
-            }
-
-            public IEnumerator<TSource> GetEnumerator()
-            {
                 if (!descending)
                 {
                     resultList.Reverse();

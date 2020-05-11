@@ -986,17 +986,16 @@ namespace LINQ.Tests
 
             Func<ProductsList.Product, int> keySelector2 = x => x.Name.Length;
 
-            var result1 = LinqFunctions.OrderBy(products,
+            var result = LinqFunctions.OrderBy(products,
                                                 x => keySelector1(x),
                                                 Comparer<int>.Default
-                                                );
+                                                )
+                                                .ThenBy(
+                                                        x => keySelector2(x),
+                                                        Comparer<int>.Default
+                                                        );
 
-            var result2 = LinqFunctions.ThenBy(result1,
-                                                x => keySelector2(x),
-                                                Comparer<int>.Default
-                                                );
-
-            var numerator = result2.GetEnumerator();
+            var numerator = result.GetEnumerator();
 
             Assert.True(numerator.MoveNext());
             Assert.Equal("Dero1", numerator.Current.Name);
