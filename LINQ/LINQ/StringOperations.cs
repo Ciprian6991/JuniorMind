@@ -42,7 +42,8 @@ namespace LINQ
         {
             ThrowNullParameter(word);
 
-            return word.OrderByDescending(ch => word.Count(c => c.Equals(ch))).First();
+            return word.GroupBy(x => x).Aggregate((curentElement, maxApparitions) =>
+                                        curentElement.Count() > maxApparitions.Count() ? curentElement : maxApparitions).Key;
         }
 
         public static IEnumerable<string> GetPalindromPartitions(string word)
