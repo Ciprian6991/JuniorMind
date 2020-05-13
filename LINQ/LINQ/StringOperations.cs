@@ -24,7 +24,7 @@ namespace LINQ
         {
             ThrowNullParameter(word);
 
-            return word.FirstOrDefault((c) => word.IndexOf(c) == word.LastIndexOf(c));
+            return word.GroupBy(ch => ch).First(x => x.Count() == 1).Key;
         }
 
         public static int ConvertToInt(string word)
