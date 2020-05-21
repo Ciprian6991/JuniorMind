@@ -11,37 +11,13 @@ namespace LINQ
         {
             ThrowIfNullParameter(source);
 
-            var subsets = from subset in source.SubSetsOf()
-                          where subset.Sum() <= sum
-                          select subset;
+            var allSets = from index1 in Enumerable.Range(1, 1 << source.Count())
+                            select
+                                   from index2 in Enumerable.Range(0, source.Count())
+                                   where (index1 & (1 << index2)) != 0
+                                   select source.ToList()[index2];
 
-            return subsets.SkipLast(1);
-        }
-
-        private static IEnumerable<IEnumerable<T>> SubSetsOf<T>(this IEnumerable<T> source)
-        {
-            if (source.Any())
-            {
-                var element = source.Take(1);
-
-                var setsWithoutElement = SubSetsOf(source.Skip(1));
-
-                var setsWithAddedElement = setsWithoutElement.Select(set => element.Concat(set));
-
-                return setsWithAddedElement.Concat(setsWithoutElement);
-            }
-
-            return Enumerable.Repeat(Enumerable.Empty<T>(), 1);
-        }
-
-        private static IEnumerable<int> GetSubset(this IEnumerable<int> array, int startingPosition, int numbersToTake)
-        {
-            return GetSubset(array, startingPosition).Take(numbersToTake);
-        }
-
-        private static IEnumerable<int> GetSubset(this IEnumerable<int> array, int startingPosition)
-        {
-            return array.Skip(startingPosition);
+            return allSets.Where(element => element.Sum() <= sum).SkipLast(1);
         }
 
         private static void ThrowIfNullParameter(IEnumerable<int> array)
