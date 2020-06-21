@@ -11,13 +11,10 @@ namespace LINQ
         {
             ThrowIfNullParameter(source);
 
-            var allSets = from index1 in Enumerable.Range(1, 1 << source.Count())
-                            select
-                                   from index2 in Enumerable.Range(0, source.Count())
-                                   where (index1 & (1 << index2)) != 0
-                                   select source.ToList()[index2];
-
-            return allSets.Where(element => element.Sum() <= sum).SkipLast(1);
+            return source.SelectMany((_, startPos) =>
+                                                    source.Skip(startPos).Select((__, secIndex) =>
+                                                          source.Skip(startPos).Take(source.Count() - secIndex - startPos)))
+                                                                                                .Where(x => x.Sum() <= sum);
         }
 
         private static void ThrowIfNullParameter(IEnumerable<int> array)
