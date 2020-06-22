@@ -24,5 +24,17 @@ namespace LINQ.Tests
 
             Assert.Equal(testList, subSets);
         }
+
+        [Fact]
+        public void Test_GetAllPlusMinusCombinations_LengthOfFour()
+        {
+            var result = NumberOperations.GetAllPlusMinusCombinations(4);
+
+            var expected = new string[] {
+                                        "++++", "+++-", "++-+" ,"++--", "+-++", "+-+-", "+--+", "+---",
+                                        "-+++", "-++-", "-+-+" ,"-+--", "--++", "--+-", "---+", "----",
+                                        };
+            Assert.Equal(result, expected);
+        }
     }
 }
