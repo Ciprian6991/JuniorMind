@@ -17,12 +17,30 @@ namespace LINQ
                                                                                                 .Where(x => x.Sum() <= sum);
         }
 
+        public static IEnumerable<string> GenerateEquations(int k, int sum)
+        {
+            return GetAllPlusMinusCombinations(k).Where(equation => GetSumOfConsecutiveNaturalNumbers(equation) == sum)
+                                                 .Select(element => string.Concat(element.Select((sign, value) => sign.ToString() + (value + 1)))
+                                                                    + string.Concat(" = ", sum.ToString()));
+        }
+
         public static IEnumerable<string> GetAllPlusMinusCombinations(int length)
         {
             IEnumerable<string> seed = new[] { "" };
 
             return Enumerable.Range(1, length).Aggregate(seed, (res, x) =>
                                                             res.SelectMany(result => new[] { result + "+", result + "-" }));
+        }
+
+        private static int GetSumOfConsecutiveNaturalNumbers(string signs)
+        {
+            if (signs == null)
+            {
+                throw new ArgumentNullException(signs);
+            }
+
+            return Enumerable.Range(1, signs.Length)
+                .Aggregate(0, (result, index) => signs[index - 1] == '+' ? result + index : result - index);
         }
 
         private static void ThrowIfNullParameter(IEnumerable<int> array)

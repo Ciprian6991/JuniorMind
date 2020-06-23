@@ -36,5 +36,18 @@ namespace LINQ.Tests
                                         };
             Assert.Equal(result, expected);
         }
+
+        [Fact]
+        public void Test_GenerateEquations()
+        {
+            var result = NumberOperations.GenerateEquations(3, 0);
+
+            var expected = new string[] {
+                                        "+1+2-3 = 0",
+                                        "-1-2+3 = 0"
+                                        };
+
+            Assert.Equal(result, expected);
+        }
     }
 }
