@@ -32,6 +32,15 @@ namespace LINQ
                                                             res.SelectMany(result => new[] { result + "+", result + "-" }));
         }
 
+        public static IEnumerable<IEnumerable<int>> GetAllConsecutiveTriplePairs(IEnumerable<int> array)
+        {
+            {
+                return array.SelectMany((first, firstIndex) => array.Skip(firstIndex + 1)
+                                          .SelectMany((sec, secIndex) => array.Skip(firstIndex + ++secIndex + 1)
+                                          .Select(third => new[] { first, sec, third })));
+            }
+        }
+
         private static int GetSumOfConsecutiveNaturalNumbers(string signs)
         {
             if (signs == null)

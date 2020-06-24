@@ -49,5 +49,43 @@ namespace LINQ.Tests
 
             Assert.Equal(result, expected);
         }
+
+        [Fact]
+        public void Test_GenerateEquationsComplex()
+        {
+            var result = NumberOperations.GenerateEquations(7, 10);
+
+            var expected = new string[] {
+                                        "+1+2+3-4-5+6+7 = 10",
+                                        "+1+2-3+4+5-6+7 = 10",
+                                        "+1-2+3+4+5+6-7 = 10",
+                                        "+1-2-3-4+5+6+7 = 10",
+                                        "-1+2-3+4-5+6+7 = 10",
+                                        "-1-2+3+4+5-6+7 = 10"
+                                        };
+
+            Assert.Equal(result, expected);
+        }
+
+        [Fact]
+        public void Test_GetAllConsecutiveTriplePairs()
+        {
+            var result = NumberOperations.GetAllConsecutiveTriplePairs(new int[] { 1, 2, 3, 4, 5 });
+
+            var expected = new int[10][] {
+                                          new int[] {1, 2, 3 },
+                                          new int[] { 1, 2, 4 },
+                                          new int[] {1, 2, 5 },
+                                          new int[] { 1, 3, 4 },
+                                          new int[] {1, 3, 5 },
+                                          new int[] { 1, 4, 5 },
+                                          new int[] {2, 3, 4 },
+                                          new int[] { 2, 3, 5 },
+                                          new int[] {2, 4, 5 },
+                                          new int[] { 3, 4, 5 },
+                                         }; 
+
+            Assert.Equal(result, expected);
+        }
     }
 }
