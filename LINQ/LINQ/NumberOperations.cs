@@ -41,6 +41,13 @@ namespace LINQ
             }
         }
 
+        public static bool IsTriplePythagorean(int firstElement, int secondElement, int thirdElement)
+        {
+            const int exponent = 2;
+
+            return (firstElement ^ exponent) + (secondElement ^ exponent) == (thirdElement ^ exponent);
+        }
+
         private static int GetSumOfConsecutiveNaturalNumbers(string signs)
         {
             if (signs == null)

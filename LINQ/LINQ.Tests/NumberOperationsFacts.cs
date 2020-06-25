@@ -87,5 +87,15 @@ namespace LINQ.Tests
 
             Assert.Equal(result, expected);
         }
+
+        [Fact]
+        public void Test_IsTriplePythagorean()
+        {
+            var result1 = NumberOperations.IsTriplePythagorean(3, 4, 5);
+            var result2 = NumberOperations.IsTriplePythagorean(1, 2, 3);
+
+            Assert.True(result1);
+            Assert.False(result2);
+        }
     }
 }
