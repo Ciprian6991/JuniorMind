@@ -61,12 +61,15 @@ namespace LINQ
 
         private static IEnumerable<IEnumerable<int>> PermuteElements(int first, int second, int third)
         {
-            return new[]
-            {
-                new[] { first, second, third }, new[] { first, third, second },
-                new[] { second, first, third }, new[] { second, third, first },
-                new[] { third, first, second }, new[] { third, second, first }
-            };
+            return first != second ?
+                        new[]
+                        {
+                            new[] { first, second, third }, new[] { first, third, second },
+                            new[] { second, first, third }, new[] { second, third, first },
+                            new[] { third, first, second }, new[] { third, second, first }
+                        }
+                        :
+                        new[] { new[] { 0, 0, 0 } };
         }
 
         private static int GetSumOfConsecutiveNaturalNumbers(string signs)

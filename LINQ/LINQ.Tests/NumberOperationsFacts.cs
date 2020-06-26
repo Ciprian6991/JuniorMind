@@ -132,5 +132,26 @@ namespace LINQ.Tests
 
             Assert.Equal(result, expected);
         }
+
+        [Fact]
+        public void Test_GetAllPythagoreanPairs_ShouldReturnEmpty()
+        {
+            var result = NumberOperations.GetAllPythagoreanPairs(new int[] { 1, 2});
+
+            Assert.Empty(result);
+        }
+
+
+        [Fact]
+        public void Test_GetAllPythagoreanPairs_0AsValues()
+        {
+            var result = NumberOperations.GetAllPythagoreanPairs(new int[] { 0, 0, 0 });
+
+            var expected = new int[1][] {
+                                          new[] { 0, 0, 0 }
+                                         };
+
+            Assert.Equal(result, expected);
+        }
     }
 }
