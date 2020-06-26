@@ -48,6 +48,26 @@ namespace LINQ
             return (firstElement ^ exponent) + (secondElement ^ exponent) == (thirdElement ^ exponent);
         }
 
+        public static IEnumerable<IEnumerable<int>> GetAllPythagoreanPairPermutations(IEnumerable<int> pair)
+        {
+            var first = pair.First();
+            var second = pair.ElementAt(1);
+            var third = pair.Last();
+
+            return PermuteElements(first, second, third)
+                   .Where(permutation => IsTriplePythagorean(permutation.First(), permutation.ElementAt(1), permutation.Last()));
+        }
+
+        private static IEnumerable<IEnumerable<int>> PermuteElements(int first, int second, int third)
+        {
+            return new[]
+            {
+                new[] { first, second, third }, new[] { first, third, second },
+                new[] { second, first, third }, new[] { second, third, first },
+                new[] { third, first, second }, new[] { third, second, first }
+            };
+        }
+
         private static int GetSumOfConsecutiveNaturalNumbers(string signs)
         {
             if (signs == null)

@@ -97,5 +97,18 @@ namespace LINQ.Tests
             Assert.True(result1);
             Assert.False(result2);
         }
+
+        [Fact]
+        public void Test_GetAllPythagoreanPairPermutations()
+        {
+            var result = NumberOperations.GetAllPythagoreanPairPermutations(new int[] { 5, 4, 3 });
+
+            var expected = new int[2][] {
+                                          new int[] { 4, 3, 5 },
+                                          new int[] { 3, 4, 5 },
+                                         };
+
+            Assert.Equal(result, expected);
+        }
     }
 }
