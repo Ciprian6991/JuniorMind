@@ -112,12 +112,25 @@ namespace LINQ.Tests
         }
 
         [Fact]
-        public void Test_GetAllPythagoreanPairPermutationsFalse()
+        public void Test_IsTriplePythagoreanFalse()
         {
 
             var res = NumberOperations.IsTriplePythagorean(3, 12, 13);
 
             Assert.False(res);
+        }
+
+        [Fact]
+        public void Test_GetAllPythagoreanPairs()
+        {
+            var result = NumberOperations.GetAllPythagoreanPairs(new int[] { 1, 2, 3, 4, 5, 12, 13 });
+
+            var expected = new int[4][] {
+                                          new[] { 3, 4, 5 }, new[] { 4, 3, 5 },
+                                          new[] { 5, 12, 13 }, new[] { 12, 5, 13 }
+                                         };
+
+            Assert.Equal(result, expected);
         }
     }
 }

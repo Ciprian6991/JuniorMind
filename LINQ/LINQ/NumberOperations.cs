@@ -32,19 +32,21 @@ namespace LINQ
                                                             res.SelectMany(result => new[] { result + "+", result + "-" }));
         }
 
+        public static IEnumerable<IEnumerable<int>> GetAllPythagoreanPairs(IEnumerable<int> array)
+        {
+            return GetAllConsecutiveTriplePairs(array).SelectMany(pair => GetAllPythagoreanPairPermutations(pair));
+        }
+
         public static IEnumerable<IEnumerable<int>> GetAllConsecutiveTriplePairs(IEnumerable<int> array)
         {
-            {
-                return array.SelectMany((first, firstIndex) => array.Skip(firstIndex + 1)
+            return array.SelectMany((first, firstIndex) => array.Skip(firstIndex + 1)
                                           .SelectMany((sec, secIndex) => array.Skip(firstIndex + ++secIndex + 1)
                                           .Select(third => new[] { first, sec, third })));
-            }
         }
 
         public static bool IsTriplePythagorean(int firstElement, int secondElement, int thirdElement)
         {
-            return (firstElement * firstElement) + (secondElement * secondElement)
-                     == thirdElement * thirdElement;
+            return (firstElement * firstElement) + (secondElement * secondElement) == thirdElement * thirdElement;
         }
 
         public static IEnumerable<IEnumerable<int>> GetAllPythagoreanPairPermutations(IEnumerable<int> pair)
