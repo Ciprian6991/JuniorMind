@@ -43,9 +43,8 @@ namespace LINQ
 
         public static bool IsTriplePythagorean(int firstElement, int secondElement, int thirdElement)
         {
-            const int exponent = 2;
-
-            return (firstElement ^ exponent) + (secondElement ^ exponent) == (thirdElement ^ exponent);
+            return (firstElement * firstElement) + (secondElement * secondElement)
+                     == thirdElement * thirdElement;
         }
 
         public static IEnumerable<IEnumerable<int>> GetAllPythagoreanPairPermutations(IEnumerable<int> pair)
