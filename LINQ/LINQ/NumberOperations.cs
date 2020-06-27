@@ -34,10 +34,10 @@ namespace LINQ
 
         public static IEnumerable<IEnumerable<int>> GetAllPythagoreanPairs(IEnumerable<int> array)
         {
-            return GetAllConsecutiveTriplePairs(array).SelectMany(pair => GetAllPythagoreanPairPermutations(pair));
+            return GetAllDistinctTriplePairs(array).SelectMany(pair => GetAllPythagoreanPairPermutations(pair));
         }
 
-        public static IEnumerable<IEnumerable<int>> GetAllConsecutiveTriplePairs(IEnumerable<int> array)
+        public static IEnumerable<IEnumerable<int>> GetAllDistinctTriplePairs(IEnumerable<int> array)
         {
             return array.SelectMany((first, firstIndex) => array.Skip(firstIndex + 1)
                                           .SelectMany((sec, secIndex) => array.Skip(firstIndex + ++secIndex + 1)

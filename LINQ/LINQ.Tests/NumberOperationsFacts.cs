@@ -70,7 +70,7 @@ namespace LINQ.Tests
         [Fact]
         public void Test_GetAllConsecutiveTriplePairs()
         {
-            var result = NumberOperations.GetAllConsecutiveTriplePairs(new int[] { 1, 2, 3, 4, 5 });
+            var result = NumberOperations.GetAllDistinctTriplePairs(new int[] { 1, 2, 3, 4, 5 });
 
             var expected = new int[10][] {
                                           new int[] {1, 2, 3 },
