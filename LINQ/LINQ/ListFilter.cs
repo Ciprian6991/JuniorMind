@@ -18,12 +18,22 @@ namespace LINQ
 
         public IEnumerable<ProductType> AnyFeatureFilter()
         {
-            return productList.Where(product => FindAtLeastOneFeature(product));
+            return productList.Where(product => HasAtLeastOneFeature(product));
         }
 
-        private bool FindAtLeastOneFeature(ProductType product)
+        public IEnumerable<ProductType> AllFeaturesFilter()
         {
-            return featureList.Intersect(product.Features, new IDComparer()).Any();
+            return productList.Where(product => HasAllFeatures(product));
+        }
+
+        private bool HasAtLeastOneFeature(ProductType product)
+        {
+            return featureList.Any(feature => product.Features.Contains(feature, new IDComparer()));
+        }
+
+        private bool HasAllFeatures(ProductType product)
+        {
+            return featureList.All(feature => product.Features.Contains(feature, new IDComparer()));
         }
     }
 }
