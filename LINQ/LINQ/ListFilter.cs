@@ -26,6 +26,11 @@ namespace LINQ
             return productList.Where(product => HasAllFeatures(product));
         }
 
+        public IEnumerable<ProductType> NoFeatureFilter()
+        {
+            return productList.Where(product => !HasAtLeastOneFeature(product));
+        }
+
         private bool HasAtLeastOneFeature(ProductType product)
         {
             return featureList.Any(feature => product.Features.Contains(feature, new IDComparer()));
