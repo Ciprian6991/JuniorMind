@@ -10,7 +10,7 @@ namespace LINQ
 
         public WordsOccurrences(string input)
         {
-            this.input = input;
+            this.input = input ?? throw new ArgumentNullException(nameof(input));
         }
 
         public string GetWordsOccurrences()
