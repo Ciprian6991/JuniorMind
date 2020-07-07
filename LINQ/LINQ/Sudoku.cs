@@ -19,11 +19,18 @@ namespace LINQ
             throw new NotImplementedException();
         }
 
-        public bool HasAllLinesValid()
-        {
-            var lines = GetLines();
+        public bool HasAllLinesValid() => Has_All_Lines_Values_Valid(GetLines());
 
+        public bool HasAllColumnsValid() => Has_All_Lines_Values_Valid(GetColumns());
+
+        private bool Has_All_Lines_Values_Valid(IEnumerable<IEnumerable<int>> lines)
+        {
             return lines.All(line => CheckLine(line));
+        }
+
+        private IEnumerable<IEnumerable<int>> GetColumns()
+        {
+            return Enumerable.Range(0, square.Length - 1).Select(index => square.Select(col => col[index]));
         }
 
         private bool CheckLine(IEnumerable<int> line)
