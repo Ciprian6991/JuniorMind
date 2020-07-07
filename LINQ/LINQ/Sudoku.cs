@@ -38,8 +38,8 @@ namespace LINQ
 
             return Enumerable.Range(0, squareSize).SelectMany(lineIndex =>
                              Enumerable.Range(0, squareSize).Select(columnIndex => GetBlock(
-                                                                                            lineIndex / squareSize * squareSize,
-                                                                                            columnIndex % squareSize * squareSize,
+                                                                                            lineIndex * squareSize,
+                                                                                            columnIndex * squareSize,
                                                                                             squareSize)));
         }
 

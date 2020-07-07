@@ -121,5 +121,21 @@ namespace LINQ.Tests
 
             Assert.False(result);
         }
+
+        [Fact]
+        public void CheckSudoku_IsValidSudoku_3x4_False()
+        {
+
+            var line = new int[][]
+            {
+                new int[] { 1, 2, 3, 4 },
+                new int[] { 2, 3, 4, 1 },
+                new int[] { 3, 4, 1, 2 },
+            };
+
+            var result = new Sudoku(line).IsValidSudoku();
+
+            Assert.False(result);
+        }
     }
 }
