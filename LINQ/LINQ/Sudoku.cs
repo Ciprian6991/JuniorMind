@@ -14,7 +14,19 @@ namespace LINQ
             this.square = square;
         }
 
-        public static bool CheckLine(IEnumerable<int> line)
+        public bool IsValidSudoku()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool HasAllLinesValid()
+        {
+            var lines = GetLines();
+
+            return lines.All(line => CheckLine(line));
+        }
+
+        private bool CheckLine(IEnumerable<int> line)
         {
             return Enumerable.Range(1, line.Count()).All(digit => line.Contains(digit));
         }
