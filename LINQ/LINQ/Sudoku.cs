@@ -23,9 +23,29 @@ namespace LINQ
 
         public bool HasAllColumnsValid() => Has_All_Lines_Values_Valid(GetColumns());
 
+        public bool HasAllBlocksValid() => Has_All_Lines_Values_Valid(GetBlocks());
+
         private bool Has_All_Lines_Values_Valid(IEnumerable<IEnumerable<int>> lines)
         {
             return lines.All(line => CheckLine(line));
+        }
+
+        private IEnumerable<IEnumerable<int>> GetBlocks()
+        {
+            int squareSize = (int)Math.Sqrt(square.Length);
+
+            return Enumerable.Range(0, squareSize).SelectMany(lineIndex =>
+                             Enumerable.Range(0, squareSize).Select(columnIndex => GetBlock(
+                                                                                            lineIndex / squareSize * squareSize,
+                                                                                            columnIndex % squareSize * squareSize,
+                                                                                            squareSize)));
+        }
+
+        private IEnumerable<int> GetBlock(int lineIndex, int columnIndex, int count)
+        {
+            return Enumerable.Range(lineIndex, count)
+                             .SelectMany(x => Enumerable.Range(columnIndex, count)
+                             .Select(y => square[x][y]));
         }
 
         private IEnumerable<IEnumerable<int>> GetColumns()
