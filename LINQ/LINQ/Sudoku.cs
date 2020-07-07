@@ -16,7 +16,9 @@ namespace LINQ
 
         public bool IsValidSudoku()
         {
-            throw new NotImplementedException();
+            return HasAllLinesValid()
+                && HasAllColumnsValid()
+                && HasAllBlocksValid();
         }
 
         public bool HasAllLinesValid() => Has_All_Lines_Values_Valid(GetLines());
