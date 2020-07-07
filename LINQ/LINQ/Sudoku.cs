@@ -16,7 +16,7 @@ namespace LINQ
 
         public static bool CheckLine(IEnumerable<int> line)
         {
-            return line.All(digit => Enumerable.Range(1, line.Count()).Contains(digit));
+            return Enumerable.Range(1, line.Count()).All(digit => line.Contains(digit));
         }
 
         private IEnumerable<IEnumerable<int>> GetLines()

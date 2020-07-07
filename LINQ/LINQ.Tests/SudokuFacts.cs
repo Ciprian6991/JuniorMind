@@ -20,5 +20,19 @@ namespace LINQ.Tests
             
             Assert.True(result);
         }
+
+        [Fact]
+        public void CheckSudoku_Check_Line_DuplicateNumber_False()
+        {
+
+            var line = new int[]
+            {
+                1, 2, 3, 4, 5, 6, 7, 9, 9
+            };
+
+            var result = Sudoku.CheckLine(line);
+
+            Assert.False(result);
+        }
     }
 }
