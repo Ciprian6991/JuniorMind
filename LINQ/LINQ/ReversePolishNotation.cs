@@ -23,16 +23,16 @@ namespace LINQ
                                                     ? GetNewResult(operands, current)
                                                     : operands.Append(Convert.ToDouble(current)));
 
-            return result.First();
+            return result.Last();
         }
 
         private IEnumerable<double> GetNewResult(IEnumerable<double> operands, string current)
         {
             const int skip = 2;
 
-            return operands.SkipLast(skip)
-                                          .Append(Operate(
-                                                          operands.TakeLast(skip), current));
+            var curentResult = Operate(operands.Take(skip), current);
+
+            return operands.Skip(skip).Append(curentResult).Reverse();
         }
 
         private double Operate(IEnumerable<double> values, string toOperate)

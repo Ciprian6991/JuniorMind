@@ -15,5 +15,14 @@ namespace LINQ.Tests
 
             Assert.Equal(6, result);
         }
+
+        [Fact]
+        public void Test_Calculate_Subtraction()
+        {
+
+            var result = new ReversePolishNotation("1 2 3 - -").Calculate();
+
+            Assert.Equal(-4, result);
+        }
     }
 }
