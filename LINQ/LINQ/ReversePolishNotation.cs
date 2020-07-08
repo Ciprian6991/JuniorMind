@@ -52,6 +52,9 @@ namespace LINQ
                 case "*":
                     return operand1 * operand2;
 
+                case "%":
+                    return operand1 % operand2;
+
                 default:
                     return operand1 / operand2;
             }
