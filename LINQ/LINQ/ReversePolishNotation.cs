@@ -16,7 +16,8 @@ namespace LINQ
 
         public double Calculate()
         {
-            ThrowExceptions(operation);
+            ThrowNullExceptions(operation);
+            ThrowInvalidInputExceptions(operation);
 
             var seed = Enumerable.Empty<double>();
 
@@ -67,7 +68,7 @@ namespace LINQ
             return "+-*/%".Contains(element);
         }
 
-        private void ThrowExceptions(string expression)
+        private void ThrowNullExceptions(string expression)
         {
             if (expression != null)
             {
@@ -75,6 +76,20 @@ namespace LINQ
             }
 
             throw new ArgumentNullException(nameof(expression));
+        }
+
+        private void ThrowInvalidInputExceptions(string operation)
+        {
+            var count_Operator_Operand = operation.Split().Aggregate((0, 0), (resultTuple, curentChar) => IsOperator(curentChar) ?
+                                                                                        (resultTuple.Item1 + 1, resultTuple.Item2) :
+                                                                                        (resultTuple.Item1, resultTuple.Item2 + 1));
+
+            if (count_Operator_Operand.Item1 == count_Operator_Operand.Item2 - 1)
+            {
+                return;
+            }
+
+            throw new ArithmeticException("invalid expression");
         }
     }
 }

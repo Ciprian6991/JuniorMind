@@ -79,5 +79,13 @@ namespace LINQ.Tests
 
             Assert.Equal("expression", ex.ParamName);
         }
+
+        [Fact]
+        public void Test_Calculate_InvalidInputException()
+        {
+            var ex = Assert.Throws<ArithmeticException>(() => new ReversePolishNotation("1 2 + - + -").Calculate());
+
+            Assert.Equal("invalid expression", ex.Message);
+        }
     }
 }
