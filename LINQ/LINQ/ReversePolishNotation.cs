@@ -16,6 +16,8 @@ namespace LINQ
 
         public double Calculate()
         {
+            ThrowExceptions(operation);
+
             var seed = Enumerable.Empty<double>();
 
             var result = operation.Split().Aggregate(seed, (operands, current) =>
@@ -63,6 +65,16 @@ namespace LINQ
         private bool IsOperator(string element)
         {
             return "+-*/%".Contains(element);
+        }
+
+        private void ThrowExceptions(string expression)
+        {
+            if (expression != null)
+            {
+                return;
+            }
+
+            throw new ArgumentNullException(nameof(expression));
         }
     }
 }

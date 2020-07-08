@@ -51,5 +51,33 @@ namespace LINQ.Tests
 
             Assert.Equal(2, result);
         }
+
+        [Fact]
+        public void Test_Calculate_MinusPlus()
+        {
+
+            var result = new ReversePolishNotation("2 1 3 - +").Calculate();
+
+            Assert.Equal(4, result);
+        }
+
+        [Fact]
+        public void Test_Calculate_Complex()
+        {
+
+            var result = new ReversePolishNotation("15 7 1 1 + - / 3 * 2 1 1 + % +").Calculate();
+
+            Assert.Equal(1, result);
+        }
+
+        [Fact]
+        public void Test_Calculate_NullException()
+        {
+            string input = null;
+
+            var ex = Assert.Throws<ArgumentNullException>( () => new ReversePolishNotation(input).Calculate());
+
+            Assert.Equal("expression", ex.ParamName);
+        }
     }
 }
